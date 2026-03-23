@@ -12,20 +12,20 @@ import { cn } from "@/lib/utils";
 import { Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 
-const links = [
+export const NavLinks = [
 	{
 		link: "/",
 		title: "Home",
 		icon: User,
 	},
 	{
-		link: "/about",
+		link: "/products",
 		title: "Products",
 		icon: ShoppingCart,
 	},
 	{
-		link: "/product",
-		title: "Products",
+		link: "/liked",
+		title: "Liked",
 		icon: Heart,
 	},
 ];
@@ -35,7 +35,7 @@ export default function NavMenu(props: ComponentProps<typeof NavigationMenu>) {
 	return (
 		<NavigationMenu {...props}>
 			<NavigationMenuList className='space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start data-[orientation=vertical]:justify-start'>
-				{links.map(item => (
+				{NavLinks.map(item => (
 					<NavigationMenuItem key={item.link}>
 						<NavigationMenuLink
 							asChild

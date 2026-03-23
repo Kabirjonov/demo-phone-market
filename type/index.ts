@@ -1,7 +1,7 @@
 export type IProduct = {
 	id: number;
 	title: string;
-	image: string;
+	image: string[];
 	price: number;
 	monthlyPrice: number;
 	monthlyDuration: number;
@@ -10,4 +10,13 @@ export type IProduct = {
 	badge?: string;
 	discount?: string;
 	discountSecondary?: string;
+	code?: string;
+	brand?: string;
+	capacity?: string;
+	availability?: string;
+	shortDescription?: string;
+	storeCount?: number;
+	warranty?: string;
+	installmentNote?: string;
+	providers?: string[];
 };

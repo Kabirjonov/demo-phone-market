@@ -7,24 +7,25 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 
 import { useTheme } from "next-themes";
-import { usePathname } from "next/navigation";
 import NavMenu from "../navMenu";
+import Link from "next/link";
 
 const Navbar = () => {
-	const pathname = usePathname();
 	const { theme } = useTheme();
 	return (
-		<nav className='fixed inset-x-4 top-6 mx-auto h-16 max-w-(--breakpoint-xl) rounded-full border bg-background'>
+		<nav className='fixed inset-x-4 top-6 z-50 mx-auto h-16 max-w-(--breakpoint-xl) rounded-full border bg-background'>
 			<div className='mx-auto flex h-full items-center justify-between px-4'>
 				{/* <Logo /> */}
 				<div className='relative h-10 w-24 sm:h-12 sm:w-28 md:h-14 md:w-32'>
-					<Image
-						alt='logo'
-						src={theme === "dark" ? "/logo2.png" : "/logo.png"}
-						fill
-						className='object-contain'
-						priority
-					/>
+					<Link href={"/"}>
+						<Image
+							alt='logo'
+							src={theme === "dark" ? "/logo2.png" : "/logo.png"}
+							fill
+							className='object-contain'
+							priority
+						/>
+					</Link>
 				</div>
 
 				{/* Desktop Menu */}
