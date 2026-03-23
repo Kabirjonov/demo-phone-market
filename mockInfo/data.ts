@@ -203,7 +203,7 @@ export const promotions: PromotionItem[] = [
 		daysLeft: 648,
 		kicker: "0% boshlang'ich to'lov, 0% ustama, 12 oyga bo'lib to'lash",
 		description: [
-			"texnomart'da texnikalarni 0-0-12 muddatli to'lov asosida xarid qiling, ortiqcha va boshlang'ich to'lovsiz.",
+			"texnool'da texnikalarni 0-0-12 muddatli to'lov asosida xarid qiling, ortiqcha va boshlang'ich to'lovsiz.",
 			"Telefon, televizor, muzlatgich, kir yuvish mashinasi va boshqa ko'plab texnikalarni 12 oy davomida o'z narxida bo'lib to'lash imkoniyati sizni kutmoqda.",
 		],
 		highlights: [

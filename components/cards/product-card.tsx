@@ -134,7 +134,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 						<Button
 							size='icon'
 							variant='outline'
-							className='h-11 w-11 rounded-2xl border-2 border-yellow-400'
+							className='h-11 w-11 rounded-2xl border-2 border-primary'
 							onClick={event => event.stopPropagation()}
 						>
 							<ShoppingCart className='text-primary' />

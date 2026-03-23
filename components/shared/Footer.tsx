@@ -170,7 +170,7 @@ export default function Footer() {
 
 				<div className='mt-12 flex flex-col gap-6 border-t border-white/12 pt-7 lg:flex-row lg:items-end lg:justify-between'>
 					<p className='max-w-3xl text-sm leading-6 text-white/65'>
-						2016-{currentYear} © texnomart.uz. Barcha huquqlar himoyalangan.
+						2016-{currentYear} © texnool.uz. Barcha huquqlar himoyalangan.
 						Tovarlarning ko&apos;rsatilgan qiymati va ularni sotib olish
 						shartlari joriy sanaga amal qiladi.
 					</p>
