@@ -8,6 +8,7 @@ import Footer from "@/components/shared/Footer";
 const fontSans = Inter({
 	subsets: ["latin"],
 	variable: "--font-sans",
+	// vercel.svg
 });
 
 const fontMono = JetBrains_Mono({
@@ -18,6 +19,11 @@ const fontMono = JetBrains_Mono({
 export const metadata: Metadata = {
 	title: "Texnool",
 	description: "Texnool shop",
+	icons: {
+		icon: "/logo.png",
+		shortcut: "/logo.png",
+		apple: "/logo.png",
+	},
 };
 
 export default function RootLayout({

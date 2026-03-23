@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Home, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import ProductCard from "@/components/cards/product-card";
 import { hitProducts } from "@/mockInfo/data";
 import ProductSection from "@/components/sections/Products";
 

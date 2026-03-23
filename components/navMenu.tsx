@@ -19,7 +19,7 @@ export const NavLinks = [
 		icon: User,
 	},
 	{
-		link: "/products",
+		link: "/product",
 		title: "Products",
 		icon: ShoppingCart,
 	},

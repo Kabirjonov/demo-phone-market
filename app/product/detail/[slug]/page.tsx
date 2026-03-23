@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import ProductDetailView from "@/components/sections/ProductDetailView";
 import { getProductBySlug, hitProducts, slugifyProduct } from "@/mockInfo/data";
+import ProductSection from "@/components/sections/Products";
 
 export function generateStaticParams() {
 	return hitProducts.map(product => ({
@@ -21,5 +22,14 @@ export default async function ProductDetailPage({
 		notFound();
 	}
 
-	return <ProductDetailView product={product} />;
+	return (
+		<>
+			<ProductDetailView product={product} />;
+			<ProductSection
+				title='Xit savdo'
+				products={hitProducts}
+				viewAllHref='/products'
+			/>
+		</>
+	);
 }
