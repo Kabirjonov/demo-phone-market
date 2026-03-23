@@ -4,6 +4,8 @@ import "./globals.css";
 import MainProvider from "@/providers/Main-provider";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import { getDictionary } from "@/lib/dictionaries";
+import { getRequestLocale } from "@/lib/request-locale";
 
 const fontSans = Inter({
 	subsets: ["latin"],
@@ -26,22 +28,22 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const locale = await getRequestLocale();
+	const dictionary = getDictionary(locale);
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body
 				className={`${fontSans.variable}  ${fontMono.variable} antialiased`}
 			>
-				<MainProvider>
-					<div className='min-h-screen'>
-						<Navbar />
-						<main>{children}</main>
-						<Footer />
-					</div>
+				<MainProvider locale={locale} messages={dictionary}>
+					<Navbar />
+					<main>{children}</main>
+					<Footer />
 				</MainProvider>
 			</body>
 		</html>

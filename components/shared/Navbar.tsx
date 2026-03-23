@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import NavMenu from "../navMenu";
 import Link from "next/link";
+import { LanguageSwitcher } from "./language-switcher";
 
 const Navbar = () => {
 	const { theme } = useTheme();
@@ -34,6 +35,8 @@ const Navbar = () => {
 
 				<div className='flex items-center gap-3'>
 					<ModeToggle />
+					<LanguageSwitcher />
+
 					{/* <Button
 						className='hidden rounded-full sm:inline-flex'
 						variant='outline'

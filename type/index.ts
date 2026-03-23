@@ -20,3 +20,18 @@ export type IProduct = {
 	installmentNote?: string;
 	providers?: string[];
 };
+
+export type PromotionItem = {
+	slug: string;
+	title: string;
+	period: string;
+	daysLeft: number;
+	kicker: string;
+	description: string[];
+	highlights: string[];
+	newsTitle: string;
+	newsText: string;
+	opportunityTitle: string;
+	opportunityText: string;
+	products: { name: string; price: string; tag: string }[];
+};

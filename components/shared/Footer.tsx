@@ -19,7 +19,7 @@ const companyLinks = [
 	{ label: "Biz haqimizda", href: "#" },
 	{ label: "Yangiliklar va bloglar", href: "#" },
 	{ label: "IMEI ni tekshirish", href: "#" },
-	{ label: "Texnomartda ishlash", href: "#" },
+	{ label: "Tenool ishlash", href: "#" },
 ];
 
 const infoLinks = [
@@ -49,7 +49,7 @@ const paymentMethods = ["Uzcard", "Humo", "Payme", "Click"];
 const contactActions = [
 	{
 		label: "Qo'ng'iroq qilmoq",
-		href: "tel:+998712099944",
+		href: "tel:+998 33 100 23 10",
 		icon: Phone,
 		className: "bg-[#28c981] text-white",
 	},
@@ -110,7 +110,7 @@ export default function Footer() {
 								href='tel:+998712099944'
 								className='block text-3xl font-semibold tracking-tight transition hover:text-[#ffbf2f]'
 							>
-								+998 71 209 99 44
+								+998 33 100 23 10
 							</Link>
 						</div>
 

@@ -1,4 +1,4 @@
-import { IProduct } from "@/type";
+import { IProduct, PromotionItem } from "@/type";
 
 export const hitProducts: IProduct[] = [
 	{
@@ -149,3 +149,132 @@ export function slugifyProduct(title: string) {
 export function getProductBySlug(slug: string) {
 	return hitProducts.find(product => slugifyProduct(product.title) === slug);
 }
+
+export const slides = [
+	{
+		title: "Galaxy-S26-Ultra",
+		subtitle: "Galaxy AI ✨",
+		slug: "galaxy-s26-ultra",
+		image:
+			"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1600&auto=format&fit=crop",
+	},
+	{
+		title: "iPhone 17 Pro",
+		subtitle: "New Era",
+		image:
+			"https://images.unsplash.com/photo-1510552776732-03e61cf4b144?q=80&w=1600&auto=format&fit=crop",
+	},
+	{
+		title: "Xiaomi 16 Ultra",
+		slug: "Xiaomi 16 Ultra",
+		subtitle: "Leica Power",
+		image:
+			"https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1600&auto=format&fit=crop",
+	},
+	{
+		title: "Pixel 11 Pro",
+		slug: "Pixel 11 Pro",
+		subtitle: "Smart by Google",
+		image:
+			"https://images.unsplash.com/photo-1567581935884-3349723552ca?q=80&w=1600&auto=format&fit=crop",
+	},
+	{
+		title: "Nothing Phone 4",
+		slug: "Nothing Phone 4",
+
+		subtitle: "Pure Design",
+		image:
+			"https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1600&auto=format&fit=crop",
+	},
+	{
+		title: "OnePlus 14",
+		slug: "OnePlus 14",
+		subtitle: "Fast and Fluid",
+		image:
+			"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=1600&auto=format&fit=crop",
+	},
+];
+
+export const promotions: PromotionItem[] = [
+	{
+		slug: "ustamasiz-muddatli-tolov-0012",
+		title: "Ustamasiz muddatli to'lov 0012!",
+		period: "01 Yanvardan 31 Dekabrgacha",
+		daysLeft: 648,
+		kicker: "0% boshlang'ich to'lov, 0% ustama, 12 oyga bo'lib to'lash",
+		description: [
+			"texnomart'da texnikalarni 0-0-12 muddatli to'lov asosida xarid qiling, ortiqcha va boshlang'ich to'lovsiz.",
+			"Telefon, televizor, muzlatgich, kir yuvish mashinasi va boshqa ko'plab texnikalarni 12 oy davomida o'z narxida bo'lib to'lash imkoniyati sizni kutmoqda.",
+		],
+		highlights: [
+			"Boshlang'ich to'lovsiz xarid",
+			"12 oy davomida teng to'lov",
+			"Eng ommabop texnikalarga amal qiladi",
+		],
+		newsTitle: "Yangilik",
+		newsText:
+			"Aksiya doirasida yangi smartfonlar, televizorlar va maishiy texnikalar uchun alohida tavsiyalar ham tayyorlandi.",
+		opportunityTitle: "Yangi imkoniyatlar",
+		opportunityText:
+			"Onlayn rasmiylashtirish, tezkor tasdiqlash va do'kondan olib ketish xizmati bilan xarid yanada qulaylashdi.",
+		products: [
+			{ name: "iPhone17", price: "12 999 000 so'm", tag: "Top savdo" },
+			{ name: "Samsung TV 55", price: "7 499 000 so'm", tag: "0-0-12" },
+			{ name: "LG Muzlatgich", price: "9 899 000 so'm", tag: "Chegirma" },
+		],
+	},
+	{
+		slug: "50-0-2",
+		title: "50-0-2",
+		period: "01 Yanvardan 31 Dekabrgacha",
+		daysLeft: 648,
+		kicker: "Tanlangan mahsulotlarda foydali takliflar",
+		description: [
+			"Aksiya doirasida ayrim mahsulotlar uchun maxsus to'lov va chegirma shartlari amal qiladi.",
+			"Yangilanib boruvchi mahsulotlar ro'yxati orqali o'zingizga mos variantni tanlang.",
+		],
+		highlights: [
+			"Tanlangan brendlarga amal qiladi",
+			"Qulay muddatli to'lov",
+			"Cheklangan muddat",
+		],
+		newsTitle: "Yangilik",
+		newsText:
+			"Hafta davomida aksiyaga yangi mahsulot kategoriyalari qo'shiladi.",
+		opportunityTitle: "Yangi imkoniyatlar",
+		opportunityText:
+			"Onlayn xarid qilgan mijozlar uchun qo'shimcha qulayliklar mavjud.",
+		products: [
+			{ name: "Xiaomi 16 Ultra", price: "10 499 000 so'm", tag: "Aksiya" },
+			{ name: "Dyson Supurgi", price: "6 299 000 so'm", tag: "Top" },
+			{ name: "Aqlli soat", price: "1 899 000 so'm", tag: "Chegirma" },
+		],
+	},
+	{
+		slug: "kenwood-1-6",
+		title: "Kenwood 1=6",
+		period: "01 Yanvardan 31 Martgacha",
+		daysLeft: 86,
+		kicker: "Kenwood texnikalarida foydali aksiyalar",
+		description: [
+			"Kenwood mahsulotlarini xarid qilganingizda maxsus taklif va sovg'alar kutmoqda.",
+			"Oshxona texnikalari orasida eng qulay narx va xizmatlar to'plami mavjud.",
+		],
+		highlights: [
+			"Brend aksiyasi",
+			"Sovg'ali takliflar",
+			"Cheklangan mahsulot soni",
+		],
+		newsTitle: "Yangilik",
+		newsText:
+			"Kenwood yangi kolleksiyasi ayrim filiallarda allaqachon sotuvda.",
+		opportunityTitle: "Yangi imkoniyatlar",
+		opportunityText:
+			"Rasmiy kafolat va bepul konsultatsiya bilan xarid qilishingiz mumkin.",
+		products: [
+			{ name: "Kenwood Blender", price: "1 499 000 so'm", tag: "Sovg'a" },
+			{ name: "Kenwood Mikser", price: "2 249 000 so'm", tag: "Aksiya" },
+			{ name: "Kenwood Toaster", price: "899 000 so'm", tag: "Top" },
+		],
+	},
+];
