@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import MainProvider from "@/providers/Main-provider";
+import Navbar from "@/components/shared/Navbar";
 
 const fontSans = Inter({
 	subsets: ["latin"],
@@ -28,7 +29,10 @@ export default function RootLayout({
 			<body
 				className={`${fontSans.variable}  ${fontMono.variable} antialiased`}
 			>
-				<MainProvider>{children}</MainProvider>
+				<MainProvider>
+					<Navbar />
+					{children}
+				</MainProvider>
 			</body>
 		</html>
 	);
