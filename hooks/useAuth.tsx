@@ -7,7 +7,7 @@ type AuthStore = {
 };
 
 export const useAuthStore = create<AuthStore>()(set => ({
-	step: "verify",
+	step: "login",
 	setStep: step => set({ step }),
 	email: "",
 	setEmail: email => set({ email }),
