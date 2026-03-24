@@ -14,10 +14,10 @@ import { LanguageSwitcher } from "./language-switcher";
 const Navbar = () => {
 	const { theme } = useTheme();
 	return (
-		<nav className='fixed inset-x-4 top-6 z-50 mx-auto h-16 max-w-(--breakpoint-xl) rounded-full border bg-background'>
+		<nav className='fixed left-1/2 top-6 z-50 h-16 w-[calc(100%-1rem)] -translate-x-1/2 rounded-full border bg-background/95 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:w-[calc(100%-2rem)] xl:w-[80%]'>
 			<div className='mx-auto flex h-full items-center justify-between px-4'>
 				{/* <Logo /> */}
-				<div className='relative h-10 w-24 sm:h-12 sm:w-28 md:h-14 md:w-32'>
+				<div className='relative h-10 w-24 sm:h-12 sm:w-28 md:h-4 md:w-32'>
 					<Link href={"/"}>
 						<Image
 							alt='logo'
@@ -34,7 +34,7 @@ const Navbar = () => {
 				<NavMenu className='hidden md:block' />
 
 				<div className='flex items-center gap-3'>
-					<ModeToggle />
+					{/* <ModeToggle /> */}
 					<LanguageSwitcher />
 
 					{/* <Button
@@ -43,12 +43,15 @@ const Navbar = () => {
 					>
 						Sign In
 					</Button> */}
-					<div className='flex items-center gap-0.5'>
+					<div className='hidden md:flex items-center gap-0.5'>
 						<Input placeholder='Search' />
 						<Button size={"icon"}>
 							<Search />
 						</Button>
 					</div>
+					<Button variant={"outline"}>
+						<Link href={"/auth"}>Login</Link>
+					</Button>
 
 					{/* Mobile Menu */}
 					<div className='md:hidden'>

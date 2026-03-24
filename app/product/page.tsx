@@ -6,14 +6,14 @@ export default function page() {
 	return (
 		<div>
 			<ProductSection
-				title='Xit savdo'
+				// title='Xit savdo'
 				products={hitProducts}
-				viewAllHref='/products'
+				// viewAllHref='/products'
 			/>
 			<ProductSection
-				title='Foydali xaridlar'
+				// title='Foydali xaridlar'
 				products={hitProducts}
-				viewAllHref='/products'
+				// viewAllHref='/products'
 			/>
 			<ProductSection title='' products={hitProducts} viewAllHref='/products' />
 		</div>

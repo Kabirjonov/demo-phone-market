@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import MainProvider from "@/providers/Main-provider";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
+import AppShell from "@/components/shared/App-shell";
+import { createDefaultMetadata } from "@/config/seo.config";
 import { getDictionary } from "@/lib/dictionaries";
 import { getRequestLocale } from "@/lib/request-locale";
 
@@ -18,15 +18,7 @@ const fontMono = JetBrains_Mono({
 	variable: "--font-mono",
 });
 
-export const metadata: Metadata = {
-	title: "Texnool",
-	description: "Texnool shop",
-	icons: {
-		icon: "/logo.png",
-		shortcut: "/logo.png",
-		apple: "/logo.png",
-	},
-};
+export const metadata: Metadata = createDefaultMetadata();
 
 export default async function RootLayout({
 	children,
@@ -41,9 +33,7 @@ export default async function RootLayout({
 				className={`${fontSans.variable}  ${fontMono.variable} antialiased`}
 			>
 				<MainProvider locale={locale} messages={dictionary}>
-					<Navbar />
-					<main>{children}</main>
-					<Footer />
+					<AppShell>{children}</AppShell>
 				</MainProvider>
 			</body>
 		</html>

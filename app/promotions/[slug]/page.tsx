@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -7,6 +8,7 @@ import {
 	Sparkles,
 	Tag,
 } from "lucide-react";
+import { createSeoMetadata } from "@/config/seo.config";
 import { promotions } from "@/mockInfo/data";
 
 function decodePromotionSlug(slug: string) {
@@ -19,17 +21,43 @@ export function generateStaticParams() {
 	}));
 }
 
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const currentPromotion = promotions.find(
+		item => item.slug === decodePromotionSlug(slug),
+	);
+
+	if (!currentPromotion) {
+		return createSeoMetadata({
+			title: "Aksiya topilmadi",
+			description: "So'ralgan aksiya sahifasi topilmadi.",
+			path: `/promotions/${slug}`,
+			noIndex: true,
+		});
+	}
+
+	return createSeoMetadata({
+		title: currentPromotion.title,
+		description: currentPromotion.kicker,
+		path: `/promotions/${currentPromotion.slug}`,
+		type: "article",
+		keywords: ["aksiya", "chegirma", "muddatli to'lov", currentPromotion.title],
+	});
+}
+
 export default async function PromotionsPageOne({
 	params,
 }: {
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
-	console.log("slug", slug);
 	const currentPromotion = promotions.find(
 		item => item.slug === decodePromotionSlug(slug),
 	);
-	console.log("currentPromotion", currentPromotion);
 	if (!currentPromotion) {
 		notFound();
 	}

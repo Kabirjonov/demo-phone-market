@@ -8,6 +8,13 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRouter } from "next/navigation";
 import { slugifyProduct } from "@/mockInfo/data";
+import { cn } from "@/lib/utils";
+import {
+	isProductLiked,
+	likedProductsUpdatedEvent,
+	toggleLikedProduct,
+} from "@/lib/liked-products";
+import { useEffect, useState } from "react";
 
 import "swiper/css";
 
@@ -18,6 +25,20 @@ type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
 	const router = useRouter();
 	const productHref = `/product/detail/${slugifyProduct(product.title)}`;
+	const [liked, setLiked] = useState(false);
+
+	useEffect(() => {
+		const syncLikedState = () => setLiked(isProductLiked(product.id));
+
+		syncLikedState();
+		window.addEventListener("storage", syncLikedState);
+		window.addEventListener(likedProductsUpdatedEvent, syncLikedState);
+
+		return () => {
+			window.removeEventListener("storage", syncLikedState);
+			window.removeEventListener(likedProductsUpdatedEvent, syncLikedState);
+		};
+	}, [product.id]);
 
 	return (
 		<div className='group'>
@@ -134,10 +155,23 @@ export default function ProductCard({ product }: ProductCardProps) {
 						<Button
 							size='icon'
 							variant='outline'
-							className='h-11 w-11 rounded-2xl border-2 border-primary'
-							onClick={event => event.stopPropagation()}
+							className={cn(
+								"h-11 w-11 rounded-2xl border-2",
+								liked
+									? "border-primary bg-primary text-primary-foreground hover:bg-primary/90"
+									: "border-primary",
+							)}
+							onClick={event => {
+								event.stopPropagation();
+								toggleLikedProduct(product.id);
+								setLiked(isProductLiked(product.id));
+							}}
 						>
-							<ShoppingCart className='text-primary' />
+							<ShoppingCart
+								className={cn(
+									liked ? "text-primary-foreground" : "text-primary",
+								)}
+							/>
 						</Button>
 					</div>
 				</div>

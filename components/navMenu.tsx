@@ -28,6 +28,11 @@ export const NavLinks = [
 		title: "Liked",
 		icon: Heart,
 	},
+	{
+		link: "/catalog",
+		title: "Catalog",
+		icon: Heart,
+	},
 ];
 export default function NavMenu(props: ComponentProps<typeof NavigationMenu>) {
 	const pathname = usePathname();

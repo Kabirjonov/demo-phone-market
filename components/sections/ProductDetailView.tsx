@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import {
+	ArrowRight,
 	ChevronRight,
 	Copy,
 	Heart,
@@ -14,6 +15,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { IProduct } from "@/type";
+import { hitProducts } from "@/mockInfo/data";
+import ProductSection from "./Products";
 
 type ProductDetailViewProps = {
 	product: IProduct;
@@ -23,10 +26,11 @@ function formatPrice(value: number) {
 	return new Intl.NumberFormat("uz-UZ").format(value);
 }
 
-export default function ProductDetailView({
-	product,
-}: ProductDetailViewProps) {
+export default function ProductDetailView({ product }: ProductDetailViewProps) {
 	const [selectedImage, setSelectedImage] = useState(product.image[0]);
+	const relatedProducts = hitProducts
+		.filter(item => item.id !== product.id)
+		.slice(0, 5);
 
 	return (
 		<div className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
@@ -37,7 +41,8 @@ export default function ProductDetailView({
 
 				<div className='flex flex-wrap items-center gap-3 text-sm text-muted-foreground'>
 					<span>
-						Kod: <span className='font-medium text-foreground'>{product.code}</span>
+						Kod:{" "}
+						<span className='font-medium text-foreground'>{product.code}</span>
 					</span>
 					<Copy size={16} />
 					<span className='rounded-full bg-emerald-100 px-3 py-1 text-emerald-600'>
@@ -154,7 +159,9 @@ export default function ProductDetailView({
 
 						<div className='mt-5 rounded-2xl bg-slate-100 p-3'>
 							<div className='flex items-center justify-between gap-3'>
-								<span className='text-sm text-slate-700'>Muddatli to&apos;lov</span>
+								<span className='text-sm text-slate-700'>
+									Muddatli to&apos;lov
+								</span>
 								<div className='flex items-center gap-2'>
 									<span className='rounded-xl bg-blue-500 px-3 py-2 text-sm font-semibold text-white'>
 										{formatPrice(product.monthlyPrice)} so&apos;m
@@ -219,6 +226,63 @@ export default function ProductDetailView({
 					</div>
 				</div>
 			</div>
+
+			<section className='mt-10 overflow-hidden rounded-[36px] border border-border bg-[linear-gradient(135deg,#0f172a_0%,#13213d_45%,#1d4ed8_100%)] text-white shadow-[0_24px_60px_rgba(15,23,42,0.18)]'>
+				<div className='grid gap-8 px-6 py-8 md:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-10'>
+					<div className='max-w-2xl space-y-5'>
+						<span className='inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium text-white/90 backdrop-blur'>
+							Maxsus taklif
+						</span>
+						<h2 className='text-3xl font-semibold tracking-tight md:text-4xl'>
+							0% ustama bilan muddatli to&apos;lovni hoziroq faollashtiring
+						</h2>
+						<p className='max-w-xl text-base leading-7 text-white/75 md:text-lg'>
+							Tanlangan texnikalarda qulay bo&apos;lib to&apos;lash, tezkor
+							rasmiylashtirish va hamkor banklardan eng foydali takliflar sizni
+							kutmoqda.
+						</p>
+						<div className='flex flex-wrap gap-3'>
+							<Button className='h-12 rounded-2xl bg-white px-5 text-base font-semibold text-slate-950 hover:bg-white/90'>
+								Aksiyani ko&apos;rish
+								<ArrowRight />
+							</Button>
+							<Button
+								variant='outline'
+								className='h-12 rounded-2xl border-white/20 bg-white/10 px-5 text-base font-semibold text-white hover:bg-white/15'
+							>
+								Maslahat olish
+							</Button>
+						</div>
+					</div>
+
+					<div className='grid gap-4 sm:grid-cols-3'>
+						<div className='rounded-[28px] border border-white/15 bg-white/10 p-5 backdrop-blur'>
+							<p className='text-3xl font-bold'>0%</p>
+							<p className='mt-2 text-sm leading-6 text-white/75'>
+								Boshlang&apos;ich to&apos;lovsiz xarid
+							</p>
+						</div>
+						<div className='rounded-[28px] border border-white/15 bg-white/10 p-5 backdrop-blur'>
+							<p className='text-3xl font-bold'>12 oy</p>
+							<p className='mt-2 text-sm leading-6 text-white/75'>
+								Qulay muddatli to&apos;lov
+							</p>
+						</div>
+						<div className='rounded-[28px] border border-white/15 bg-white/10 p-5 backdrop-blur'>
+							<p className='text-3xl font-bold'>24/7</p>
+							<p className='mt-2 text-sm leading-6 text-white/75'>
+								Onlayn ariza va tezkor javob
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<ProductSection
+				title='O‘xshash mahsulotlar'
+				products={relatedProducts}
+				viewAllHref='/product'
+			/>
 		</div>
 	);
 }
