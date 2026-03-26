@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import {
 	Check,
 	ChevronDown,
+	ChevronDownIcon,
 	ChevronRight,
 	SlidersHorizontal,
 	X,
@@ -19,6 +20,22 @@ type FilterGroup = {
 	items?: { label: string; value: string; count?: number }[];
 };
 
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Field, FieldDescription, FieldTitle } from "@/components/ui/field";
+import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
+import { mockData } from "../page";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import {
+	InputOTP,
+	InputOTPGroup,
+	InputOTPSlot,
+} from "@/components/ui/input-otp";
 const priceRanges = [
 	{
 		label: "300 000 - 2 000 000 so'm",
@@ -129,6 +146,7 @@ const filterGroups: FilterGroup[] = [
 ];
 
 export default function CatalogPage() {
+	const [value, setValue] = useState([200, 800]);
 	const [selectedCategory, setSelectedCategory] = useState("smart-devices");
 	const [selectedSubcategory, setSelectedSubcategory] =
 		useState("smart-devices");
@@ -170,30 +188,57 @@ export default function CatalogPage() {
 
 	return (
 		<section className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
-			{/*<div className='mb-8 flex flex-col gap-3'>
-			 <span className='inline-flex w-fit items-center gap-2 rounded-full bg-yellow-100 px-4 py-2 text-sm font-semibold text-yellow-700'>
-					<SlidersHorizontal size={16} />
-					Mock catalog
-				</span>
-				<h1 className='text-3xl font-semibold tracking-tight text-foreground md:text-5xl'>
-					Texnika katalogi
-				</h1>
-				<p className='max-w-3xl text-base leading-7 text-muted-foreground md:text-lg'>
-					Hozircha katalog `hitProducts` mock data bilan ishlayapti. Keyinchalik
-					shu funksional qismni backenddan keladigan real mahsulotlar bilan
-					to'ldirasiz.
-				</p>
-			</div> */}
+			<div className='flex flex-wrap gap-x-2 my-3'>
+				{mockData.map((item, i) => (
+					<Link href={item.items[0]} key={item.id}>
+						<Badge>{item.items[0]}</Badge>
+					</Link>
+				))}
+			</div>
 
 			<div className='grid gap-8 lg:grid-cols-[290px_minmax(0,1fr)]'>
 				<aside className='h-fit rounded-[28px] border border-border/70 bg-white p-4 shadow-[0_14px_40px_rgba(15,23,42,0.05)]'>
-					<button
-						type='button'
-						className='flex w-full items-center justify-between rounded-2xl bg-muted/40 px-4 py-3 text-left text-sm font-medium text-foreground'
+					<Collapsible
+						defaultOpen
+						className='mt-5 space-y-1 px-2 py-2'
+						// className='w-full  text-left text-base font-medium text-foreground'
 					>
-						<span>Category</span>
-						<ChevronDown size={18} />
-					</button>
+						<CollapsibleTrigger asChild>
+							<div className='group flex w-full '>
+								Product details
+								<ChevronDownIcon className='ml-auto group-data-[state=open]:rotate-180' />
+							</div>
+						</CollapsibleTrigger>
+						<CollapsibleContent>
+							<Field className='w-full max-w-xs'>
+								<FieldDescription>
+									{/* Set your budget range ($
+									<span className='font-medium tabular-nums'>
+										{value[0]}
+									</span> -{" "}
+									<span className='font-medium tabular-nums'>{value[1]}</span>). */}
+									<InputOTP maxLength={2} className='w-full'>
+										<InputOTPGroup defaultValue={value}>
+											<InputOTPSlot index={0} />
+											<InputOTPSlot index={1} />
+										</InputOTPGroup>
+									</InputOTP>
+									{/* <Input value={value[0]} />
+									<Input value={value[1]} /> */}
+								</FieldDescription>
+
+								<Slider
+									value={value}
+									onValueChange={value => setValue(value as [number, number])}
+									min={0}
+									max={1000}
+									step={10}
+									className='mt-2 w-full'
+									aria-label='Price Range'
+								/>
+							</Field>
+						</CollapsibleContent>
+					</Collapsible>
 
 					<div className='mt-5 space-y-1'>
 						{filterGroups.map(group => {

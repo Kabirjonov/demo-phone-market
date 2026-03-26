@@ -4,7 +4,7 @@ import { hitProducts, slugifyProduct } from "@/mockInfo/data";
 import Image from "next/image";
 import Link from "next/link";
 
-const mockData = [
+export const mockData = [
 	{
 		id: 1,
 		title: "Smartfonlar va gadjetlar",

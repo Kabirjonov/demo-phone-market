@@ -18,6 +18,7 @@ import { IProduct } from "@/type";
 import { hitProducts } from "@/mockInfo/data";
 import ProductSection from "./Products";
 import { useLikedProduct } from "@/hooks/useLikedProduct";
+import Link from "next/link";
 
 type ProductDetailViewProps = {
 	product: IProduct;
@@ -153,12 +154,12 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 						</div>
 					</div>
 
-					<button
-						type='button'
+					<Link
+						href={"#moreInfo"}
 						className='font-medium text-blue-600 transition hover:text-blue-700'
 					>
 						Barcha xususiyatlar
-					</button>
+					</Link>
 				</div>
 
 				<div className='space-y-4'>
@@ -186,13 +187,13 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 						<div className='mt-5 grid grid-cols-2 gap-3'>
 							<Button className='h-14 rounded-2xl bg-yellow-400 text-base font-semibold text-black hover:bg-yellow-300'>
 								<ShoppingCart />
-								Savatga
+								Buyurtma qilish
 							</Button>
 							<Button
 								variant='outline'
 								className='h-14 rounded-2xl border-0 bg-slate-200 text-base font-semibold text-slate-700 hover:bg-slate-300'
 							>
-								Karta bilan to&apos;lash
+								Call center bilan bog'lanish
 							</Button>
 						</div>
 

@@ -19,16 +19,16 @@ export const NavLinks = [
 		titleKey: "nav.home",
 		icon: User,
 	},
-	{
-		link: "/product",
-		titleKey: "nav.products",
-		icon: ShoppingCart,
-	},
+	// {
+	// 	link: "/product",
+	// 	titleKey: "nav.products",
+	// 	icon: ShoppingCart,
+	// },
 
 	{
 		link: "/catalog",
 		titleKey: "nav.catalog",
-		icon: Heart,
+		icon: ShoppingCart,
 	},
 	{
 		link: "/liked",

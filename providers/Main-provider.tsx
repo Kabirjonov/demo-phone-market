@@ -9,11 +9,13 @@ import NoSSR from "react-no-ssr";
 import { Locale } from "@/lib/i18n";
 import { Dictionary } from "@/lib/dictionaries";
 import { I18nProvider } from "@/i18n/i18n-provider";
+import { apolloClient } from "@/http/apollo-client";
 type AppProvidersProps = {
 	children: ReactNode;
 	locale: Locale;
 	messages: Dictionary;
 };
+import { ApolloProvider } from "@apollo/client/react";
 export default function MainProvider({
 	children,
 	locale,
@@ -23,17 +25,21 @@ export default function MainProvider({
 	return (
 		<ThemeProvider
 			attribute='class'
-			defaultTheme='system'
-			enableSystem
+			defaultTheme='light'
+			enableSystem={false}
 			disableTransitionOnChange
 		>
-			<I18nProvider locale={locale} messages={messages}>
-				<QueryClientProvider client={queryClient}>
-					<NoSSR>{children}</NoSSR>
-				</QueryClientProvider>
+			{" "}
+			<ApolloProvider client={apolloClient}>
+				<I18nProvider locale={locale} messages={messages}>
+					<QueryClientProvider client={queryClient}>
+						<NoSSR>{children}</NoSSR>
+					</QueryClientProvider>
 
-				<Toaster />
-			</I18nProvider>
+					<Toaster />
+				</I18nProvider>
+			</ApolloProvider>
+			;
 		</ThemeProvider>
 	);
 }

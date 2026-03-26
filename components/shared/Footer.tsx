@@ -75,7 +75,8 @@ type FooterLinkGroupProps = {
 
 function FooterLinkGroup({ title, links }: FooterLinkGroupProps) {
 	return (
-		<div className='space-y-4'>
+		<div className='space-y-4 hidden '>
+			{/* lg:block */}
 			<h3 className='text-xl font-semibold text-white'>{title}</h3>
 			<div className='space-y-3 text-[17px] leading-6 text-white/90'>
 				{links.map(link => (
@@ -128,45 +129,11 @@ export default function Footer() {
 							))}
 						</div>
 					</div>
-
+					{/* <div className='hidden lg:block'> */}
 					<FooterLinkGroup title='Kompaniya' links={companyLinks} />
 					<FooterLinkGroup title="Ma'lumot" links={infoLinks} />
 					<FooterLinkGroup title='Haridorga yordam' links={helpLinks} />
-
-					{/* <div className='space-y-5'>
-						<h3 className='text-xl font-semibold text-white'>
-							Ilovani yuklab olish
-						</h3>
-
-						<div className='flex flex-col gap-5 sm:flex-row sm:items-start'>
-							<FooterQr />
-
-							<div className='space-y-4'>
-								<div className='flex flex-wrap gap-3'>
-									{storeLinks.map(({ label, href, icon: Icon }) => (
-										<Link
-											key={label}
-											href={href}
-											aria-label={label}
-											className='flex h-11 w-12 items-center justify-center rounded-2xl bg-white/12 text-white transition hover:bg-white/20'
-										>
-											<Icon size={20} />
-										</Link>
-									))}
-								</div>
-
-								<div className='max-w-[180px] space-y-2 text-white/75'>
-									<p className='text-base leading-6'>
-										Yuklab olish uchun QR-kodni skanerlang
-									</p>
-									<div className='flex items-center gap-2 text-sm text-white/50'>
-										<span className='inline-block h-px w-10 bg-white/20' />
-										<span>tezkor o&apos;tish</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> */}
+					{/* </div> */}
 				</div>
 
 				<div className='mt-12 flex flex-col gap-6 border-t border-white/12 pt-7 lg:flex-row lg:items-end lg:justify-between'>

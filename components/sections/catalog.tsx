@@ -8,64 +8,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { slugifyProduct } from "@/mockInfo/data";
+import { mockData } from "@/app/catalog/page";
 
-const catalogPreviewItems = [
-	{
-		id: 1,
-		title: "Aksiyalar va chegirmalar",
-		href: "/promotions/ustamasiz-muddatli-tolov-0012",
-		image: "/products/product-1.webp",
-	},
-	{
-		id: 2,
-		title: "Smartfonlar",
-		href: "/catalog",
-		image: "/products/product-1.2.webp",
-		accent: "from-slate-50 to-zinc-100",
-	},
-	{
-		id: 3,
-		title: "Havo sovutgichlar",
-		href: "/catalog",
-		image: "/products/product-1.3.webp",
-		accent: "from-cyan-50 to-sky-100",
-	},
-	{
-		id: 4,
-		title: "Changyutgichlar",
-		href: "/catalog",
-		image: "/products/product-1.4.webp",
-		accent: "from-slate-50 to-blue-100",
-	},
-	{
-		id: 5,
-		title: "Muzlatgichlar",
-		href: "/catalog",
-		image: "/products/product-1.webp",
-		accent: "from-lime-50 to-emerald-100",
-	},
-	{
-		id: 6,
-		title: "Noutbuklar",
-		href: "/catalog",
-		image: "/products/product-1.2.webp",
-		accent: "from-zinc-50 to-slate-100",
-	},
-	{
-		id: 7,
-		title: "Televizorlar",
-		href: "/catalog",
-		image: "/products/product-1.3.webp",
-		accent: "from-fuchsia-50 to-rose-100",
-	},
-	{
-		id: 8,
-		title: "Qahva mashinalari",
-		href: "/catalog",
-		image: "/products/product-1.4.webp",
-		accent: "from-orange-50 to-amber-100",
-	},
-];
+const Aksiyalar = {
+	id: 1,
+	title: "Aksiyalar va chegirmalar",
+	href: "/promotions/ustamasiz-muddatli-tolov-0012",
+	image: "/products/product-1.webp",
+};
 
 export default function CatalogSection() {
 	return (
@@ -110,32 +61,56 @@ export default function CatalogSection() {
 					}}
 					className='!pb-2'
 				>
-					{catalogPreviewItems.map(item => (
-						<SwiperSlide key={item.id}>
-							<Link
-								href={item.href}
-								className={`group relative block overflow-hidden rounded-xl p-4 bg-card shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(15,23,42,0.10)]`}
-							>
-								<div className='relative z-10 flex h-full min-h-[126px] flex-col justify-between'>
-									<h2 className='max-w-[150px] text-xl font-semibold leading-7 text-foreground'>
-										{item.title}
-									</h2>
+					<div className='flex bg-red-500'>
+						<Link
+							href={Aksiyalar.href}
+							className={`group relative block overflow-hidden rounded-xl p-4 bg-card shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(15,23,42,0.10)]`}
+						>
+							<div className='relative z-10 flex h-full min-h-[126px] flex-col justify-between'>
+								<h2 className='max-w-[150px] text-xl font-semibold leading-7 text-foreground'>
+									{Aksiyalar.title}
+								</h2>
 
-									<div className='ml-auto mt-4 flex w-full justify-end'>
-										<Image
-											src={item.image}
-											alt={item.title}
-											width={120}
-											height={120}
-											className='h-[92px] w-auto object-contain transition duration-300 group-hover:scale-105'
-										/>
-									</div>
+								<div className='ml-auto mt-4 flex w-full justify-end'>
+									<Image
+										src={Aksiyalar.image}
+										alt={Aksiyalar.title}
+										width={120}
+										height={120}
+										className='h-[92px] w-auto object-contain transition duration-300 group-hover:scale-105'
+									/>
 								</div>
+							</div>
 
-								<div className='absolute -bottom-8 right-6 h-20 w-20 rounded-full bg-white/35 blur-2xl' />
-							</Link>
-						</SwiperSlide>
-					))}
+							<div className='absolute -bottom-8 right-6 h-20 w-20 rounded-full bg-white/35 blur-2xl' />
+						</Link>
+						{mockData.map(item => (
+							<SwiperSlide key={item.id}>
+								<Link
+									href={`/catalog/${slugifyProduct(item.items[0])}`}
+									className={`group relative block overflow-hidden rounded-xl p-4 bg-card shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(15,23,42,0.10)]`}
+								>
+									<div className='relative z-10 flex h-full min-h-[126px] flex-col justify-between'>
+										<h2 className='max-w-[150px] text-xl font-semibold leading-7 text-foreground'>
+											{item.title}
+										</h2>
+
+										<div className='ml-auto mt-4 flex w-full justify-end'>
+											<Image
+												src={item.image}
+												alt={item.title}
+												width={120}
+												height={120}
+												className='h-[92px] w-auto object-contain transition duration-300 group-hover:scale-105'
+											/>
+										</div>
+									</div>
+
+									<div className='absolute -bottom-8 right-6 h-20 w-20 rounded-full bg-white/35 blur-2xl' />
+								</Link>
+							</SwiperSlide>
+						))}
+					</div>
 				</Swiper>
 
 				<button

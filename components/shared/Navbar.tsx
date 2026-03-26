@@ -40,7 +40,7 @@ const Navbar = () => {
 							alt='logo'
 							src={theme === "dark" ? "/logo2.png" : "/logo.png"}
 							fill
-							className='object-contain'
+							className='object-contain '
 							priority
 						/>
 					</Link>
@@ -51,15 +51,9 @@ const Navbar = () => {
 				<NavMenu className='hidden md:block' />
 
 				<div className='flex items-center gap-3'>
-					<ModeToggle />
+					{/* <ModeToggle /> */}
 					<LanguageSwitcher />
 
-					{/* <Button
-						className='hidden rounded-full sm:inline-flex'
-						variant='outline'
-					>
-						Sign In
-					</Button> */}
 					<div className='hidden md:flex items-center gap-0.5'>
 						<Input placeholder={t("nav.searchPlaceholder")} />
 						<Button size={"icon"}>
