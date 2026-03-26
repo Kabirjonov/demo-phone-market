@@ -3,7 +3,7 @@
 // import { getServerSession } from "next-auth";
 // import { authConfig } from "@/config/auth.config";
 import Logo from "@/components/shared/logo";
-import { useAuthStore } from "@/hooks/useAuth";
+import { useAuthStore } from "@/store/useAuth.store";
 import StateAuth from "./(page)/state";
 import SocialAuth from "./(page)/social";
 import { Separator } from "@/components/ui/separator";
@@ -25,17 +25,16 @@ export default function AuthPage() {
 				</div>
 				<div className='w-full space-y-5 rounded-[28px] border border-border/70 bg-background p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]'>
 					<StateAuth />
-					{step !== "verify" ? (
+					{/* {step !== "verify" ? (
 						<>
 							<div className='relative py-1'>
-								<Separator />
 								<span className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground'>
-									yoki
+									Or
 								</span>
 							</div>
 							<SocialAuth />
 						</>
-					) : null}
+					) : null} */}
 				</div>
 			</div>
 		</div>

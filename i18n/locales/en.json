@@ -2,5 +2,41 @@
 	"seo": {
 		"title": "Oxunjon Kabirjonov Resume | Developer Portfolio",
 		"description": "Official resume website for Oxunjon Kabirjonov: experience, projects, skills, and contact information."
+	},
+	"auth": {
+		"login": {
+			"title": "Sign in",
+			"description": "Enter your phone number and password.",
+			"phoneLabel": "Phone number",
+			"phonePlaceholder": "+998901234567",
+			"passwordLabel": "Password",
+			"passwordPlaceholder": "Enter your password",
+			"submit": "Sign in",
+			"noAccount": "Don't have an account?",
+			"registerLink": "Create one",
+			"forgotPassword": "Forgot password?"
+		},
+		"register": {
+			"title": "Create account",
+			"description": "Enter your name, phone number, and password.",
+			"nameLabel": "Name",
+			"namePlaceholder": "Enter your name",
+			"phoneLabel": "Phone number",
+			"phonePlaceholder": "+998901234567",
+			"passwordLabel": "Password",
+			"passwordPlaceholder": "Create a password",
+			"passwordHint": "Password should be at least 6 characters long.",
+			"submit": "Continue",
+			"hasAccount": "Already have an account?",
+			"loginLink": "Sign in"
+		}
+	},
+	"nav": {
+		"home": "Home",
+		"products": "Products",
+		"liked": "Liked",
+		"catalog": "Catalog",
+		"searchPlaceholder": "Search",
+		"login": "Login"
 	}
 }

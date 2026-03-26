@@ -5,7 +5,7 @@ import { ShieldCheck, Smartphone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useAuthStore } from "@/hooks/useAuth";
+import { useAuthStore } from "@/store/useAuth.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -35,7 +35,7 @@ function formatPhoneForView(phone: string) {
 }
 
 export default function VerifyForm() {
-	const { email, setStep } = useAuthStore();
+	const { phone, setStep } = useAuthStore();
 	const [secondsLeft, setSecondsLeft] = useState(60);
 	const form = useForm<VerifyFormValues>({
 		resolver: zodResolver(verifySchema),
@@ -71,7 +71,10 @@ export default function VerifyForm() {
 					Tasdiqlash kodi
 				</h1>
 				<p className='mt-2 text-sm leading-6 text-muted-foreground'>
-					Kod <span className='font-medium text-foreground'>{formatPhoneForView(email)}</span>{" "}
+					Kod{" "}
+					<span className='font-medium text-foreground'>
+						{formatPhoneForView(phone)}
+					</span>{" "}
 					raqamiga yuborildi.
 				</p>
 			</div>
@@ -82,7 +85,9 @@ export default function VerifyForm() {
 						<Smartphone className='h-5 w-5' />
 					</div>
 					<div>
-						<p className='text-sm font-medium text-foreground'>SMS tasdiqlash</p>
+						<p className='text-sm font-medium text-foreground'>
+							SMS tasdiqlash
+						</p>
 						<p className='text-xs text-muted-foreground'>
 							6 xonali kodni kiriting
 						</p>

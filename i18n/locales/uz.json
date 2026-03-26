@@ -2,5 +2,41 @@
 	"seo": {
 		"title": "Oxunjon Kabirjonov Resume | Dasturchi portfolio",
 		"description": "Oxunjon Kabirjonovning rasmiy resume sayti: tajriba, loyihalar, ko'nikmalar va aloqa ma'lumotlari."
+	},
+	"auth": {
+		"login": {
+			"title": "Kirish",
+			"description": "Telefon raqamingiz va parolingizni kiriting.",
+			"phoneLabel": "Telefon raqam",
+			"phonePlaceholder": "+998901234567",
+			"passwordLabel": "Parol",
+			"passwordPlaceholder": "Parolingizni kiriting",
+			"submit": "Kirish",
+			"noAccount": "Akkauntingiz yo'qmi?",
+			"registerLink": "Ro'yxatdan o'tish",
+			"forgotPassword": "Parolni unutdingizmi?"
+		},
+		"register": {
+			"title": "Ro'yxatdan o'tish",
+			"description": "Ismingiz, telefon raqamingiz va parolingizni kiriting.",
+			"nameLabel": "Ism",
+			"namePlaceholder": "Ismingizni kiriting",
+			"phoneLabel": "Telefon raqam",
+			"phonePlaceholder": "+998901234567",
+			"passwordLabel": "Parol",
+			"passwordPlaceholder": "Parol yarating",
+			"passwordHint": "Parol kamida 6 ta belgidan iborat bo'lsin.",
+			"submit": "Davom etish",
+			"hasAccount": "Akkauntingiz bormi?",
+			"loginLink": "Kirish"
+		}
+	},
+	"nav": {
+		"home": "Bosh sahifa",
+		"products": "Mahsulotlar",
+		"liked": "Sevimlilar",
+		"catalog": "Katalog",
+		"searchPlaceholder": "Qidirish",
+		"login": "Kirish"
 	}
 }

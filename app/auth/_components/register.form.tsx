@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useAuthStore } from "@/hooks/useAuth";
+import { useAuthStore } from "@/store/useAuth.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -17,8 +17,12 @@ import {
 } from "@/components/ui/form";
 import { registerSchema, type RegisterFormValues } from "@/lib/validation";
 import { formatUzPhone } from "@/lib/PhoneFormater";
+import { useTranslation } from "react-i18next";
+import { useAuthRegister } from "@/hooks/useAuth";
 export default function RegisterForm() {
-	const { setStep, setEmail } = useAuthStore();
+	const { t } = useTranslation();
+	const { setStep, setPhone } = useAuthStore();
+	const { mutate, isPending } = useAuthRegister();
 	const form = useForm<RegisterFormValues>({
 		resolver: zodResolver(registerSchema),
 		defaultValues: {
@@ -29,8 +33,9 @@ export default function RegisterForm() {
 	});
 
 	const onSubmit = (values: RegisterFormValues) => {
-		setEmail(values.phoneNumber);
+		setPhone(values.phoneNumber);
 		void values;
+		mutate(values);
 		// Backend integratsiya keyin shu yerga ulanadi.
 		setStep("verify");
 	};
@@ -39,10 +44,10 @@ export default function RegisterForm() {
 		<>
 			<div className='mb-6 space-y-2'>
 				<h1 className='text-2xl font-semibold tracking-tight text-foreground'>
-					Ro&apos;yxatdan o&apos;tish
+					{t("auth.register.title")}
 				</h1>
 				<p className='text-sm leading-6 text-muted-foreground'>
-					Ismingiz, telefon raqamingiz va parolingizni kiriting.
+					{t("auth.register.description")}
 				</p>
 			</div>
 
@@ -57,12 +62,13 @@ export default function RegisterForm() {
 						name='name'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Ism</FormLabel>
+								<FormLabel>{t("auth.register.nameLabel")}</FormLabel>
 								<FormControl>
 									<Input
-										placeholder='Ismingizni kiriting'
+										placeholder={t("auth.register.namePlaceholder")}
 										autoComplete='name'
 										{...field}
+										disabled={isPending}
 									/>
 								</FormControl>
 								<FormMessage />
@@ -75,16 +81,17 @@ export default function RegisterForm() {
 						name='phoneNumber'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Telefon raqam</FormLabel>
+								<FormLabel>{t("auth.register.phoneLabel")}</FormLabel>
 								<FormControl>
 									<Input
-										placeholder='+998901234567'
+										placeholder={t("auth.register.phonePlaceholder")}
 										autoComplete='tel'
 										inputMode='tel'
 										{...field}
 										onChange={event =>
 											field.onChange(formatUzPhone(event.target.value))
 										}
+										disabled={isPending}
 									/>
 								</FormControl>
 								<FormMessage />
@@ -97,37 +104,42 @@ export default function RegisterForm() {
 						name='password'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Parol</FormLabel>
+								<FormLabel>{t("auth.register.passwordLabel")}</FormLabel>
 								<FormControl>
 									<Input
 										type='password'
-										placeholder='Parol yarating'
+										placeholder={t("auth.register.passwordPlaceholder")}
 										autoComplete='new-password'
 										{...field}
+										disabled={isPending}
 									/>
 								</FormControl>
 								<FormDescription>
-									Parol kamida 6 ta belgidan iborat bo&apos;lsin.
+									{t("auth.register.passwordHint")}
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 
-					<Button type='submit' className='h-11 w-full rounded-2xl text-base'>
-						Davom etish
+					<Button
+						type='submit'
+						className='h-11 w-full rounded-2xl text-base'
+						disabled={isPending}
+					>
+						{t("auth.register.submit")}
 					</Button>
 				</form>
 			</Form>
 
 			<div className='mt-5 text-center text-sm text-muted-foreground '>
-				Akkauntingiz bormi?{" "}
+				{t("auth.register.hasAccount")}{" "}
 				<button
 					type='button'
 					onClick={() => setStep("login")}
 					className='font-medium text-primary transition hover:underline'
 				>
-					Kirish
+					{t("auth.register.loginLink")}
 				</button>
 			</div>
 		</>

@@ -2,5 +2,41 @@
 	"seo": {
 		"title": "Охунджон Кабирджонов Resume | Портфолио разработчика",
 		"description": "Официальный сайт-резюме Охунджон Кабирджонов: опыт, проекты, навыки и контактная информация."
+	},
+	"auth": {
+		"login": {
+			"title": "Вход",
+			"description": "Введите номер телефона и пароль.",
+			"phoneLabel": "Номер телефона",
+			"phonePlaceholder": "+998901234567",
+			"passwordLabel": "Пароль",
+			"passwordPlaceholder": "Введите пароль",
+			"submit": "Войти",
+			"noAccount": "Нет аккаунта?",
+			"registerLink": "Зарегистрироваться",
+			"forgotPassword": "Забыли пароль?"
+		},
+		"register": {
+			"title": "Регистрация",
+			"description": "Введите имя, номер телефона и пароль.",
+			"nameLabel": "Имя",
+			"namePlaceholder": "Введите ваше имя",
+			"phoneLabel": "Номер телефона",
+			"phonePlaceholder": "+998901234567",
+			"passwordLabel": "Пароль",
+			"passwordPlaceholder": "Создайте пароль",
+			"passwordHint": "Пароль должен содержать минимум 6 символов.",
+			"submit": "Продолжить",
+			"hasAccount": "Уже есть аккаунт?",
+			"loginLink": "Войти"
+		}
+	},
+	"nav": {
+		"home": "Главная",
+		"products": "Товары",
+		"liked": "Избранное",
+		"catalog": "Каталог",
+		"searchPlaceholder": "Поиск",
+		"login": "Войти"
 	}
 }

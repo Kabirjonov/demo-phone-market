@@ -82,11 +82,7 @@ export default function NotFound() {
 					</Link>
 				</Button>
 			</div>
-			<ProductSection
-				title='Xit savdo'
-				products={hitProducts}
-				viewAllHref='/products'
-			/>
+			<ProductSection products={hitProducts} viewAllHref='/products' />
 		</section>
 	);
 }

@@ -1,8 +1,33 @@
+export type IProductSpecification = {
+	label: string;
+	value: string;
+	group?: string;
+};
+
+export type ICategory = {
+	id: number;
+	title: string;
+	slug: string;
+};
+
+export type IProductUser = {
+	id: number;
+	name: string;
+	phone: string;
+};
+
 export type IProduct = {
 	id: number;
 	title: string;
-	image: string[];
 	price: number;
+	image: string[];
+	slug?: string;
+	brand: string;
+	category?: ICategory;
+	availability: boolean | string;
+	code: string;
+	description: string;
+	user?: IProductUser;
 	monthlyPrice: number;
 	monthlyDuration: number;
 	rating?: number;
@@ -10,15 +35,13 @@ export type IProduct = {
 	badge?: string;
 	discount?: string;
 	discountSecondary?: string;
-	code?: string;
-	brand?: string;
 	capacity?: string;
-	availability?: string;
 	shortDescription?: string;
 	storeCount?: number;
 	warranty?: string;
 	installmentNote?: string;
 	providers?: string[];
+	specifications?: IProductSpecification[];
 };
 
 export type PromotionItem = {

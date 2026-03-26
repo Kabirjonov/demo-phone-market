@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useAuthStore } from "@/hooks/useAuth";
+import { useAuthStore } from "@/store/useAuth.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,9 +16,13 @@ import {
 } from "@/components/ui/form";
 import { loginSchema, type LoginFormValues } from "@/lib/validation";
 import { formatUzPhone } from "@/lib/PhoneFormater";
+import { useTranslation } from "react-i18next";
+import { useAuthLogin } from "@/hooks/useAuth";
 
 export default function LoginForm() {
-	const { setStep, setEmail } = useAuthStore();
+	const { t } = useTranslation();
+	const { mutate, isPending } = useAuthLogin();
+	const { setStep, setPhone } = useAuthStore();
 	const form = useForm<LoginFormValues>({
 		resolver: zodResolver(loginSchema),
 		defaultValues: {
@@ -28,20 +32,18 @@ export default function LoginForm() {
 	});
 
 	const onSubmit = (values: LoginFormValues) => {
-		setEmail(values.phoneNumber);
-		void values;
-		// Backend integratsiya keyin shu yerga ulanadi.
-		setStep("verify");
+		setPhone(values.phoneNumber);
+		mutate(values);
 	};
 
 	return (
 		<>
 			<div className='mb-6 space-y-2'>
 				<h1 className='text-2xl font-semibold tracking-tight text-foreground text-center'>
-					Kirish
+					{t("auth.login.title")}
 				</h1>
 				<p className='text-sm leading-6 text-muted-foreground text-center'>
-					Telefon raqamingiz va parolingizni kiriting.
+					{t("auth.login.description")}
 				</p>
 			</div>
 
@@ -56,7 +58,7 @@ export default function LoginForm() {
 						name='phoneNumber'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Telefon raqam</FormLabel>
+								<FormLabel>{t("auth.login.phoneLabel")}</FormLabel>
 								<FormControl>
 									<Input
 										placeholder='+998901234567'
@@ -66,6 +68,7 @@ export default function LoginForm() {
 										onChange={event =>
 											field.onChange(formatUzPhone(event.target.value))
 										}
+										disabled={isPending}
 									/>
 								</FormControl>
 								<FormMessage />
@@ -78,13 +81,14 @@ export default function LoginForm() {
 						name='password'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Parol</FormLabel>
+								<FormLabel>{t("auth.login.passwordLabel")}</FormLabel>
 								<FormControl>
 									<Input
 										type='password'
-										placeholder='Parolingizni kiriting'
+										placeholder={t("auth.login.passwordPlaceholder")}
 										autoComplete='current-password'
 										{...field}
+										disabled={isPending}
 									/>
 								</FormControl>
 								<FormMessage />
@@ -92,21 +96,24 @@ export default function LoginForm() {
 						)}
 					/>
 
-					<Button type='submit' className='h-11 w-full rounded-2xl text-base'>
-						Kirish
+					<Button
+						type='submit'
+						className='h-11 w-full rounded-2xl text-base'
+						disabled={isPending}
+					>
+						{t("auth.login.submit")}
 					</Button>
 				</form>
 			</Form>
 
 			<div className='mt-5 text-center text-sm text-muted-foreground flex justify-between'>
 				<div className='text-sm'>
-					Akkauntingiz yo&apos;qmi?{" "}
 					<button
 						type='button'
 						onClick={() => setStep("register")}
 						className='font-medium text-primary transition hover:underline'
 					>
-						Ro&apos;yxatdan o&apos;tish
+						{t("auth.login.registerLink")}
 					</button>
 				</div>
 				<button
@@ -114,7 +121,7 @@ export default function LoginForm() {
 					onClick={() => setStep("register")}
 					className='font-medium text-primary transition hover:underline'
 				>
-					Forgot Password{" "}
+					{t("auth.login.forgotPassword")}
 				</button>
 			</div>
 		</>

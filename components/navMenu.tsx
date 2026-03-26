@@ -11,31 +11,34 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export const NavLinks = [
 	{
 		link: "/",
-		title: "Home",
+		titleKey: "nav.home",
 		icon: User,
 	},
 	{
 		link: "/product",
-		title: "Products",
+		titleKey: "nav.products",
 		icon: ShoppingCart,
 	},
+
 	{
-		link: "/liked",
-		title: "Liked",
+		link: "/catalog",
+		titleKey: "nav.catalog",
 		icon: Heart,
 	},
 	{
-		link: "/catalog",
-		title: "Catalog",
+		link: "/liked",
+		titleKey: "nav.liked",
 		icon: Heart,
 	},
 ];
 export default function NavMenu(props: ComponentProps<typeof NavigationMenu>) {
 	const pathname = usePathname();
+	const { t } = useTranslation();
 
 	return (
 		<NavigationMenu {...props}>
@@ -54,7 +57,7 @@ export default function NavMenu(props: ComponentProps<typeof NavigationMenu>) {
 								)}
 							>
 								<item.icon size={20} />
-								{item.title}
+								{t(item.titleKey)}
 							</Link>
 						</NavigationMenuLink>
 					</NavigationMenuItem>

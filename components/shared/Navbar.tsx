@@ -2,17 +2,34 @@
 import { Button } from "@/components/ui/button";
 import { NavigationSheet } from "@/components/navigation-sheet";
 import Image from "next/image";
-import { ModeToggle } from "./mode-toggle";
-import { Search } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { Input } from "../ui/input";
 
 import { useTheme } from "next-themes";
 import NavMenu from "../navMenu";
 import Link from "next/link";
 import { LanguageSwitcher } from "./language-switcher";
+import { useTranslation } from "react-i18next";
+import { ModeToggle } from "./mode-toggle";
+import { useAuthStore } from "@/store/useAuth.store";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
 	const { theme } = useTheme();
+	const { t } = useTranslation();
+	const { isAuth } = useAuthStore();
+	const router = useRouter();
+	const handleLogOut = () => {
+		router.push("/");
+	};
+
 	return (
 		<nav className='fixed left-1/2 top-6 z-50 h-16 w-[calc(100%-1rem)] -translate-x-1/2 rounded-full border bg-background/95 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:w-[calc(100%-2rem)] xl:w-[80%]'>
 			<div className='mx-auto flex h-full items-center justify-between px-4'>
@@ -34,7 +51,7 @@ const Navbar = () => {
 				<NavMenu className='hidden md:block' />
 
 				<div className='flex items-center gap-3'>
-					{/* <ModeToggle /> */}
+					<ModeToggle />
 					<LanguageSwitcher />
 
 					{/* <Button
@@ -44,14 +61,43 @@ const Navbar = () => {
 						Sign In
 					</Button> */}
 					<div className='hidden md:flex items-center gap-0.5'>
-						<Input placeholder='Search' />
+						<Input placeholder={t("nav.searchPlaceholder")} />
 						<Button size={"icon"}>
 							<Search />
 						</Button>
 					</div>
-					<Button variant={"outline"}>
-						<Link href={"/auth"}>Login</Link>
-					</Button>
+					{isAuth ? (
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant='outline'>
+									<User />
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent>
+								<DropdownMenuGroup>
+									<DropdownMenuItem>
+										<Link href={"/profile"}>Profile</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										<Link href={"/profile"}>History</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem>
+										<Link href={"/orders"}>Orders</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem
+										onClick={handleLogOut}
+										variant='destructive'
+									>
+										LogOut
+									</DropdownMenuItem>
+								</DropdownMenuGroup>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					) : (
+						<Button variant={"outline"}>
+							<Link href={"/auth"}>{t("nav.login")}</Link>
+						</Button>
+					)}
 
 					{/* Mobile Menu */}
 					<div className='md:hidden'>

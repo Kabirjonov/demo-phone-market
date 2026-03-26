@@ -23,6 +23,10 @@ export function LanguageSwitcher() {
 	const locale = useLocale();
 
 	async function onChangeLocale(nextLocale: Locale) {
+		if (nextLocale === locale) {
+			return;
+		}
+
 		await fetch("/api/locale", {
 			method: "POST",
 			headers: {

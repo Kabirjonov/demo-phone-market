@@ -8,6 +8,7 @@ import {
 	Facebook,
 	Instagram,
 	Mail,
+	MessageSquare,
 	Phone,
 	Send,
 	X,
@@ -61,7 +62,7 @@ const contactActions = [
 	},
 	{
 		label: "Telegram",
-		href: "#",
+		href: "https://t/@burxonbv",
 		icon: Send,
 		className: "bg-[#229ed9] text-white",
 	},
@@ -228,7 +229,7 @@ export default function Footer() {
 							type='button'
 							aria-label='Kontakt panelini yopish'
 							onClick={() => setIsContactCardOpen(false)}
-							className='flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#ffc400] bg-white text-black shadow-lg transition hover:-translate-y-0.5'
+							className='flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-white text-black shadow-lg transition hover:-translate-y-0.5'
 						>
 							<X size={22} />
 						</button>
@@ -238,9 +239,9 @@ export default function Footer() {
 						type='button'
 						aria-label='Kontakt panelini ochish'
 						onClick={() => setIsContactCardOpen(true)}
-						className='flex h-12 w-12 items-center justify-center rounded-full bg-[#ffc400] text-black shadow-lg transition hover:-translate-y-0.5'
+						className='flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg transition hover:-translate-y-0.5'
 					>
-						<Phone size={22} />
+						<MessageSquare size={22} />
 					</button>
 				)}
 			</div>

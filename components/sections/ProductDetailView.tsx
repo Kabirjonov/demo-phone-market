@@ -7,16 +7,17 @@ import {
 	ChevronRight,
 	Copy,
 	Heart,
-	Scale,
 	ShieldCheck,
 	ShoppingCart,
 	Star,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { IProduct } from "@/type";
 import { hitProducts } from "@/mockInfo/data";
 import ProductSection from "./Products";
+import { useLikedProduct } from "@/hooks/useLikedProduct";
 
 type ProductDetailViewProps = {
 	product: IProduct;
@@ -28,9 +29,20 @@ function formatPrice(value: number) {
 
 export default function ProductDetailView({ product }: ProductDetailViewProps) {
 	const [selectedImage, setSelectedImage] = useState(product.image[0]);
+	const { liked } = useLikedProduct(product.id);
 	const relatedProducts = hitProducts
 		.filter(item => item.id !== product.id)
 		.slice(0, 5);
+	const yandexMapUrl =
+		"https://yandex.uz/maps/org/texnool/175427033560/?ll=69.203205%2C41.284762&z=16";
+	const groupedSpecifications = (product.specifications || []).reduce<
+		Record<string, { label: string; value: string }[]>
+	>((acc, item) => {
+		const group = item.group || "Asosiy xususiyatlar";
+		if (!acc[group]) acc[group] = [];
+		acc[group].push({ label: item.label, value: item.value });
+		return acc;
+	}, {});
 
 	return (
 		<div className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
@@ -52,14 +64,19 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 			</div>
 
 			<div className='mb-8 flex flex-wrap gap-6 text-muted-foreground'>
-				<div className='flex items-center gap-2'>
-					<Heart size={20} />
+				<div
+					className={cn(
+						"flex items-center gap-2 transition-colors",
+						liked && "text-primary",
+					)}
+				>
+					<Heart size={20} className={cn(liked && "fill-current")} />
 					<span>Sevimlilarga</span>
 				</div>
-				<div className='flex items-center gap-2'>
+				{/* <div className='flex items-center gap-2'>
 					<Scale size={20} />
 					<span>Taqqoslashga</span>
-				</div>
+				</div> */}
 				<div className='flex items-center gap-2'>
 					<Star size={18} className='fill-muted text-muted' />
 					<span>{product.reviewsText || "Sharh yo'q"}</span>
@@ -114,16 +131,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 								{product.badge}
 							</span>
 						)}
-						{product.discount && (
-							<span className='rounded-full bg-blue-500 px-3 py-1 text-sm font-semibold text-white'>
-								{product.discount}
-							</span>
-						)}
-						{product.discountSecondary && (
-							<span className='rounded-full bg-blue-500 px-3 py-1 text-sm font-semibold text-white'>
-								{product.discountSecondary}
-							</span>
-						)}
+						<span className='rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700'>
+							Naqd yoki karta
+						</span>
 					</div>
 
 					<h2 className='text-2xl font-semibold text-foreground'>
@@ -159,22 +169,18 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
 						<div className='mt-5 rounded-2xl bg-slate-100 p-3'>
 							<div className='flex items-center justify-between gap-3'>
-								<span className='text-sm text-slate-700'>
-									Muddatli to&apos;lov
+								<span className='text-sm font-medium text-slate-700'>
+									To&apos;lov turi
 								</span>
-								<div className='flex items-center gap-2'>
-									<span className='rounded-xl bg-blue-500 px-3 py-2 text-sm font-semibold text-white'>
-										{formatPrice(product.monthlyPrice)} so&apos;m
-									</span>
-									<span className='text-sm text-slate-700'>
-										{product.monthlyDuration} / oy
-									</span>
-								</div>
+								<span className='rounded-xl bg-emerald-500 px-3 py-2 text-sm font-semibold text-white'>
+									Naqd yoki karta
+								</span>
 							</div>
 						</div>
 
 						<p className='mt-4 text-sm leading-6 text-muted-foreground'>
-							{product.installmentNote}
+							Mahsulotni do&apos;konda yoki yetkazib berishda naqd pul va bank
+							kartasi orqali to&apos;lashingiz mumkin.
 						</p>
 
 						<div className='mt-5 grid grid-cols-2 gap-3'>
@@ -186,29 +192,36 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 								variant='outline'
 								className='h-14 rounded-2xl border-0 bg-slate-200 text-base font-semibold text-slate-700 hover:bg-slate-300'
 							>
-								Birgina klik orqali xarid
+								Karta bilan to&apos;lash
 							</Button>
 						</div>
 
 						<div className='mt-6 border-t border-border pt-5'>
 							<p className='mb-4 text-sm leading-6 text-muted-foreground'>
-								Muddatli to&apos;lov rasmiylashtirayotganingizda bizdan va
-								hamkorlardan eng ma&apos;qul takliflarga ega bo&apos;ling.
+								Xaridni o&apos;zingizga qulay usulda yakunlang: naqd pul yoki
+								uzum, humo, visa kabi bank kartalari orqali to&apos;lov qiling.
 							</p>
 							<div className='flex flex-wrap gap-3'>
-								{(product.providers || []).map(provider => (
-									<div
-										key={provider}
-										className='rounded-2xl border border-border bg-white px-3 py-3 text-sm font-medium text-foreground shadow-sm'
-									>
-										{provider}
-									</div>
-								))}
+								{["Naqd to'lov", "Visa", "Mastercard", "Humo", "Uzcard"].map(
+									provider => (
+										<div
+											key={provider}
+											className='rounded-2xl border border-border bg-white px-3 py-3 text-sm font-medium text-foreground shadow-sm'
+										>
+											{provider}
+										</div>
+									),
+								)}
 							</div>
 						</div>
 					</div>
 
-					<div className='flex items-center justify-between rounded-[26px] border border-border bg-white px-5 py-4 shadow-sm'>
+					<a
+						href={yandexMapUrl}
+						target='_blank'
+						rel='noreferrer'
+						className='flex items-center justify-between rounded-[26px] border border-border bg-white px-5 py-4 shadow-sm transition hover:border-primary/40 hover:shadow-md'
+					>
 						<div>
 							<p className='text-lg font-semibold text-foreground'>
 								Do&apos;kondan olib ketish bepul
@@ -218,7 +231,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 							</p>
 						</div>
 						<ChevronRight className='text-muted-foreground' />
-					</div>
+					</a>
 
 					<div className='flex items-center justify-center gap-3 rounded-[26px] bg-slate-100 px-5 py-4 text-foreground'>
 						<ShieldCheck className='text-slate-500' />
@@ -227,19 +240,18 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 				</div>
 			</div>
 
-			<section className='mt-10 overflow-hidden rounded-[36px] border border-border bg-[linear-gradient(135deg,#0f172a_0%,#13213d_45%,#1d4ed8_100%)] text-white shadow-[0_24px_60px_rgba(15,23,42,0.18)]'>
+			{/* <section className='mt-10 overflow-hidden rounded-[36px] border border-border bg-[linear-gradient(135deg,#0f172a_0%,#13213d_45%,#1d4ed8_100%)] text-white shadow-[0_24px_60px_rgba(15,23,42,0.18)]'>
 				<div className='grid gap-8 px-6 py-8 md:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-10'>
 					<div className='max-w-2xl space-y-5'>
 						<span className='inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium text-white/90 backdrop-blur'>
 							Maxsus taklif
 						</span>
 						<h2 className='text-3xl font-semibold tracking-tight md:text-4xl'>
-							0% ustama bilan muddatli to&apos;lovni hoziroq faollashtiring
+							Original texnikalarni qulay narxda hoziroq xarid qiling
 						</h2>
 						<p className='max-w-xl text-base leading-7 text-white/75 md:text-lg'>
-							Tanlangan texnikalarda qulay bo&apos;lib to&apos;lash, tezkor
-							rasmiylashtirish va hamkor banklardan eng foydali takliflar sizni
-							kutmoqda.
+							Tanlangan mahsulotlarda tezkor buyurtma, rasmiy kafolat va naqd
+							yoki karta orqali qulay to&apos;lov sizni kutmoqda.
 						</p>
 						<div className='flex flex-wrap gap-3'>
 							<Button className='h-12 rounded-2xl bg-white px-5 text-base font-semibold text-slate-950 hover:bg-white/90'>
@@ -257,15 +269,15 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
 					<div className='grid gap-4 sm:grid-cols-3'>
 						<div className='rounded-[28px] border border-white/15 bg-white/10 p-5 backdrop-blur'>
-							<p className='text-3xl font-bold'>0%</p>
+							<p className='text-3xl font-bold'>100%</p>
 							<p className='mt-2 text-sm leading-6 text-white/75'>
-								Boshlang&apos;ich to&apos;lovsiz xarid
+								Original va tekshirilgan mahsulotlar
 							</p>
 						</div>
 						<div className='rounded-[28px] border border-white/15 bg-white/10 p-5 backdrop-blur'>
-							<p className='text-3xl font-bold'>12 oy</p>
+							<p className='text-3xl font-bold'>2 usul</p>
 							<p className='mt-2 text-sm leading-6 text-white/75'>
-								Qulay muddatli to&apos;lov
+								Naqd yoki karta orqali to&apos;lov
 							</p>
 						</div>
 						<div className='rounded-[28px] border border-white/15 bg-white/10 p-5 backdrop-blur'>
@@ -276,8 +288,107 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> */}
 
+			<div className='space-y-3'>
+				<h2 className='text-3xl font-semibold text-foreground my-3'>
+					Mahsulot xususiyatlari
+				</h2>
+				{/* <p className='text-base leading-7 text-muted-foreground'>
+					Backenddan keladigan asosiy product fieldlar va texnik parametrlarga
+					mos ma&apos;lumotlar.
+				</p> */}
+			</div>
+
+			<div className='grid gap-10 lg:grid-cols-2'>
+				<div className='space-y-4'>
+					{/* <h3 className='text-xl font-semibold text-foreground'>
+						Asosiy xususiyatlar
+					</h3> */}
+
+					<div className='space-y-4'>
+						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
+							<span className='text-muted-foreground'>Brend</span>
+							<span className='font-medium text-foreground'>
+								{product.brand}
+							</span>
+						</div>
+						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
+							<span className='text-muted-foreground'>Kategoriya</span>
+							<span className='font-medium text-foreground'>
+								{product.category?.title || "Ko'rsatilmagan"}
+							</span>
+						</div>
+						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
+							<span className='text-muted-foreground'>Kod</span>
+							<span className='font-medium text-foreground'>
+								{product.code}
+							</span>
+						</div>
+						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
+							<span className='text-muted-foreground'>Mavjudligi</span>
+							<span className='font-medium text-foreground'>
+								{typeof product.availability === "boolean"
+									? product.availability
+										? "Mavjud"
+										: "Mavjud emas"
+									: product.availability}
+							</span>
+						</div>
+						{product.user ? (
+							<>
+								<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
+									<span className='text-muted-foreground'>
+										Mas&apos;ul sotuvchi
+									</span>
+									<span className='font-medium text-foreground'>
+										{product.user.name}
+									</span>
+								</div>
+								{/* <div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
+									<span className='text-muted-foreground'>Telefon</span>
+									<span className='font-medium text-foreground'>
+										{product.user.phone}
+									</span>
+								</div> */}
+							</>
+						) : null}
+					</div>
+				</div>
+
+				<div className='space-y-6'>
+					{Object.entries(groupedSpecifications).map(([group, items]) => (
+						<div key={group} className='space-y-4'>
+							{/* <h3 className='text-xl font-semibold text-foreground'>{group}</h3> */}
+							<div className='space-y-4'>
+								{items.map(item => (
+									<div
+										key={`${group}-${item.label}`}
+										className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'
+									>
+										<span className='text-muted-foreground'>{item.label}</span>
+										<span className='font-medium text-foreground'>
+											{item.value}
+										</span>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<div className='space-y-2 mt-2'>
+				<h3 className='text-2xl font-semibold text-foreground'>Batafsil</h3>
+				<div className='space-y-4 text-base leading-8 text-foreground/85'>
+					{product.description
+						.split("\n")
+						.filter(Boolean)
+						.map(paragraph => (
+							<p key={paragraph}>{paragraph}</p>
+						))}
+				</div>
+			</div>
 			<ProductSection
 				title='O‘xshash mahsulotlar'
 				products={relatedProducts}

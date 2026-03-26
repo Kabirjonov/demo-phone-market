@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Link from "next/link";
-import { slides } from "@/mockInfo/data";
+import { slides, slugifyProduct } from "@/mockInfo/data";
 
 export default function Hero() {
 	return (
@@ -39,7 +39,7 @@ export default function Hero() {
 						<SwiperSlide key={i}>
 							<div className='relative h-full w-full rounded-3xl overflow-hidden'>
 								<Link
-									href={`/promotions/${slide.slug}`}
+									href={`/promotions/${slugifyProduct(slide.slug)}`}
 									className='cursor-pointer'
 								>
 									<Image

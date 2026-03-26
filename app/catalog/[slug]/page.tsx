@@ -1,50 +1,396 @@
-import type { Metadata } from "next";
+"use client";
 
-import { getProductBySlug } from "@/mockInfo/data";
-import { createSeoMetadata } from "@/config/seo.config";
-import { notFound } from "next/navigation";
-import React from "react";
+import { useMemo, useState } from "react";
+import {
+	Check,
+	ChevronDown,
+	ChevronRight,
+	SlidersHorizontal,
+	X,
+} from "lucide-react";
 
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-	const { slug } = await params;
-	const product = getProductBySlug(slug);
+import { hitProducts, slugifyProduct } from "@/mockInfo/data";
+import { IProduct } from "@/type";
+import ProductCard from "@/components/cards/product-card";
 
-	if (!product) {
-		return createSeoMetadata({
-			title: "Katalog tafsiloti topilmadi",
-			description: "So'ralgan katalog elementi topilmadi.",
-			path: `/catalog/${slug}`,
-			noIndex: true,
-		});
+type FilterGroup = {
+	title: string;
+	key: string;
+	items?: { label: string; value: string; count?: number }[];
+};
+
+const priceRanges = [
+	{
+		label: "300 000 - 2 000 000 so'm",
+		value: "budget",
+		min: 300000,
+		max: 2000000,
+	},
+	{
+		label: "2 000 000 - 5 000 000 so'm",
+		value: "mid",
+		min: 2000000,
+		max: 5000000,
+	},
+	{
+		label: "5 000 000 so'm+",
+		value: "premium",
+		min: 5000000,
+		max: Number.POSITIVE_INFINITY,
+	},
+];
+
+function getCategoryKey(product: IProduct) {
+	const title = product.title.toLowerCase();
+
+	if (
+		title.includes("televizor") ||
+		title.includes("tv") ||
+		title.includes("stansiya") ||
+		title.includes("karnay")
+	) {
+		return "tv-audio";
 	}
 
-	return createSeoMetadata({
-		title: product.title,
-		description:
-			product.shortDescription ||
-			`${product.title} haqida qisqacha ma'lumot, narx va mavjudlik tafsilotlari.`,
-		path: `/catalog/${slug}`,
-		keywords: [product.brand ?? "", product.capacity ?? "", "katalog"].filter(
-			Boolean,
-		),
-	});
+	if (
+		title.includes("namlagich") ||
+		title.includes("havo") ||
+		title.includes("muzlatgich") ||
+		title.includes("kir yuvish")
+	) {
+		return "home-tech";
+	}
+
+	if (
+		title.includes("telefon") ||
+		title.includes("smartfon") ||
+		title.includes("iphone") ||
+		title.includes("galaxy")
+	) {
+		return "phones";
+	}
+
+	return "smart-devices";
 }
 
-export default async function page({
-	params,
-}: {
-	params: Promise<{ slug: string }>;
-}) {
-	const { slug } = await params;
-	const product = getProductBySlug(slug);
-
-	if (!product) {
-		notFound();
+function getCategoryTitle(category: string) {
+	switch (category) {
+		case "phones":
+			return "Telefonlar";
+		case "tv-audio":
+			return "TV va audio";
+		case "home-tech":
+			return "Maishiy texnika";
+		default:
+			return "Smart qurilmalar";
 	}
+}
 
-	return <div>{product.title}</div>;
+const filterGroups: FilterGroup[] = [
+	{
+		title: "Smartfon va telefonlar",
+		key: "phones",
+		items: [
+			{ label: "Smartfonlar", value: "phones", count: 12 },
+			{ label: "Flagman modellari", value: "phones" },
+			{ label: "Aksessuarlar", value: "phones" },
+		],
+	},
+	{
+		title: "TV va audio",
+		key: "tv-audio",
+		items: [
+			{ label: "Televizorlar", value: "tv-audio", count: 8 },
+			{ label: "Karnay va stansiyalar", value: "tv-audio" },
+			{ label: "Sound tizimlar", value: "tv-audio" },
+		],
+	},
+	{
+		title: "Maishiy texnika",
+		key: "home-tech",
+		items: [
+			{ label: "Namlagichlar", value: "home-tech", count: 16 },
+			{ label: "Uy uchun texnika", value: "home-tech" },
+			{ label: "Iqlim qurilmalari", value: "home-tech" },
+		],
+	},
+	{
+		title: "Smart qurilmalar",
+		key: "smart-devices",
+		items: [
+			{ label: "Aqlli qurilmalar", value: "smart-devices", count: 11 },
+			{ label: "Stansiyalar", value: "smart-devices" },
+			{ label: "Premium gadjetlar", value: "smart-devices" },
+		],
+	},
+	{ title: "Brendlar", key: "brands" },
+	{ title: "Narx", key: "price" },
+	{ title: "Muddatli to'lov", key: "installment" },
+];
+
+export default function CatalogPage() {
+	const [selectedCategory, setSelectedCategory] = useState("smart-devices");
+	const [selectedSubcategory, setSelectedSubcategory] =
+		useState("smart-devices");
+	const [selectedPrice, setSelectedPrice] = useState("");
+	const [sortBy, setSortBy] = useState("popular");
+
+	const filteredProducts = useMemo(() => {
+		const activeRange = priceRanges.find(
+			range => range.value === selectedPrice,
+		);
+
+		const products = hitProducts.filter(product => {
+			const category = getCategoryKey(product);
+			const matchesCategory = selectedCategory
+				? category === selectedCategory
+				: true;
+			const matchesSubcategory = selectedSubcategory
+				? category === selectedSubcategory
+				: true;
+			const matchesPrice = activeRange
+				? product.price >= activeRange.min && product.price <= activeRange.max
+				: true;
+
+			return matchesCategory && matchesSubcategory && matchesPrice;
+		});
+
+		return [...products].sort((left, right) => {
+			if (sortBy === "price-low") return left.price - right.price;
+			if (sortBy === "price-high") return right.price - left.price;
+			if (sortBy === "monthly-low")
+				return left.monthlyPrice - right.monthlyPrice;
+			return (right.rating || 0) - (left.rating || 0);
+		});
+	}, [selectedCategory, selectedPrice, selectedSubcategory, sortBy]);
+
+	const selectedCategoryGroup = filterGroups.find(
+		group => group.key === selectedCategory,
+	);
+
+	return (
+		<section className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
+			{/*<div className='mb-8 flex flex-col gap-3'>
+			 <span className='inline-flex w-fit items-center gap-2 rounded-full bg-yellow-100 px-4 py-2 text-sm font-semibold text-yellow-700'>
+					<SlidersHorizontal size={16} />
+					Mock catalog
+				</span>
+				<h1 className='text-3xl font-semibold tracking-tight text-foreground md:text-5xl'>
+					Texnika katalogi
+				</h1>
+				<p className='max-w-3xl text-base leading-7 text-muted-foreground md:text-lg'>
+					Hozircha katalog `hitProducts` mock data bilan ishlayapti. Keyinchalik
+					shu funksional qismni backenddan keladigan real mahsulotlar bilan
+					to'ldirasiz.
+				</p>
+			</div> */}
+
+			<div className='grid gap-8 lg:grid-cols-[290px_minmax(0,1fr)]'>
+				<aside className='h-fit rounded-[28px] border border-border/70 bg-white p-4 shadow-[0_14px_40px_rgba(15,23,42,0.05)]'>
+					<button
+						type='button'
+						className='flex w-full items-center justify-between rounded-2xl bg-muted/40 px-4 py-3 text-left text-sm font-medium text-foreground'
+					>
+						<span>Category</span>
+						<ChevronDown size={18} />
+					</button>
+
+					<div className='mt-5 space-y-1'>
+						{filterGroups.map(group => {
+							const isExpanded = group.key === selectedCategory && group.items;
+
+							return (
+								<div
+									key={group.key}
+									className='rounded-2xl border border-transparent px-2 py-1 transition hover:border-yellow-100 hover:bg-yellow-50/50'
+								>
+									<button
+										type='button'
+										onClick={() => {
+											if (!group.items) return;
+											setSelectedCategory(group.key);
+											setSelectedSubcategory(group.items[0].value);
+										}}
+										className='flex w-full items-center justify-between px-2 py-2 text-left text-base font-medium text-foreground'
+									>
+										<span>{group.title}</span>
+										{group.items ? (
+											<ChevronDown size={18} />
+										) : (
+											<ChevronRight
+												size={18}
+												className='text-muted-foreground'
+											/>
+										)}
+									</button>
+
+									{isExpanded ? (
+										<div className='space-y-1 pb-2 pl-2 pt-1'>
+											{group.items.map(item => {
+												const isSelected = selectedSubcategory === item.value;
+
+												return (
+													<button
+														key={`${group.key}-${item.label}`}
+														type='button'
+														onClick={() => setSelectedSubcategory(item.value)}
+														className='flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition hover:bg-white'
+													>
+														<span className='flex items-center gap-3 text-sm text-foreground'>
+															<span
+																className={`flex h-4 w-4 items-center justify-center rounded border ${
+																	isSelected
+																		? "border-yellow-500 bg-yellow-400 text-black"
+																		: "border-slate-300 bg-white"
+																}`}
+															>
+																{isSelected ? <Check size={12} /> : null}
+															</span>
+															{item.label}
+														</span>
+														{item.count ? (
+															<span className='text-sm text-muted-foreground'>
+																{item.count}
+															</span>
+														) : null}
+													</button>
+												);
+											})}
+										</div>
+									) : null}
+								</div>
+							);
+						})}
+					</div>
+				</aside>
+
+				<div className='space-y-6'>
+					<div className='flex flex-col gap-4 rounded-[28px] border border-border/70 bg-white p-5 shadow-[0_14px_40px_rgba(15,23,42,0.05)] md:flex-row md:items-center md:justify-between'>
+						<div className='space-y-3'>
+							<p className='text-sm text-muted-foreground'>
+								Showing{" "}
+								<span className='font-semibold text-foreground'>
+									{filteredProducts.length} results
+								</span>{" "}
+								from total{" "}
+								<span className='font-semibold text-foreground'>
+									{hitProducts.length}
+								</span>{" "}
+								for{" "}
+								<span className='font-semibold text-foreground'>
+									"{selectedCategoryGroup?.title || "Texnika"}"
+								</span>
+							</p>
+
+							<div className='flex flex-wrap gap-2'>
+								<span className='text-sm text-muted-foreground'>
+									Applied Filters:
+								</span>
+								<span className='inline-flex items-center rounded-full bg-yellow-100 px-3 py-1.5 text-sm font-medium text-yellow-800'>
+									{getCategoryTitle(selectedSubcategory)}
+								</span>
+								{selectedPrice ? (
+									<button
+										type='button'
+										onClick={() => setSelectedPrice("")}
+										className='inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-700'
+									>
+										{
+											priceRanges.find(range => range.value === selectedPrice)
+												?.label
+										}
+										<X size={14} />
+									</button>
+								) : null}
+							</div>
+						</div>
+
+						<div className='flex flex-wrap items-center gap-3'>
+							<label className='text-sm text-muted-foreground'>Price:</label>
+							<select
+								value={selectedPrice}
+								onChange={event => setSelectedPrice(event.target.value)}
+								className='rounded-2xl border border-border bg-background px-4 py-2 text-sm outline-none transition focus:border-yellow-400'
+							>
+								<option value=''>All prices</option>
+								{priceRanges.map(range => (
+									<option key={range.value} value={range.value}>
+										{range.label}
+									</option>
+								))}
+							</select>
+
+							<label className='text-sm text-muted-foreground'>Sort by</label>
+							<select
+								value={sortBy}
+								onChange={event => setSortBy(event.target.value)}
+								className='rounded-2xl border border-border bg-background px-4 py-2 text-sm outline-none transition focus:border-yellow-400'
+							>
+								<option value='popular'>Popular</option>
+								<option value='price-low'>Price: Low to High</option>
+								<option value='price-high'>Price: High to Low</option>
+								<option value='monthly-low'>Monthly payment</option>
+							</select>
+						</div>
+					</div>
+
+					<div className='grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
+						{filteredProducts.map(product => (
+							// <Link
+							// 	key={product.id}
+							// 	href={`/product/detail/${slugifyProduct(product.title)}`}
+							// 	className='group rounded-[28px] border border-border/70 bg-white p-4 shadow-[0_16px_42px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(15,23,42,0.09)]'
+							// >
+							// 	<div className='relative overflow-hidden rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(253,224,71,0.24),_transparent_55%),linear-gradient(180deg,#fafaf9_0%,#f5f5f4_100%)]'>
+							// 		{product.badge ? (
+							// 			<span className='absolute left-3 top-3 z-10 rounded-lg bg-red-500 px-2.5 py-1 text-xs font-bold text-white'>
+							// 				{product.badge}
+							// 			</span>
+							// 		) : null}
+
+							// 		<div className='flex h-[280px] items-center justify-center p-6'>
+							// 			<Image
+							// 				src={product.image[0]}
+							// 				alt={product.title}
+							// 				width={240}
+							// 				height={240}
+							// 				className='h-auto max-h-[240px] w-auto object-contain transition duration-300 group-hover:scale-105'
+							// 			/>
+							// 		</div>
+							// 	</div>
+
+							// 	<div className='mt-4 space-y-3'>
+							// 		<div className='flex items-start justify-between gap-4'>
+							// 			<h2 className='line-clamp-2 text-lg font-medium text-foreground'>
+							// 				{product.title}
+							// 			</h2>
+							// 			<div className='text-right'>
+							// 				<p className='text-2xl font-semibold text-foreground'>
+							// 					{formatPrice(product.price)}
+							// 				</p>
+							// 			</div>
+							// 		</div>
+
+							// 		<p className='text-sm text-muted-foreground'>
+							// 			{getCategoryTitle(getCategoryKey(product))}
+							// 		</p>
+
+							// 		<div className='flex items-center justify-between gap-4'>
+							// 			<span className='rounded-full bg-yellow-100 px-3 py-1.5 text-sm font-medium text-yellow-800'>
+							// 				{formatPrice(product.monthlyPrice)} /{" "}
+							// 				{product.monthlyDuration} oy
+							// 			</span>
+							// 			<span className='text-sm text-muted-foreground'>
+							// 				{product.reviewsText || "Sharh yo'q"}
+							// 			</span>
+							// 		</div>
+							// 	</div>
+							// </Link>
+							<ProductCard product={product} key={product.id} />
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 }
