@@ -226,6 +226,7 @@ export default function CatalogPage() {
 
 									{isExpanded ? (
 										<div className='space-y-1 pb-2 pl-2 pt-1'>
+											{/* @ts-ignore */}
 											{group.items.map(item => {
 												const isSelected = selectedSubcategory === item.value;
 
