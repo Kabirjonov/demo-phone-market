@@ -7,10 +7,22 @@ import {
 	ChevronRight,
 	Copy,
 	Heart,
+	Phone,
 	ShieldCheck,
 	ShoppingCart,
 	Star,
 } from "lucide-react";
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -19,6 +31,10 @@ import { hitProducts } from "@/mockInfo/data";
 import ProductSection from "./Products";
 import { useLikedProduct } from "@/hooks/useLikedProduct";
 import Link from "next/link";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Field, FieldGroup } from "../ui/field";
+import { CALL_CENTER_PHONE_NUMBER } from "@/const/data";
 
 type ProductDetailViewProps = {
 	product: IProduct;
@@ -29,7 +45,8 @@ function formatPrice(value: number) {
 }
 
 export default function ProductDetailView({ product }: ProductDetailViewProps) {
-	const [selectedImage, setSelectedImage] = useState(product.image[0]);
+	// @ts-ignore
+	const [selectedImage, setSelectedImage] = useState(product.images[0]);
 	const { liked } = useLikedProduct(product.id);
 	const relatedProducts = hitProducts
 		.filter(item => item.id !== product.id)
@@ -58,9 +75,6 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 						<span className='font-medium text-foreground'>{product.code}</span>
 					</span>
 					<Copy size={16} />
-					<span className='rounded-full bg-emerald-100 px-3 py-1 text-emerald-600'>
-						{product.availability}
-					</span>
 				</div>
 			</div>
 
@@ -87,7 +101,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 			<div className='grid gap-8 xl:grid-cols-[1.15fr_0.95fr_380px]'>
 				<div className='grid gap-5 md:grid-cols-[88px_minmax(0,1fr)]'>
 					<div className='order-2 flex gap-3 md:order-1 md:flex-col'>
-						{product.image.map(image => {
+						{/* @ts-ignore */}
+						{product.images.map(image => {
 							const isActive = selectedImage === image;
 
 							return (
@@ -186,15 +201,125 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
 						<div className='mt-5 grid grid-cols-2 gap-3'>
 							<Button className='h-14 rounded-2xl bg-yellow-400 text-base font-semibold text-black hover:bg-yellow-300'>
-								<ShoppingCart />
-								Buyurtma qilish
+								<ShoppingCart className='mr-2 h-5 w-5' />
+								Rasmilashtirish
 							</Button>
-							<Button
-								variant='outline'
-								className='h-14 rounded-2xl border-0 bg-slate-200 text-base font-semibold text-slate-700 hover:bg-slate-300'
-							>
-								Call center bilan bog'lanish
-							</Button>
+
+							<Dialog>
+								<DialogTrigger asChild>
+									<Button
+										variant='outline'
+										className='h-14 rounded-2xl border-0 bg-slate-200 text-base font-semibold text-slate-700 hover:bg-slate-300'
+									>
+										Bog&apos;lanish
+									</Button>
+								</DialogTrigger>
+
+								<DialogContent className='w-[95vw] max-w-[520px] rounded-3xl border-0 p-0'>
+									<div className='p-6 sm:p-7'>
+										<Tabs
+											defaultValue='contact'
+											className='flex w-full flex-col'
+										>
+											<TabsList className='mb-6 grid h-auto w-full grid-cols-2 rounded-2xl bg-slate-100 p-1'>
+												<TabsTrigger
+													disabled
+													value='contact'
+													className='h-12 rounded-xl px-3 text-center text-sm font-medium whitespace-normal data-[state=active]:bg-white data-[state=active]:shadow-none'
+												>
+													Men bilan bog&apos;laning
+												</TabsTrigger>
+
+												<TabsTrigger
+													value='self'
+													className='h-12 rounded-xl px-3 text-center text-sm font-medium whitespace-normal data-[state=active]:bg-white data-[state=active]:shadow-none'
+												>
+													O&apos;zim bog&apos;lanaman
+												</TabsTrigger>
+											</TabsList>
+
+											<TabsContent
+												value='contact'
+												className='mt-0 block w-full space-y-4'
+											>
+												<div className='space-y-2'>
+													<Label
+														htmlFor='name'
+														className='text-sm text-slate-500'
+													>
+														Ism <span className='text-yellow-500'>*</span>
+													</Label>
+													<Input
+														id='name'
+														className='h-14 w-full rounded-2xl border-slate-200 px-4 text-base shadow-none'
+													/>
+												</div>
+
+												<div className='space-y-2'>
+													<Label
+														htmlFor='surname'
+														className='text-sm text-slate-500'
+													>
+														Familiya <span className='text-yellow-500'>*</span>
+													</Label>
+													<Input
+														id='surname'
+														placeholder='Familiya'
+														className='h-14 w-full rounded-2xl border-slate-200 px-4 text-base shadow-none'
+													/>
+												</div>
+
+												<div className='space-y-2'>
+													<Label
+														htmlFor='phone'
+														className='text-sm text-slate-500'
+													>
+														Telefon <span className='text-yellow-500'>*</span>
+													</Label>
+													<Input
+														id='phone'
+														className='h-14 w-full rounded-2xl border-slate-200 px-4 text-base font-medium shadow-none'
+													/>
+												</div>
+
+												<Button className='mt-2 h-14 w-full rounded-2xl bg-yellow-400 text-lg font-semibold text-black hover:bg-yellow-300'>
+													Ariza yuborish
+												</Button>
+											</TabsContent>
+
+											<TabsContent
+												value='self'
+												className='mt-0 block w-full space-y-5'
+											>
+												<div className='rounded-2xl border border-slate-200 px-4 py-4 text-lg text-slate-700'>
+													Mahsulot kodi{" "}
+													<span className='ml-2 font-bold tracking-wide text-slate-900'>
+														{product.code}
+													</span>
+												</div>
+
+												<div className='flex items-center justify-between rounded-2xl bg-slate-100 px-5 py-5'>
+													<div>
+														<div className='text-2xl font-bold italic text-slate-900'>
+															{CALL_CENTER_PHONE_NUMBER}
+														</div>
+														<p className='mt-1 text-sm italic text-slate-500'>
+															Aloqa markazi
+														</p>
+													</div>
+
+													<Link
+														href={`tel:${CALL_CENTER_PHONE_NUMBER}`}
+														className='h-14 w-14 flex items-center justify-center rounded-full border-slate-300 bg-white'
+													>
+														<Phone className='h-6 w-6 text-slate-700' />
+													</Link>
+												</div>
+											</TabsContent>
+										</Tabs>
+									</div>
+								</DialogContent>
+							</Dialog>
 						</div>
 
 						<div className='mt-6 border-t border-border pt-5'>
@@ -317,7 +442,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
 							<span className='text-muted-foreground'>Kategoriya</span>
 							<span className='font-medium text-foreground'>
-								{product.category?.title || "Ko'rsatilmagan"}
+								{product.category?.name || "Ko'rsatilmagan"}
 							</span>
 						</div>
 						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
@@ -328,13 +453,6 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 						</div>
 						<div className='grid grid-cols-[160px_1fr] gap-4 border-b border-dashed border-border pb-3'>
 							<span className='text-muted-foreground'>Mavjudligi</span>
-							<span className='font-medium text-foreground'>
-								{typeof product.availability === "boolean"
-									? product.availability
-										? "Mavjud"
-										: "Mavjud emas"
-									: product.availability}
-							</span>
 						</div>
 						{product.user ? (
 							<>

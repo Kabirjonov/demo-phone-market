@@ -14,6 +14,7 @@ import {
 	X,
 	Youtube,
 } from "lucide-react";
+import { CALL_CENTER_PHONE_NUMBER } from "@/const/data";
 
 const companyLinks = [
 	{ label: "Yuridik shaxslar uchun", href: "#" },
@@ -37,12 +38,20 @@ const helpLinks = [
 	{ label: "Do'konlar manzillari", href: "#" },
 ];
 
-const socialLinks = [
-	{ label: "Facebook", href: "#", icon: Facebook },
-	{ label: "Telegram", href: "#", icon: Send },
-	{ label: "Instagram", href: "#", icon: Instagram },
-	{ label: "YouTube", href: "#", icon: Youtube },
-	{ label: "Email", href: "mailto:info@example.com", icon: Mail },
+export const socialLinks = [
+	// { label: "Facebook", href: "#", icon: Facebook },
+	{ label: "Telegram", href: "https://t.me/texnool_rayxona", icon: Send },
+	{
+		label: "Instagram",
+		href: "https://www.instagram.com/texnool?igsh=cTdhMnY0eWhldHUx",
+		icon: Instagram,
+	},
+	{
+		label: "YouTube",
+		href: "https://www.youtube.com/@texnooluz",
+		icon: Youtube,
+	},
+	{ label: "Email", href: "mailto:info@texnool.com", icon: Mail },
 ];
 
 const paymentMethods = ["Uzcard", "Humo", "Payme", "Click"];
@@ -50,7 +59,7 @@ const paymentMethods = ["Uzcard", "Humo", "Payme", "Click"];
 const contactActions = [
 	{
 		label: "Qo'ng'iroq qilmoq",
-		href: "tel:+998 33 100 23 10",
+		href: `tel:${CALL_CENTER_PHONE_NUMBER}`,
 		icon: Phone,
 		className: "bg-[#28c981] text-white",
 	},
@@ -62,7 +71,7 @@ const contactActions = [
 	},
 	{
 		label: "Telegram",
-		href: "https://t/@burxonbv",
+		href: "https://t.me/texnool_rayxona",
 		icon: Send,
 		className: "bg-[#229ed9] text-white",
 	},
@@ -109,10 +118,10 @@ export default function Footer() {
 								Savolingiz bormi? Qo&apos;ng&apos;iroq qiling
 							</p>
 							<Link
-								href='tel:+998712099944'
+								href={`tel:${CALL_CENTER_PHONE_NUMBER}`}
 								className='block text-3xl font-semibold tracking-tight transition hover:text-[#ffbf2f]'
 							>
-								+998 33 100 23 10
+								{CALL_CENTER_PHONE_NUMBER}
 							</Link>
 						</div>
 
@@ -138,7 +147,7 @@ export default function Footer() {
 
 				<div className='mt-12 flex flex-col gap-6 border-t border-white/12 pt-7 lg:flex-row lg:items-end lg:justify-between'>
 					<p className='max-w-3xl text-sm leading-6 text-white/65'>
-						2016-{currentYear} © texnool.uz. Barcha huquqlar himoyalangan.
+						2026-{currentYear} © texnool.uz. Barcha huquqlar himoyalangan.
 						Tovarlarning ko&apos;rsatilgan qiymati va ularni sotib olish
 						shartlari joriy sanaga amal qiladi.
 					</p>
@@ -149,7 +158,7 @@ export default function Footer() {
 								key={method}
 								className='inline-flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-slate-700'
 							>
-								<CreditCard size={16} className='text-[#0ea5e9]' />
+								<CreditCard size={16} className='' />
 								<span>{method}</span>
 							</div>
 						))}

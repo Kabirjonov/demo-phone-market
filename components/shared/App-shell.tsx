@@ -8,7 +8,8 @@ import Navbar from "@/components/shared/Navbar";
 
 export default function AppShell({ children }: { children: ReactNode }) {
 	const pathname = usePathname();
-	const isAuthPage = pathname?.startsWith("/auth");
+	const isAuthPage =
+		pathname?.startsWith("/auth") || pathname?.startsWith("/admin");
 
 	return (
 		<main className='h-screen'>

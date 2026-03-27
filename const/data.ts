@@ -1,0 +1,1 @@
+export const CALL_CENTER_PHONE_NUMBER = "+998 94 668 40 05";

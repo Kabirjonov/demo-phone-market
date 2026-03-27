@@ -4,30 +4,36 @@ export type IProductSpecification = {
 	group?: string;
 };
 
-export type ICategory = {
-	id: number;
-	title: string;
-	slug: string;
-};
-
-export type IProductUser = {
-	id: number;
+export interface IUser {
+	id: string;
 	name: string;
 	phone: string;
+	role: string;
+	isVerified: boolean;
+}
+
+export type ICategory = {
+	id: number;
+	name: string;
+	slug: string;
+	products: IProduct[];
 };
 
-export type IProduct = {
+export interface IProduct {
 	id: number;
 	title: string;
 	price: number;
-	image: string[];
+	images: string[];
 	slug?: string;
 	brand: string;
 	category?: ICategory;
-	availability: boolean | string;
+	stock: number;
 	code: string;
 	description: string;
-	user?: IProductUser;
+	shortDescription?: string;
+	specifications?: IProductSpecification[];
+
+	// not-need
 	monthlyPrice: number;
 	monthlyDuration: number;
 	rating?: number;
@@ -36,13 +42,26 @@ export type IProduct = {
 	discount?: string;
 	discountSecondary?: string;
 	capacity?: string;
-	shortDescription?: string;
 	storeCount?: number;
 	warranty?: string;
 	installmentNote?: string;
 	providers?: string[];
-	specifications?: IProductSpecification[];
-};
+	availability: boolean;
+	user: IUser;
+}
+export interface IProductFormState {
+	title: string;
+	price: string;
+	// slug: string;
+	brand: string;
+	categoryId: string;
+	code: string;
+	stock: string;
+	shortDescription: string;
+	description: string;
+	imagesText: string;
+	specifications: IProductSpecification[];
+}
 
 export type PromotionItem = {
 	slug: string;

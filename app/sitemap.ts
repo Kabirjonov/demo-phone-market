@@ -38,15 +38,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		lastModified: now,
 		changeFrequency: "weekly",
 		priority: 0.8,
-		images: product.image.map(image => `${seoConfig.url}${image}`),
+		images: product.images.map(image => `${seoConfig.url}${image}`),
 	}));
 
-	const catalogDetailRoutes: MetadataRoute.Sitemap = hitProducts.map(product => ({
-		url: `${seoConfig.url}/catalog/${slugifyProduct(product.title)}`,
-		lastModified: now,
-		changeFrequency: "weekly",
-		priority: 0.7,
-	}));
+	const catalogDetailRoutes: MetadataRoute.Sitemap = hitProducts.map(
+		product => ({
+			url: `${seoConfig.url}/catalog/${slugifyProduct(product.title)}`,
+			lastModified: now,
+			changeFrequency: "weekly",
+			priority: 0.7,
+		}),
+	);
 
 	const promotionRoutes: MetadataRoute.Sitemap = promotions.map(promotion => ({
 		url: `${seoConfig.url}/promotions/${promotion.slug}`,

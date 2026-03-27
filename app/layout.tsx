@@ -10,7 +10,6 @@ import { getRequestLocale } from "@/lib/request-locale";
 const fontSans = Inter({
 	subsets: ["latin"],
 	variable: "--font-sans",
-	// vercel.svg
 });
 
 const fontMono = JetBrains_Mono({
@@ -18,7 +17,12 @@ const fontMono = JetBrains_Mono({
 	variable: "--font-mono",
 });
 
-export const metadata: Metadata = createDefaultMetadata();
+// export const metadata: Metadata = createDefaultMetadata();
+export const metadata = {
+	icons: {
+		icon: "/favicon.jpg", // Reference path from the /public directory
+	},
+};
 
 export default async function RootLayout({
 	children,

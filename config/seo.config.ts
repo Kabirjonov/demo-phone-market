@@ -27,8 +27,10 @@ export const seoConfig = {
 		"Toshkent texnika",
 		"aksiyalar",
 		"muddatli to'lov",
+		"Oxunjon Kabirjonov",
+		"Kabirjonov Oxunjon",
 	],
-	image: "/logo.png",
+	image: "/icon.jpg",
 };
 
 export function absoluteUrl(path = "/") {
@@ -100,9 +102,9 @@ export function createDefaultMetadata(): Metadata {
 		description: seoConfig.description,
 		applicationName: seoConfig.siteName,
 		icons: {
-			icon: "/logo.png",
-			shortcut: "/logo.png",
-			apple: "/logo.png",
+			icon: "/icon.jpg",
+			shortcut: "/icon.jpg",
+			apple: "/icon.jpg",
 		},
 		openGraph: {
 			siteName: seoConfig.siteName,

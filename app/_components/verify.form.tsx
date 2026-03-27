@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { ShieldCheck, Smartphone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useAuthStore } from "@/store/useAuth.store";
+import { useAuthFlowStore } from "@/store/useAuth.store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -17,6 +16,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { verifySchema, type VerifyFormValues } from "@/lib/validation";
+import { useAuthVerify } from "@/hooks/useAuth";
 
 function formatPhoneForView(phone: string) {
 	if (!phone) {
@@ -35,7 +35,8 @@ function formatPhoneForView(phone: string) {
 }
 
 export default function VerifyForm() {
-	const { phone, setStep } = useAuthStore();
+	const { phone, setStep } = useAuthFlowStore();
+	const { mutate, isPending } = useAuthVerify();
 	const [secondsLeft, setSecondsLeft] = useState(60);
 	const form = useForm<VerifyFormValues>({
 		resolver: zodResolver(verifySchema),
@@ -58,6 +59,7 @@ export default function VerifyForm() {
 
 	const onSubmit = (values: VerifyFormValues) => {
 		void values;
+		mutate(values);
 		// Backend integratsiya keyin shu yerga ulanadi.
 	};
 
@@ -113,6 +115,7 @@ export default function VerifyForm() {
 										autoComplete='one-time-code'
 										inputMode='numeric'
 										maxLength={6}
+										disabled={isPending}
 										className='h-12 text-center text-lg tracking-[0.35em]'
 										{...field}
 										onChange={event =>
@@ -127,7 +130,11 @@ export default function VerifyForm() {
 						)}
 					/>
 
-					<Button type='submit' className='h-11 w-full rounded-2xl text-base'>
+					<Button
+						type='submit'
+						className='h-11 w-full rounded-2xl text-base'
+						disabled={isPending}
+					>
 						Tasdiqlash
 					</Button>
 				</form>
@@ -136,16 +143,16 @@ export default function VerifyForm() {
 			<div className='mt-5 space-y-3 text-center text-sm text-muted-foreground'>
 				<div>
 					Kod kelmadimi?{" "}
-					<button
+					<Button
 						type='button'
-						disabled={secondsLeft > 0}
+						disabled={secondsLeft > 0 || isPending}
 						onClick={() => setSecondsLeft(60)}
 						className='font-medium text-primary transition hover:underline disabled:cursor-not-allowed disabled:text-muted-foreground disabled:no-underline'
 					>
 						{secondsLeft > 0
 							? `Qayta yuborish ${secondsLeft}s`
 							: "Qayta yuborish"}
-					</button>
+					</Button>
 				</div>
 
 				<button

@@ -19,3 +19,17 @@ export const formatUzPhone = (value: string) => {
 
 	return formatted;
 };
+
+export const normalizePhone = (phone: string) => {
+	let value = phone.replace(/\D/g, ""); // faqat raqamlar
+
+	if (value.startsWith("998")) {
+		return `+${value}`;
+	}
+
+	if (value.startsWith("0")) {
+		return `+998${value.slice(1)}`;
+	}
+
+	return `+${value}`;
+};

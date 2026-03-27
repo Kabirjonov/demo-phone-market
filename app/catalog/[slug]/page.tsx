@@ -200,7 +200,7 @@ export default function CatalogPage() {
 				<aside className='h-fit rounded-[28px] border border-border/70 bg-white p-4 shadow-[0_14px_40px_rgba(15,23,42,0.05)]'>
 					<Collapsible
 						defaultOpen
-						className='mt-5 space-y-1 px-2 py-2'
+						className='mt-5  px-2 py-2'
 						// className='w-full  text-left text-base font-medium text-foreground'
 					>
 						<CollapsibleTrigger asChild>
@@ -217,12 +217,39 @@ export default function CatalogPage() {
 										{value[0]}
 									</span> -{" "}
 									<span className='font-medium tabular-nums'>{value[1]}</span>). */}
-									<InputOTP maxLength={2} className='w-full'>
-										<InputOTPGroup defaultValue={value}>
-											<InputOTPSlot index={0} />
-											<InputOTPSlot index={1} />
-										</InputOTPGroup>
-									</InputOTP>
+									<div className='grid grid-cols-2 gap-3 mb-3'>
+										<div>
+											<label className='text-sm text-muted-foreground'>
+												dan
+											</label>
+											<Input
+												type='number'
+												value={value[0]}
+												onChange={e =>
+													setValue([
+														Math.min(Number(e.target.value), value[1]),
+														value[1],
+													])
+												}
+											/>
+										</div>
+
+										<div>
+											<label className='text-sm text-muted-foreground'>
+												gacha
+											</label>
+											<Input
+												type='number'
+												value={value[1]}
+												onChange={e =>
+													setValue([
+														value[0],
+														Math.max(Number(e.target.value), value[0]),
+													])
+												}
+											/>
+										</div>
+									</div>
 									{/* <Input value={value[0]} />
 									<Input value={value[1]} /> */}
 								</FieldDescription>
@@ -396,7 +423,7 @@ export default function CatalogPage() {
 
 							// 		<div className='flex h-[280px] items-center justify-center p-6'>
 							// 			<Image
-							// 				src={product.image[0]}
+							// 				src={product.images[0]}
 							// 				alt={product.title}
 							// 				width={240}
 							// 				height={240}

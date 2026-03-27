@@ -11,7 +11,6 @@ import Link from "next/link";
 import { LanguageSwitcher } from "./language-switcher";
 import { useTranslation } from "react-i18next";
 import { ModeToggle } from "./mode-toggle";
-import { useAuthStore } from "@/store/useAuth.store";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -20,15 +19,12 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { useSessionStore } from "@/store/useSession.store";
 
 const Navbar = () => {
 	const { theme } = useTheme();
 	const { t } = useTranslation();
-	const { isAuth } = useAuthStore();
-	const router = useRouter();
-	const handleLogOut = () => {
-		router.push("/");
-	};
+	const { isAuth, logout, user } = useSessionStore();
 
 	return (
 		<nav className='fixed left-1/2 top-6 z-50 h-16 w-[calc(100%-1rem)] -translate-x-1/2 rounded-full border bg-background/95 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:w-[calc(100%-2rem)] xl:w-[80%]'>
@@ -69,17 +65,26 @@ const Navbar = () => {
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
 								<DropdownMenuGroup>
-									<DropdownMenuItem>
-										<Link href={"/profile"}>Profile</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem>
-										<Link href={"/profile"}>History</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem>
-										<Link href={"/orders"}>Orders</Link>
-									</DropdownMenuItem>
+									{user?.role === "admin" ? (
+										<DropdownMenuItem>
+											<Link href={"/admin"}>Admin Panel</Link>
+										</DropdownMenuItem>
+									) : (
+										<>
+											<DropdownMenuItem>
+												<Link href={"/profile"}>Profile</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/profile"}>History</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/orders"}>Orders</Link>
+											</DropdownMenuItem>
+										</>
+									)}
+
 									<DropdownMenuItem
-										onClick={handleLogOut}
+										onClick={() => logout()}
 										variant='destructive'
 									>
 										LogOut

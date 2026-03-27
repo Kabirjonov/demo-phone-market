@@ -36,7 +36,7 @@ export async function generateMetadata({
 			product.shortDescription ||
 			`${product.title} narxi, bo'lib to'lash shartlari va asosiy xususiyatlari bilan tanishing.`,
 		path: `/product/detail/${slug}`,
-		image: product.image[0] ?? "/logo.png",
+		image: product.images[0] ?? "/logo.png",
 		keywords: [
 			product.brand ?? "",
 			product.capacity ?? "",

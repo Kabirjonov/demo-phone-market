@@ -36,7 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 			>
 				<div className='rounded-3xl bg-muted/40 p-3 '>
 					<div className='relative h-[220px] overflow-hidden'>
-						{product.image.length > 1 ? (
+						{product.images.length > 1 ? (
 							<Swiper
 								modules={[Autoplay]}
 								slidesPerView={1}
@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 								}}
 								className='h-full'
 							>
-								{product.image.map((imageSrc, index) => (
+								{product.images.map((imageSrc, index) => (
 									<SwiperSlide key={`${product.id}-${index}`}>
 										<div className='relative flex h-[220px] items-center justify-center'>
 											<Image
@@ -75,7 +75,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 						) : (
 							<div className='flex h-[220px]  items-center justify-center'>
 								<Image
-									src={product.image[0]}
+									src={product.images[0]}
 									alt={product.title}
 									width={220}
 									height={220}

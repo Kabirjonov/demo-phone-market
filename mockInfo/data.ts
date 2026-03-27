@@ -1,386 +1,83 @@
-import { IProduct, PromotionItem } from "@/type";
+import { PromotionItem } from "@/type";
 
-export const hitProducts: IProduct[] = [
-	{
-		id: 1,
-		title: "Honor X7d",
-		slug: "honor-x7d",
-		price: 3400000,
-		image: [
-			"/products/product-1.webp",
-			"/products/product-1.4.webp",
-			"/products/product-1.3.webp",
-			"/products/product-1.2.webp",
-		],
-		brand: "Honor",
-		category: {
-			id: 1,
-			title: "Smartfonlar",
-			slug: "smartfonlar",
-		},
-		availability: true,
-		code: "HONOR-X7D",
-		description:
-			"Honor X7d kundalik foydalanish uchun qulay smartfon.\n6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
-		user: {
-			id: 1,
-			name: "Abdulloh",
-			phone: "+998880116807",
-		},
-		monthlyPrice: 396000,
-		monthlyDuration: 12,
-		reviewsText: "Yangi",
-		specifications: [
-			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
-			{
-				label: "Qo'shimcha variant",
-				value: "8/256GB",
-				group: "Asosiy xususiyatlar",
-			},
-			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
-			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
-			{
-				label: "Rang",
-				value: "Hamma rangidan bor",
-				group: "Asosiy xususiyatlar",
-			},
-		],
-	},
-	{
-		id: 2,
-		title: "Honor X7d",
-		slug: "honor-x7d",
-		price: 3400000,
-		image: [
-			"/products/product-1.webp",
-			"/products/product-1.4.webp",
-			"/products/product-1.3.webp",
-			"/products/product-1.2.webp",
-		],
-		brand: "Honor",
-		category: {
-			id: 1,
-			title: "Smartfonlar",
-			slug: "smartfonlar",
-		},
-		availability: true,
-		code: "HONOR-X7D",
-		description:
-			"Honor X7d kundalik foydalanish uchun qulay smartfon.\n6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
-		user: {
-			id: 1,
-			name: "Abdulloh",
-			phone: "+998880116807",
-		},
-		monthlyPrice: 396000,
-		monthlyDuration: 12,
-		reviewsText: "Yangi",
-		specifications: [
-			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
-			{
-				label: "Qo'shimcha variant",
-				value: "8/256GB",
-				group: "Asosiy xususiyatlar",
-			},
-			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
-			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
-			{
-				label: "Rang",
-				value: "Hamma rangidan bor",
-				group: "Asosiy xususiyatlar",
-			},
-		],
-	},
-	{
-		id: 3,
-		title: "Honor X7d",
-		slug: "honor-x7d",
-		price: 3400000,
-		image: [
-			"/products/product-1.webp",
-			"/products/product-1.4.webp",
-			"/products/product-1.3.webp",
-			"/products/product-1.2.webp",
-		],
-		brand: "Honor",
-		category: {
-			id: 1,
-			title: "Smartfonlar",
-			slug: "smartfonlar",
-		},
-		availability: true,
-		code: "HONOR-X7D",
-		description:
-			"Honor X7d kundalik foydalanish uchun qulay smartfon.\n6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
-		user: {
-			id: 1,
-			name: "Abdulloh",
-			phone: "+998880116807",
-		},
-		monthlyPrice: 396000,
-		monthlyDuration: 12,
-		reviewsText: "Yangi",
-		specifications: [
-			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
-			{
-				label: "Qo'shimcha variant",
-				value: "8/256GB",
-				group: "Asosiy xususiyatlar",
-			},
-			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
-			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
-			{
-				label: "Rang",
-				value: "Hamma rangidan bor",
-				group: "Asosiy xususiyatlar",
-			},
-		],
-	},
-	{
-		id: 4,
-		title: "Honor X7d",
-		slug: "honor-x7d",
-		price: 3400000,
-		image: [
-			"/products/product-1.webp",
-			"/products/product-1.4.webp",
-			"/products/product-1.3.webp",
-			"/products/product-1.2.webp",
-		],
-		brand: "Honor",
-		category: {
-			id: 1,
-			title: "Smartfonlar",
-			slug: "smartfonlar",
-		},
-		availability: true,
-		code: "HONOR-X7D",
-		description:
-			"Honor X7d kundalik foydalanish uchun qulay smartfon.\n6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
-		user: {
-			id: 1,
-			name: "Abdulloh",
-			phone: "+998880116807",
-		},
-		monthlyPrice: 396000,
-		monthlyDuration: 12,
-		reviewsText: "Yangi",
-		specifications: [
-			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
-			{
-				label: "Qo'shimcha variant",
-				value: "8/256GB",
-				group: "Asosiy xususiyatlar",
-			},
-			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
-			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
-			{
-				label: "Rang",
-				value: "Hamma rangidan bor",
-				group: "Asosiy xususiyatlar",
-			},
-		],
-	},
+export type IProductSpecification = {
+	label: string;
+	value: string;
+	group?: string;
+};
 
-	{
-		id: 5,
-		title: "Honor X7d",
-		slug: "honor-x7d",
-		price: 3400000,
-		image: [
-			"/products/product-1.webp",
-			"/products/product-1.4.webp",
-			"/products/product-1.3.webp",
-			"/products/product-1.2.webp",
-		],
-		brand: "Honor",
-		category: {
-			id: 1,
-			title: "Smartfonlar",
-			slug: "smartfonlar",
-		},
-		availability: true,
-		code: "HONOR-X7D",
-		description:
-			"Honor X7d kundalik foydalanish uchun qulay smartfon.\n6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
-		user: {
-			id: 1,
-			name: "Abdulloh",
-			phone: "+998880116807",
-		},
-		monthlyPrice: 396000,
-		monthlyDuration: 12,
-		reviewsText: "Yangi",
-		specifications: [
-			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
-			{
-				label: "Qo'shimcha variant",
-				value: "8/256GB",
-				group: "Asosiy xususiyatlar",
-			},
-			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
-			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
-			{
-				label: "Rang",
-				value: "Hamma rangidan bor",
-				group: "Asosiy xususiyatlar",
-			},
-		],
-	},
-	{
-		id: 6,
-		title: "Honor X7d",
-		slug: "honor-x7d",
-		price: 3400000,
-		image: [
-			"/products/product-1.webp",
-			"/products/product-1.4.webp",
-			"/products/product-1.3.webp",
-			"/products/product-1.2.webp",
-		],
-		brand: "Honor",
-		category: {
-			id: 1,
-			title: "Smartfonlar",
-			slug: "smartfonlar",
-		},
-		availability: true,
-		code: "HONOR-X7D",
-		description:
-			"Honor X7d kundalik foydalanish uchun qulay smartfon.\n6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
-		user: {
-			id: 1,
-			name: "Abdulloh",
-			phone: "+998880116807",
-		},
-		monthlyPrice: 396000,
-		monthlyDuration: 12,
-		reviewsText: "Yangi",
-		specifications: [
-			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
-			{
-				label: "Qo'shimcha variant",
-				value: "8/256GB",
-				group: "Asosiy xususiyatlar",
-			},
-			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
-			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
-			{
-				label: "Rang",
-				value: "Hamma rangidan bor",
-				group: "Asosiy xususiyatlar",
-			},
-		],
-	},
+export interface IUser {
+	id: string;
+	name: string;
+	phone: string;
+	role: string;
+	isVerified: boolean;
+}
 
-	// {
-	// 	id: 2,
-	// 	title: "Haier H43K801UG Smart Televizori",
-	// 	image: [
-	// 		"/products/product-1.webp","/products/product-1.4.webp","/products/product-1.3.webp",
-	// 		"/products/product-1.2.webp",
-	// 		"/products/product-1.3.webp",
-	// 		"/products/product-1.4.webp",
-	// 	],
-	// 	price: 4800000,
-	// 	monthlyPrice: 400000,
-	// 	monthlyDuration: 18,
-	// 	reviewsText: "Sharh yo‘q",
-	// 	badge: "Xit savdo",
-	// 	discount: "0•0•12",
-	// 	discountSecondary: "50•0•2",
-	// 	code: "00024591",
-	// 	brand: "Haier",
-	// 	capacity: '43"',
-	// 	availability: "Mavjud",
-	// 	shortDescription: "Mahsulot haqida qisqacha",
-	// 	storeCount: 9,
-	// 	warranty: "2 yil",
-	// 	installmentNote:
-	// 		"Buyurtmani rasmiylashtirishda 12 oydan 24 oygacha muddatli to'lovni tanlashingiz mumkin",
-	// 	providers: ["Axiom nasiya", "TBC Nasiya", "Alif", "Anorbank", "Open"],
-	// },
-	// {
-	// 	id: 3,
-	// 	title: "Alisali Yandex Duo Max Stansiyasi aqlli karnayi, Qora, 60Vt",
+export type ICategory = {
+	id: number;
+	name: string;
+	slug: string;
+	products: IProduct[];
+};
 
-	// 	image: [
-	// 		"/products/product-1.webp","/products/product-1.4.webp","/products/product-1.3.webp",
-	// 		"/products/product-1.2.webp",
-	// 		"/products/product-1.3.webp",
-	// 		"/products/product-1.4.webp",
-	// 	],
-	// 	price: 6990000,
-	// 	monthlyPrice: 582500,
-	// 	monthlyDuration: 18,
-	// 	reviewsText: "Sharh yo‘q",
-	// 	badge: "Xit savdo",
-	// 	discount: "50•0•2",
-	// 	code: "00019842",
-	// 	brand: "Yandex",
-	// 	capacity: "60 Vt",
-	// 	availability: "Mavjud",
-	// 	shortDescription: "Mahsulot haqida qisqacha",
-	// 	storeCount: 7,
-	// 	warranty: "1 yil",
-	// 	installmentNote:
-	// 		"Buyurtmani rasmiylashtirishda 12 oydan 24 oygacha muddatli to'lovni tanlashingiz mumkin",
-	// 	providers: ["Axiom nasiya", "TBC Nasiya", "Alif", "Anorbank", "Open"],
-	// },
-	// {
-	// 	id: 4,
-	// 	title: "Polaris PUH 4550 WIFI IQ Home Havo namlagichi",
-	// 	image: [
-	// 		"/products/product-1.webp","/products/product-1.4.webp","/products/product-1.3.webp",
-	// 		"/products/product-1.2.webp",
-	// 		"/products/product-1.3.webp",
-	// 		"/products/product-1.4.webp",
-	// 	],
-	// 	price: 2199000,
-	// 	monthlyPrice: 183250,
-	// 	monthlyDuration: 18,
-	// 	reviewsText: "Sharh yo‘q",
-	// 	badge: "Xit savdo",
-	// 	discount: "0•0•12",
-	// 	discountSecondary: "50•0•2",
-	// 	code: "00038712",
-	// 	brand: "Polaris",
-	// 	capacity: "4.5 L",
-	// 	availability: "Mavjud",
-	// 	shortDescription: "Mahsulot haqida qisqacha",
-	// 	storeCount: 5,
-	// 	warranty: "2 yil",
-	// 	installmentNote:
-	// 		"Buyurtmani rasmiylashtirishda 12 oydan 24 oygacha muddatli to'lovni tanlashingiz mumkin",
-	// 	providers: ["Axiom nasiya", "TBC Nasiya", "Alif", "Anorbank", "Open"],
-	// },
-	// {
-	// 	id: 5,
-	// 	title: "Resanta YB-2 Havo namlagichi",
-	// 	image: [
-	// 		"/products/product-1.webp","/products/product-1.4.webp","/products/product-1.3.webp",
-	// 		"/products/product-1.2.webp",
-	// 		"/products/product-1.3.webp",
-	// 		"/products/product-1.4.webp",
-	// 	],
-	// 	price: 359000,
-	// 	monthlyPrice: 29917,
-	// 	monthlyDuration: 18,
-	// 	reviewsText: "Sharh yo‘q",
-	// 	badge: "Xit savdo",
-	// 	discount: "50•0•2",
-	// 	code: "00044570",
-	// 	brand: "Resanta",
-	// 	capacity: "2 L",
-	// 	availability: "Mavjud",
-	// 	shortDescription: "Mahsulot haqida qisqacha",
-	// 	storeCount: 4,
-	// 	warranty: "1 yil",
-	// 	installmentNote:
-	// 		"Buyurtmani rasmiylashtirishda 12 oydan 24 oygacha muddatli to'lovni tanlashingiz mumkin",
-	// 	providers: ["Axiom nasiya", "TBC Nasiya", "Alif", "Anorbank", "Open"],
-	// },
-];
+export interface IProduct {
+	id: number;
+	title: string;
+	price: number;
+	images: string[];
+	slug?: string;
+	brand: string;
+	category?: ICategory;
+	stock: number;
+	code: string;
+	description: string;
+	shortDescription?: string;
+	specifications?: IProductSpecification[];
+
+	monthlyPrice: number;
+	monthlyDuration: number;
+	rating?: number;
+	reviewsText?: string;
+	badge?: string;
+	discount?: string;
+	discountSecondary?: string;
+	capacity?: string;
+	storeCount?: number;
+	warranty?: string;
+	installmentNote?: string;
+	providers?: string[];
+	availability: boolean;
+	user: IUser;
+}
+
+export interface IProductFormState {
+	title: string;
+	price: string;
+	brand: string;
+	categoryId: string;
+	code: string;
+	stock: string;
+	shortDescription: string;
+	description: string;
+	imagesText: string;
+	specifications: IProductSpecification[];
+}
+
+const mockUser: IUser = {
+	id: "user-1",
+	name: "Texno Admin",
+	phone: "+998901234567",
+	role: "seller",
+	isVerified: true,
+};
+
+const smartphoneCategory: ICategory = {
+	id: 1,
+	name: "Smartfonlar",
+	slug: "smartfonlar",
+	products: [],
+};
 
 export function slugifyProduct(title: string) {
 	return title
@@ -391,13 +88,226 @@ export function slugifyProduct(title: string) {
 		.replace(/^-+|-+$/g, "");
 }
 
+export const hitProducts: IProduct[] = [
+	{
+		id: 1,
+		title: "Honor X7d 6/128GB",
+		slug: "honor-x7d-6-128gb",
+		price: 3400000,
+		images: [
+			"/products/product-1.webp",
+			"/products/product-1.4.webp",
+			"/products/product-1.3.webp",
+			"/products/product-1.2.webp",
+		],
+		brand: "Honor",
+		category: smartphoneCategory,
+		stock: 12,
+		availability: true,
+		code: "HONOR-X7D-6128",
+		shortDescription:
+			"Katta batareya va kundalik foydalanish uchun qulay smartfon.",
+		description:
+			"Honor X7d kundalik foydalanish uchun qulay smartfon. 6500 mAh batareya va bir nechta xotira variantlari bilan keladi.",
+		monthlyPrice: 396000,
+		monthlyDuration: 12,
+		rating: 4.7,
+		reviewsText: "Yangi",
+		badge: "Hit",
+		storeCount: 8,
+		warranty: "12 oy",
+		installmentNote: "0-0-12 asosida bo‘lib to‘lash мумкин",
+		providers: ["Payme Nasiya", "Uzum Nasiya"],
+		specifications: [
+			{ label: "Xotira", value: "6/128GB", group: "Asosiy xususiyatlar" },
+			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
+			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
+			{
+				label: "Rang",
+				value: "Qora, Kumush, Yashil",
+				group: "Asosiy xususiyatlar",
+			},
+		],
+		user: mockUser,
+	},
+	{
+		id: 2,
+		title: "Honor X7d 8/256GB",
+		slug: "honor-x7d-8-256gb",
+		price: 3890000,
+		images: [
+			"/products/product-1.webp",
+			"/products/product-1.4.webp",
+			"/products/product-1.3.webp",
+			"/products/product-1.2.webp",
+		],
+		brand: "Honor",
+		category: smartphoneCategory,
+		stock: 9,
+		availability: true,
+		code: "HONOR-X7D-8256",
+		shortDescription: "Kengroq xotirali Honor X7d versiyasi.",
+		description:
+			"Honor X7d 8/256GB kundalik va faol foydalanish uchun mo‘ljallangan. Katta batareya va yaxshi xotira hajmiga ega.",
+		monthlyPrice: 454000,
+		monthlyDuration: 12,
+		rating: 4.8,
+		reviewsText: "Mashhur",
+		badge: "Top",
+		storeCount: 6,
+		warranty: "12 oy",
+		installmentNote: "12 oyga bo‘lib to‘lash mumkin",
+		providers: ["Payme Nasiya", "Alif Nasiya"],
+		specifications: [
+			{ label: "Xotira", value: "8/256GB", group: "Asosiy xususiyatlar" },
+			{ label: "Batareya", value: "6500 mAh", group: "Asosiy xususiyatlar" },
+			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
+			{ label: "Rang", value: "Qora, Kumush", group: "Asosiy xususiyatlar" },
+		],
+		user: mockUser,
+	},
+	{
+		id: 3,
+		title: "Samsung Galaxy A56",
+		slug: "samsung-galaxy-a56",
+		price: 5499000,
+		images: ["/products/galaxy-a56.webp", "/products/galaxy-a56-2.webp"],
+		brand: "Samsung",
+		category: smartphoneCategory,
+		stock: 15,
+		availability: true,
+		code: "SAMSUNG-A56",
+		shortDescription: "AMOLED ekran va kuchli kamera bilan zamonaviy smartfon.",
+		description:
+			"Samsung Galaxy A56 kundalik foydalanish, ijtimoiy tarmoqlar va foto uchun qulay smartfon.",
+		monthlyPrice: 641000,
+		monthlyDuration: 12,
+		rating: 4.9,
+		reviewsText: "Top savdo",
+		badge: "New",
+		discount: "-8%",
+		storeCount: 10,
+		warranty: "12 oy",
+		providers: ["Uzum Nasiya", "Alif Nasiya"],
+		specifications: [
+			{ label: "Xotira", value: "8/256GB", group: "Asosiy xususiyatlar" },
+			{ label: "Ekran", value: "6.6 AMOLED", group: "Asosiy xususiyatlar" },
+			{ label: "Kamera", value: "50 MP", group: "Asosiy xususiyatlar" },
+			{ label: "Batareya", value: "5000 mAh", group: "Asosiy xususiyatlar" },
+		],
+		user: mockUser,
+	},
+	{
+		id: 4,
+		title: "iPhone 15 128GB",
+		slug: "iphone-15-128gb",
+		price: 10499000,
+		images: ["/products/iphone-15.webp", "/products/iphone-15-2.webp"],
+		brand: "Apple",
+		category: smartphoneCategory,
+		stock: 5,
+		availability: true,
+		code: "IPHONE15-128",
+		shortDescription: "Apple ekotizimi va yuqori ishlashni xohlovchilar uchun.",
+		description:
+			"iPhone 15 zamonaviy dizayn, kuchli kamera va iOS tajribasini taklif qiladi.",
+		monthlyPrice: 1225000,
+		monthlyDuration: 12,
+		rating: 4.9,
+		reviewsText: "Premium",
+		badge: "Apple",
+		storeCount: 4,
+		warranty: "12 oy",
+		providers: ["Payme Nasiya"],
+		specifications: [
+			{ label: "Xotira", value: "128GB", group: "Asosiy xususiyatlar" },
+			{
+				label: "Ekran",
+				value: "6.1 Super Retina",
+				group: "Asosiy xususiyatlar",
+			},
+			{ label: "Chip", value: "A16 Bionic", group: "Asosiy xususiyatlar" },
+			{ label: "Kamera", value: "48 MP", group: "Asosiy xususiyatlar" },
+		],
+		user: mockUser,
+	},
+	{
+		id: 5,
+		title: "Xiaomi Redmi Note 14 Pro",
+		slug: "xiaomi-redmi-note-14-pro",
+		price: 4599000,
+		images: [
+			"/products/redmi-note-14-pro.webp",
+			"/products/redmi-note-14-pro-2.webp",
+		],
+		brand: "Xiaomi",
+		category: smartphoneCategory,
+		stock: 18,
+		availability: true,
+		code: "REDMI-NOTE14PRO",
+		shortDescription: "Narx va imkoniyat muvozanati yaxshi model.",
+		description:
+			"Xiaomi Redmi Note 14 Pro kuchli protsessor, yaxshi kamera va chiroyli ekran bilan taqdim etiladi.",
+		monthlyPrice: 537000,
+		monthlyDuration: 12,
+		rating: 4.6,
+		reviewsText: "Tavsiya etiladi",
+		storeCount: 12,
+		warranty: "12 oy",
+		providers: ["Uzum Nasiya", "Payme Nasiya"],
+		specifications: [
+			{ label: "Xotira", value: "8/256GB", group: "Asosiy xususiyatlar" },
+			{ label: "Kamera", value: "200 MP", group: "Asosiy xususiyatlar" },
+			{ label: "Batareya", value: "5100 mAh", group: "Asosiy xususiyatlar" },
+			{ label: "Zaryad", value: "67W", group: "Asosiy xususiyatlar" },
+		],
+		user: mockUser,
+	},
+	{
+		id: 6,
+		title: "Nothing Phone 3a",
+		slug: "nothing-phone-3a",
+		price: 6299000,
+		images: [
+			"/products/nothing-phone-3a.webp",
+			"/products/nothing-phone-3a-2.webp",
+		],
+		brand: "Nothing",
+		category: smartphoneCategory,
+		stock: 7,
+		availability: true,
+		code: "NOTHING-3A",
+		shortDescription: "Minimalistik dizayn va o‘ziga xos ko‘rinish.",
+		description:
+			"Nothing Phone 3a original dizayn, toza interfeys va yaxshi kundalik performans beradi.",
+		monthlyPrice: 735000,
+		monthlyDuration: 12,
+		rating: 4.5,
+		reviewsText: "Yangi",
+		storeCount: 3,
+		warranty: "12 oy",
+		providers: ["Alif Nasiya"],
+		specifications: [
+			{ label: "Xotira", value: "8/128GB", group: "Asosiy xususiyatlar" },
+			{ label: "Ekran", value: "6.7 OLED", group: "Asosiy xususiyatlar" },
+			{ label: "Batareya", value: "5000 mAh", group: "Asosiy xususiyatlar" },
+			{ label: "Holati", value: "Yangi", group: "Asosiy xususiyatlar" },
+		],
+		user: mockUser,
+	},
+];
+
+smartphoneCategory.products = hitProducts;
+
 export function getProductBySlug(slug: string) {
-	return hitProducts.find(product => slugifyProduct(product.title) === slug);
+	return hitProducts.find(
+		product => (product.slug ?? slugifyProduct(product.title)) === slug,
+	);
 }
 
 export const slides = [
 	{
-		title: "Galaxy-S26-Ultra",
+		title: "Galaxy S26 Ultra",
 		subtitle: "Galaxy AI",
 		slug: "galaxy-s26-ultra",
 		image:
@@ -406,35 +316,35 @@ export const slides = [
 	{
 		title: "iPhone 17 Pro",
 		subtitle: "New Era",
-		slug: "iPhone 17 Pro",
+		slug: "iphone-17-pro",
 		image:
 			"https://images.unsplash.com/photo-1510552776732-03e61cf4b144?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "Xiaomi 16 Ultra",
-		slug: "Xiaomi 16 Ultra",
 		subtitle: "Leica Power",
+		slug: "xiaomi-16-ultra",
 		image:
 			"https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "Pixel 11 Pro",
-		slug: "Pixel11Pro",
 		subtitle: "Smart by Google",
+		slug: "pixel-11-pro",
 		image:
 			"https://images.unsplash.com/photo-1567581935884-3349723552ca?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "Nothing Phone 4",
-		slug: "NothingPhone4",
 		subtitle: "Pure Design",
+		slug: "nothing-phone-4",
 		image:
 			"https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "OnePlus 14",
-		slug: "OnePlus14",
 		subtitle: "Fast and Fluid",
+		slug: "oneplus-14",
 		image:
 			"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=1600&auto=format&fit=crop",
 	},
@@ -443,13 +353,13 @@ export const slides = [
 export const promotions: PromotionItem[] = [
 	{
 		slug: "ustamasiz-muddatli-tolov-0012",
-		title: "Ustamasiz muddatli to'lov 0012!",
+		title: "Ustamasiz muddatli to'lov 0-0-12",
 		period: "01 Yanvardan 31 Dekabrgacha",
 		daysLeft: 648,
 		kicker: "0% boshlang'ich to'lov, 0% ustama, 12 oyga bo'lib to'lash",
 		description: [
-			"texnool'da texnikalarni 0-0-12 muddatli to'lov asosida xarid qiling, ortiqcha va boshlang'ich to'lovsiz.",
-			"Telefon, televizor, muzlatgich, kir yuvish mashinasi va boshqa ko'plab texnikalarni 12 oy davomida o'z narxida bo'lib to'lash imkoniyati sizni kutmoqda.",
+			"Texnikalarni 0-0-12 muddatli to'lov asosida xarid qiling, ortiqcha va boshlang'ich to'lovsiz.",
+			"Telefon, televizor, muzlatgich, kir yuvish mashinasi va boshqa texnikalarni 12 oy davomida bo'lib to'lash mumkin.",
 		],
 		highlights: [
 			"Boshlang'ich to'lovsiz xarid",
@@ -458,12 +368,12 @@ export const promotions: PromotionItem[] = [
 		],
 		newsTitle: "Yangilik",
 		newsText:
-			"Aksiya doirasida yangi smartfonlar, televizorlar va maishiy texnikalar uchun alohida tavsiyalar ham tayyorlandi.",
+			"Aksiya doirasida yangi smartfonlar, televizorlar va maishiy texnikalar uchun alohida tavsiyalar tayyorlandi.",
 		opportunityTitle: "Yangi imkoniyatlar",
 		opportunityText:
 			"Onlayn rasmiylashtirish, tezkor tasdiqlash va do'kondan olib ketish xizmati bilan xarid yanada qulaylashdi.",
 		products: [
-			{ name: "iPhone17", price: "12 999 000 so'm", tag: "Top savdo" },
+			{ name: "iPhone 17", price: "12 999 000 so'm", tag: "Top savdo" },
 			{ name: "Samsung TV 55", price: "7 499 000 so'm", tag: "0-0-12" },
 			{ name: "LG Muzlatgich", price: "9 899 000 so'm", tag: "Chegirma" },
 		],

@@ -3,18 +3,27 @@
 // import { getServerSession } from "next-auth";
 // import { authConfig } from "@/config/auth.config";
 import Logo from "@/components/shared/logo";
-import { useAuthStore } from "@/store/useAuth.store";
 import StateAuth from "./(page)/state";
 import SocialAuth from "./(page)/social";
 import { Separator } from "@/components/ui/separator";
+import { useAuthFlowStore } from "@/store/useAuth.store";
+import { useSessionStore } from "@/store/useSession.store";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AuthPage() {
-	const { step } = useAuthStore();
+	const { step } = useAuthFlowStore();
+	const { isAuth } = useSessionStore();
 
-	// const session = await getServerSession(authConfig);
-	// if (session) {
-	// return redirect("/");
-	// }
+	const router = useRouter();
+
+	useEffect(() => {
+		if (isAuth) {
+			router.replace("/");
+		}
+	}, [isAuth, router]);
+
+	if (isAuth) return null;
 	return (
 		<div className='relative'>
 			<div className='container p-1 max-w-md mx-auto w-full h-screen flex justify-center items-center flex-col space-y-4'>
