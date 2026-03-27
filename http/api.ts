@@ -2,7 +2,7 @@ import axios from "axios";
 export const Base_Url = process.env.BACKEND_PUBLIC_URL;
 
 const api = axios.create({
-	baseURL: "http://localhost:5000",
+	baseURL: Base_Url,
 	withCredentials: true,
 });
 
