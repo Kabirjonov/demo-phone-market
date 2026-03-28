@@ -25,6 +25,10 @@ export interface ProductMutationInput {
 	specifications: IProductSpecification[];
 }
 
+type CreateProductMutationInput = Omit<ProductMutationInput, "code"> & {
+	code?: string;
+};
+
 interface UpdateProductMutationInput extends ProductMutationInput {
 	id: number;
 }
@@ -113,7 +117,7 @@ interface CreateProductResponse {
 }
 
 interface CreateProductVariables {
-	input: ProductMutationInput;
+	input: CreateProductMutationInput;
 }
 
 export const useCreateProduct = () => {
@@ -132,8 +136,22 @@ export const useCreateProduct = () => {
 	});
 
 	const handleCreateProduct = async (input: ProductMutationInput) => {
+		const sanitizedInput: CreateProductMutationInput = input.code.trim()
+			? input
+			: {
+					title: input.title,
+					price: input.price,
+					brand: input.brand,
+					categoryId: input.categoryId,
+					stock: input.stock,
+					shortDescription: input.shortDescription,
+					description: input.description,
+					images: input.images,
+					specifications: input.specifications,
+				};
+
 		return await createProduct({
-			variables: { input },
+			variables: { input: sanitizedInput },
 		});
 	};
 

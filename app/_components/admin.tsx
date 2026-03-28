@@ -232,7 +232,7 @@ export default function AdminProductsPage() {
 			resetForm();
 			return;
 		}
-		console.log("create input", input);
+
 		await createProduct(input);
 		resetForm();
 	}

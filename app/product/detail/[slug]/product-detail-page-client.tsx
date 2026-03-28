@@ -17,6 +17,7 @@ export default function ProductDetailPageClient({
 	const { t } = useTranslation();
 	const { product, loading, error } = useProduct(slug);
 	const { products, loading: productsLoading } = useProducts();
+	console.log(product);
 
 	if (loading) {
 		return (
