@@ -28,7 +28,7 @@ export const NavLinks = [
 	{
 		link: "/catalog",
 		titleKey: "nav.catalog",
-		icon: ShoppingCart,
+		// icon: ShoppingCart,
 	},
 	{
 		link: "/liked",
@@ -56,7 +56,7 @@ export default function NavMenu(props: ComponentProps<typeof NavigationMenu>) {
 									pathname === item.link && "text-primary",
 								)}
 							>
-								<item.icon size={20} />
+								{item.icon && <item.icon size={20} />}
 								{t(item.titleKey)}
 							</Link>
 						</NavigationMenuLink>

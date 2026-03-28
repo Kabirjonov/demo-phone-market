@@ -310,22 +310,16 @@ export const slides = [
 		title: "Galaxy S26 Ultra",
 		subtitle: "Galaxy AI",
 		slug: "galaxy-s26-ultra",
-		image:
-			"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "iPhone 17 Pro",
 		subtitle: "New Era",
 		slug: "iphone-17-pro",
-		image:
-			"https://images.unsplash.com/photo-1510552776732-03e61cf4b144?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "Xiaomi 16 Ultra",
 		subtitle: "Leica Power",
 		slug: "xiaomi-16-ultra",
-		image:
-			"https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "Pixel 11 Pro",
@@ -338,98 +332,125 @@ export const slides = [
 		title: "Nothing Phone 4",
 		subtitle: "Pure Design",
 		slug: "nothing-phone-4",
-		image:
-			"https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1600&auto=format&fit=crop",
 	},
 	{
 		title: "OnePlus 14",
 		subtitle: "Fast and Fluid",
 		slug: "oneplus-14",
-		image:
-			"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=1600&auto=format&fit=crop",
 	},
 ];
 
 export const promotions: PromotionItem[] = [
 	{
+		kind: "promotion",
+		label: "Aksiya",
 		slug: "ustamasiz-muddatli-tolov-0012",
 		title: "Ustamasiz muddatli to'lov 0-0-12",
-		period: "01 Yanvardan 31 Dekabrgacha",
-		daysLeft: 648,
-		kicker: "0% boshlang'ich to'lov, 0% ustama, 12 oyga bo'lib to'lash",
+		summary:
+			"Smartfon, televizor va maishiy texnikalarni 12 oyga 0% ustama bilan rasmiylashtirish mumkin.",
+		publishedAt: "2026-03-20",
+		period: "20 Martdan 30 Aprelgacha",
+		image:
+			"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=1600&auto=format&fit=crop",
+		daysLeft: 33,
+		kicker: "0% boshlang'ich to'lov, 0% ustama va 12 oy davomida barqaror oylik to'lov.",
 		description: [
-			"Texnikalarni 0-0-12 muddatli to'lov asosida xarid qiling, ortiqcha va boshlang'ich to'lovsiz.",
-			"Telefon, televizor, muzlatgich, kir yuvish mashinasi va boshqa texnikalarni 12 oy davomida bo'lib to'lash mumkin.",
+			"Aksiya flagman smartfonlar, televizorlar, muzlatgichlar va kundalik maishiy texnikalarning tanlangan modellari uchun amal qiladi.",
+			"Ariza onlayn tarzda 10-15 daqiqada ko'rib chiqiladi, tasdiqlangach buyurtmani filialdan olib ketish yoki yetkazib berish xizmatidan foydalanish mumkin.",
+			"Taklif faqat hamkor banklar va nasiya platformalari orqali rasmiylashtirilgan buyurtmalarga tatbiq etiladi.",
 		],
 		highlights: [
-			"Boshlang'ich to'lovsiz xarid",
-			"12 oy davomida teng to'lov",
-			"Eng ommabop texnikalarga amal qiladi",
+			"Boshlang'ich to'lov talab qilinmaydi",
+			"12 oy davomida teng oylik to'lov",
+			"Top smartfon va TV modellari ro'yxatga kiritilgan",
 		],
-		newsTitle: "Yangilik",
-		newsText:
-			"Aksiya doirasida yangi smartfonlar, televizorlar va maishiy texnikalar uchun alohida tavsiyalar tayyorlandi.",
-		opportunityTitle: "Yangi imkoniyatlar",
-		opportunityText:
-			"Onlayn rasmiylashtirish, tezkor tasdiqlash va do'kondan olib ketish xizmati bilan xarid yanada qulaylashdi.",
+		sections: [
+			{
+				title: "Shartlar",
+				text: "Mijoz pasport ma'lumotlari va faol telefon raqami bilan ariza yuboradi. Tasdiqdan keyin mahsulot narxi bo'yicha oylik to'lov jadvali bir zumda shakllanadi.",
+			},
+			{
+				title: "Muhim eslatma",
+				text: "Aksiya ombordagi qoldiq bilan cheklangan. Ayrim SKU'larda rang va xotira versiyalari bo'yicha narx farqi saqlanib qoladi.",
+			},
+		],
 		products: [
-			{ name: "iPhone 17", price: "12 999 000 so'm", tag: "Top savdo" },
-			{ name: "Samsung TV 55", price: "7 499 000 so'm", tag: "0-0-12" },
-			{ name: "LG Muzlatgich", price: "9 899 000 so'm", tag: "Chegirma" },
+			{ name: "iPhone 15 128GB", price: "10 499 000 so'm", tag: "0-0-12" },
+			{ name: "Samsung Galaxy A56", price: "5 499 000 so'm", tag: "Top savdo" },
+			{ name: "LG 55\" UHD TV", price: "7 899 000 so'm", tag: "Hamkor taklif" },
 		],
 	},
 	{
-		slug: "50-0-2",
-		title: "50-0-2",
-		period: "01 Yanvardan 31 Dekabrgacha",
-		daysLeft: 648,
-		kicker: "Tanlangan mahsulotlarda foydali takliflar",
+		kind: "news",
+		label: "Yangilik",
+		image:
+			"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1600&auto=format&fit=crop",
+		slug: "samsung-a56-oldindan-buyurtma",
+		title: "Samsung Galaxy A56 uchun oldindan buyurtma boshlandi",
+		summary:
+			"Yangi model savdosi ochildi va birinchi xaridorlar uchun bonus aksessuarlar paketi e'lon qilindi.",
+		publishedAt: "2026-03-24",
+		period: "24 Martdan 10 Aprelgacha",
+		daysLeft: 13,
+		kicker: "Oldindan buyurtma bergan mijozlar uchun quloqchin va bepul yetkazib berish taklifi mavjud.",
 		description: [
-			"Aksiya doirasida ayrim mahsulotlar uchun maxsus to'lov va chegirma shartlari amal qiladi.",
-			"Yangilanib boruvchi mahsulotlar ro'yxati orqali o'zingizga mos variantni tanlang.",
+			"Samsung Galaxy A56 8/256GB konfiguratsiyasi bilan savdoga chiqmoqda va do'kon vitrinasi hamda onlayn katalogga bir vaqtning o'zida joylandi.",
+			"Birlamchi partiya bo'yicha yetkazib berish 3 ish kuni ichida amalga oshiriladi. Filialdan olib ketish opsiyasi ham mavjud.",
+			"Oldindan buyurtma statusi shaxsiy kabinet va operator qo'ng'irog'i orqali tasdiqlanadi.",
 		],
 		highlights: [
-			"Tanlangan brendlarga amal qiladi",
-			"Qulay muddatli to'lov",
-			"Cheklangan muddat",
+			"8/256GB versiya birinchi bo'lib sotuvga chiqdi",
+			"Bonus sifatida Galaxy Buds qopchasi beriladi",
+			"Yetkazib berish va do'kondan olib ketish mavjud",
 		],
-		newsTitle: "Yangilik",
-		newsText:
-			"Hafta davomida aksiyaga yangi mahsulot kategoriyalari qo'shiladi.",
-		opportunityTitle: "Yangi imkoniyatlar",
-		opportunityText:
-			"Onlayn xarid qilgan mijozlar uchun qo'shimcha qulayliklar mavjud.",
+		sections: [
+			{
+				title: "Nimalar yangilandi",
+				text: "Mahsulot kartasiga to'liq texnik tavsif, kamera namunalariga oid blok va nasiya kalkulyatori qo'shildi.",
+			},
+			{
+				title: "Sotuv bo'yicha izoh",
+				text: "Birinchi partiya soni cheklangan. Keyingi yetkazib berish aprelning ikkinchi haftasiga rejalashtirilgan.",
+			},
+		],
 		products: [
-			{ name: "Xiaomi 16 Ultra", price: "10 499 000 so'm", tag: "Aksiya" },
-			{ name: "Dyson Supurgi", price: "6 299 000 so'm", tag: "Top" },
-			{ name: "Aqlli soat", price: "1 899 000 so'm", tag: "Chegirma" },
+			{ name: "Samsung Galaxy A56", price: "5 499 000 so'm", tag: "Yangi" },
+			{ name: "Galaxy Buds FE", price: "899 000 so'm", tag: "Bonus tavsiya" },
+			{ name: "25W USB-C adapter", price: "249 000 so'm", tag: "Aksessuar" },
 		],
 	},
 	{
-		slug: "kenwood-1-6",
-		title: "Kenwood 1=6",
-		period: "01 Yanvardan 31 Martgacha",
-		daysLeft: 86,
-		kicker: "Kenwood texnikalarida foydali aksiyalar",
+		kind: "announcement",
+		label: "E'lon",
+		image:
+			"https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1600&auto=format&fit=crop",
+		slug: "ramazon-ish-jadvali-yetkazib-berish",
+		title: "Ramazon oyidagi ish jadvali va yetkazib berish tartibi",
+		summary:
+			"Filiallar ish vaqti, call-markaz grafigi hamda buyurtmalarni yetkazish bo'yicha yangilangan jadval e'lon qilindi.",
+		publishedAt: "2026-03-26",
+		period: "26 Martdan 10 Aprelgacha",
+		daysLeft: 13,
+		kicker: "Bayramoldi kunlari ayrim filiallar qisqartirilgan rejimda ishlaydi, kuryer xizmati esa oldindan tasdiq bilan yetkazadi.",
 		description: [
-			"Kenwood mahsulotlarini xarid qilganingizda maxsus taklif va sovg'alar kutmoqda.",
-			"Oshxona texnikalari orasida eng qulay narx va xizmatlar to'plami mavjud.",
+			"Shahar markazidagi filiallar 10:00 dan 21:00 gacha, savdo markazlaridagi nuqtalar esa 22:00 gacha xizmat ko'rsatadi.",
+			"Yetkazib berish buyurtma yuklamasiga qarab 1 kundan 3 kungacha davom etishi mumkin. Operator buyurtma vaqtini alohida tasdiqlaydi.",
+			"To'lov, muddatli to'lov va kafolat bo'yicha barcha xizmatlar avvalgi tartibda saqlanib qoladi.",
 		],
 		highlights: [
-			"Brend aksiyasi",
-			"Sovg'ali takliflar",
-			"Cheklangan mahsulot soni",
+			"Filiallar bo'yicha yangilangan ish vaqti",
+			"Kuryer xizmati oldindan qo'ng'iroq qiladi",
+			"Call-markaz har kuni 09:00 dan 22:00 gacha ishlaydi",
 		],
-		newsTitle: "Yangilik",
-		newsText:
-			"Kenwood yangi kolleksiyasi ayrim filiallarda allaqachon sotuvda.",
-		opportunityTitle: "Yangi imkoniyatlar",
-		opportunityText:
-			"Rasmiy kafolat va bepul konsultatsiya bilan xarid qilishingiz mumkin.",
-		products: [
-			{ name: "Kenwood Blender", price: "1 499 000 so'm", tag: "Sovg'a" },
-			{ name: "Kenwood Mikser", price: "2 249 000 so'm", tag: "Aksiya" },
-			{ name: "Kenwood Toaster", price: "899 000 so'm", tag: "Top" },
+		sections: [
+			{
+				title: "Filiallar bo'yicha eslatma",
+				text: "Ayrim hududiy filiallarda inventarizatsiya sababli buyurtmani yig'ish vaqti 24 soatgacha uzayishi mumkin.",
+			},
+			{
+				title: "Mijozlar uchun tavsiya",
+				text: "Bayramoldi xaridlarini kechiktirmaslik tavsiya etiladi. Ombordagi mashhur modellarda tez tugash holati kuzatilmoqda.",
+			},
 		],
 	},
 ];

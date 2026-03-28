@@ -36,7 +36,7 @@ export default function MainProvider({
 						<NoSSR>{children}</NoSSR>
 					</QueryClientProvider>
 
-					<Toaster />
+					<Toaster position='top-right' />
 				</I18nProvider>
 			</ApolloProvider>
 			;

@@ -1,4 +1,5 @@
 // store/useSession.store.ts
+import { clearAccessToken } from "@/lib/auth-token";
 import { IUser } from "@/type";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -21,7 +22,7 @@ export const useSessionStore = create<SessionStore>()(
 					isAuth: !!user,
 				}),
 			logout: () => {
-				localStorage.removeItem("accessToken");
+				clearAccessToken();
 				set({
 					user: null,
 					isAuth: false,

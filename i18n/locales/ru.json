@@ -38,5 +38,300 @@
 		"catalog": "Каталог",
 		"searchPlaceholder": "Поиск",
 		"login": "Войти"
+	},
+	"catalogSection": {
+		"promotionTitle": "Акции и скидки",
+		"prevAriaLabel": "Прокрутить влево",
+		"nextAriaLabel": "Прокрутить вправо",
+		"categories": {
+			"smartphones": "Смартфоны и гаджеты",
+			"computers": "Компьютерная техника",
+			"tvAudio": "Телевизоры и аудиотехника",
+			"climate": "Климатическая техника",
+			"homeAppliances": "Бытовая техника",
+			"household": "Техника для дома",
+			"kitchen": "Техника для кухни"
+		}
+	},
+	"productDetail": {
+		"seo": {
+			"title": "Детали товара",
+			"description": "Ознакомьтесь с ценой, описанием и основными характеристиками товара."
+		},
+		"page": {
+			"notFoundTitle": "Товар не найден",
+			"notFoundDescription": "Запрошенная информация о товаре не найдена или не загрузилась.",
+			"backToProducts": "Назад к товарам"
+		},
+		"badges": {
+			"saved": "Сохранено в избранное",
+			"cashOrCard": "Наличные или карта",
+			"officialProduct": "Официальный товар"
+		},
+		"labels": {
+			"code": "Код",
+			"productCode": "Код товара",
+			"brand": "Бренд",
+			"category": "Категория",
+			"status": "Статус",
+			"availability": "Наличие"
+		},
+		"values": {
+			"notSpecified": "Не указано",
+			"inStock": "В продаже ({{count}} шт.)",
+			"outOfStock": "Нет в наличии",
+			"available": "В наличии"
+		},
+		"actions": {
+			"allSpecifications": "Все характеристики",
+			"order": "Оформить заказ",
+			"contact": "Связаться",
+			"sendRequest": "Отправить заявку"
+		},
+		"contact": {
+			"tabs": {
+				"contactMe": "Свяжитесь со мной",
+				"selfCall": "Свяжусь сам"
+			},
+			"fields": {
+				"firstName": "Имя",
+				"lastName": "Фамилия",
+				"phone": "Телефон"
+			},
+			"callCenter": "Колл-центр"
+		},
+		"summary": {
+			"paymentDescription": "Вы можете оплатить товар наличными или банковской картой в магазине или при доставке.",
+			"finishPurchase": "Завершите покупку удобным способом: оплатите наличными или картой.",
+			"providers": [
+				"Наличные",
+				"Visa",
+				"Mastercard",
+				"Humo",
+				"Uzcard"
+			]
+		},
+		"pickup": {
+			"title": "Бесплатный самовывоз из магазина",
+			"availableStock": "На складе доступно {{count}} шт."
+		},
+		"specifications": {
+			"title": "Характеристики товара",
+			"description": "Основная информация и технические характеристики товара.",
+			"defaultGroup": "Основные характеристики",
+			"empty": "Технические характеристики пока не добавлены."
+		},
+		"descriptionTitle": "Подробно",
+		"relatedTitle": "Похожие товары"
+	},
+	"admin": {
+		"page": {
+			"checking": "Проверка..."
+		},
+		"currency": "сум",
+		"badge": "Админ Tech market",
+		"title": "Панель администратора",
+		"description": "Создание, обновление, удаление товаров и управление характеристиками на одной странице.",
+		"stats": {
+			"totalProducts": "Всего товаров",
+			"totalStock": "Общий stock",
+			"inventoryValue": "Стоимость склада",
+			"lowStock": "Мало в наличии"
+		},
+		"actions": {
+			"newForm": "Новая форма",
+			"saveChanges": "Сохранить изменения",
+			"addProduct": "Добавить товар",
+			"clear": "Очистить"
+		},
+		"form": {
+			"createTitle": "Новый товар",
+			"editTitle": "Редактирование товара",
+			"fields": {
+				"productName": "Название товара",
+				"brand": "Бренд",
+				"code": "Код / SKU",
+				"price": "Цена",
+				"stock": "Остаток",
+				"category": "Категория",
+				"shortDescription": "Краткое описание",
+				"description": "Полное описание",
+				"images": "URL изображений (по одному в строке)"
+			},
+			"placeholders": {
+				"productName": "Например, iPhone 15 Pro",
+				"brand": "Apple",
+				"code": "APL-IP15PRO",
+				"category": "Выберите категорию",
+				"shortDescription": "Короткое описание для карточки",
+				"description": "Полная информация о товаре"
+			},
+			"specifications": {
+				"title": "Характеристики",
+				"description": "Добавляйте динамические характеристики: RAM, SSD, процессор и так далее.",
+				"add": "Добавить характеристику",
+				"item": "Характеристика #{{number}}",
+				"placeholders": {
+					"group": "Группа",
+					"label": "Название",
+					"value": "Значение"
+				}
+			}
+		},
+		"products": {
+			"title": "Список товаров",
+			"count": "шт.",
+			"searchPlaceholder": "Поиск по названию, бренду, коду",
+			"loading": "Загрузка...",
+			"error": "Произошла ошибка при получении товаров.",
+			"empty": "Товары не найдены.",
+			"columns": {
+				"name": "Название",
+				"brand": "Бренд",
+				"category": "Категория",
+				"price": "Цена",
+				"stock": "Остаток",
+				"specs": "Характеристики",
+				"action": "Действие"
+			}
+		}
+	},
+	"checkout": {
+		"seo": {
+			"title": "Оформление заказа",
+			"description": "Страница оформления заказа для выбранного товара."
+		},
+		"page": {
+			"notFoundTitle": "Товар не найден",
+			"notFoundDescription": "Товар для оформления заказа не найден или не загрузился.",
+			"backToProducts": "Назад к товарам",
+			"home": "Главная",
+			"back": "Назад",
+			"title": "Оформление покупки"
+		},
+		"sections": {
+			"customerInfo": "Ваши данные",
+			"receiveMethod": "Способ получения",
+			"paymentMethod": "Выберите способ оплаты"
+		},
+		"fields": {
+			"phone": "Телефон",
+			"firstName": "Имя",
+			"lastName": "Фамилия",
+			"region": "Регион",
+			"cityDistrict": "Город / район",
+			"address": "Адрес",
+			"floor": "Этаж",
+			"select": "Выберите",
+			"comment": "Комментарий к заказу",
+			"promoCode": "Введите промокод"
+		},
+		"placeholders": {
+			"address": "Например, Юнусабад 13-квартал",
+			"floor": "Если есть",
+			"comment": "Оставьте комментарий для получателя или доставки"
+		},
+		"delivery": {
+			"delivery": "Доставка",
+			"pickup": "Самовывоз из магазина",
+			"addressTitle": "Введите адрес доставки",
+			"conditionsTitle": "Условия доставки",
+			"standard": "Завтра или позже",
+			"express": "Быстрая доставка"
+		},
+		"pickup": {
+			"description": "Вы можете бесплатно забрать товар из магазина. После заказа оператор свяжется с вами.",
+			"mapTitle": "Адрес магазина",
+			"mapDescription": "Посмотрите ближайший филиал на карте и приезжайте за самовывозом."
+		},
+		"paymentMethods": {
+			"payme": "Payme",
+			"click": "Click",
+			"card": "Онлайн-оплата картой",
+			"cash": "При получении",
+			"corp": "Корпоративная карта",
+			"installment": "Рассрочка"
+		},
+		"summary": {
+			"productsTitle": "Товары в заказе",
+			"change": "Изменить",
+			"oneItem": "1 шт.",
+			"orderTitle": "Ваш заказ",
+			"singlePrice": "Цена за 1 товар",
+			"delivery": "Доставка",
+			"total": "Итого"
+		},
+		"values": {
+			"free": "Бесплатно",
+			"paid": "Платно"
+		},
+		"actions": {
+			"submit": "Оформить заказ",
+			"agreementPrefix": "Подтверждая заказ, я принимаю",
+			"agreementLink": "Пользовательское соглашение",
+			"agreementSuffix": "."
+		},
+		"validation": {
+			"userInfo": "Заполните телефон, имя и фамилию.",
+			"address": "Введите адрес доставки.",
+			"success": "Ваш заказ на {{product}} принят. Мы скоро с вами свяжемся."
+		}
+	},
+	"catalogPage": {
+		"items": {
+			"smartphones": "Смартфоны",
+			"phones": "Телефоны",
+			"tablets": "Планшеты",
+			"gadgets": "Гаджеты",
+			"phoneAccessories": "Аксессуары для телефонов",
+			"laptops": "Ноутбуки",
+			"monitors": "Мониторы",
+			"monoblocks": "Моноблоки",
+			"computerAccessories": "Компьютерные аксессуары",
+			"externalDrives": "Внешние жесткие диски",
+			"flashStorage": "Флеш-накопители",
+			"speakers": "Колонки",
+			"stabilizers": "Стабилизаторы",
+			"tvs": "Телевизоры",
+			"tvAccessories": "Аксессуары для ТВ",
+			"musicCenters": "Музыкальные центры",
+			"wirelessSpeakers": "Беспроводные колонки",
+			"soundbars": "Саундбары",
+			"tvSubscription": "Подписка на ТВ",
+			"airConditioners": "Кондиционеры",
+			"fans": "Вентиляторы",
+			"heaters": "Обогреватели",
+			"waterHeaters": "Водонагреватели",
+			"humidifiers": "Увлажнители",
+			"airPurifiers": "Очистители воздуха",
+			"homeCare": "Товары для ухода за домом",
+			"clothingCare": "Товары для ухода за одеждой",
+			"dispensers": "Диспенсеры"
+		}
+	},
+	"hero": {
+		"promotions": {
+			"ustamasiz-muddatli-tolov-0012": {
+				"label": "Акция",
+				"title": "Рассрочка 0-0-12 без наценки",
+				"summary": "Смартфоны, телевизоры и бытовую технику можно оформить на 12 месяцев с 0% наценкой.",
+				"period": "С 20 марта по 30 апреля",
+				"publishedAt": "2026-03-20"
+			},
+			"samsung-a56-oldindan-buyurtma": {
+				"label": "Новость",
+				"title": "Открыт предзаказ на Samsung Galaxy A56",
+				"summary": "Стартовали продажи новой модели, а для первых покупателей объявлен бонусный набор аксессуаров.",
+				"period": "С 24 марта по 10 апреля",
+				"publishedAt": "2026-03-24"
+			},
+			"ramazon-ish-jadvali-yetkazib-berish": {
+				"label": "Объявление",
+				"title": "График работы и доставки в месяц Рамадан",
+				"summary": "Опубликован обновленный график работы филиалов, колл-центра и доставки заказов.",
+				"period": "С 26 марта по 10 апреля",
+				"publishedAt": "2026-03-26"
+			}
+		}
 	}
 }

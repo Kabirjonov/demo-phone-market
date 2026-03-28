@@ -4,7 +4,7 @@ import { createSeoMetadata } from "@/config/seo.config";
 import { getDictionary } from "@/lib/dictionaries";
 import { getRequestLocale } from "@/lib/request-locale";
 
-import ProductDetailPageClient from "./product-detail-page-client";
+import CheckoutPageClient from "./checkout-page-client";
 
 export async function generateMetadata({
 	params,
@@ -16,20 +16,21 @@ export async function generateMetadata({
 	const dictionary = getDictionary(locale);
 
 	return createSeoMetadata({
-		title: dictionary.productDetail?.seo?.title || "Mahsulot tafsiloti",
+		title: dictionary.checkout?.seo?.title || "Checkout",
 		description:
-			dictionary.productDetail?.seo?.description ||
-			"Mahsulot narxi, tavsifi va asosiy xususiyatlari bilan tanishing.",
-		path: `/product/detail/${slug}`,
+			dictionary.checkout?.seo?.description ||
+			"Tanlangan mahsulot uchun buyurtma rasmiylashtirish sahifasi.",
+		path: `/checkout/${slug}`,
+		noIndex: true,
 	});
 }
 
-export default async function ProductDetailPage({
+export default async function CheckoutPage({
 	params,
 }: {
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
 
-	return <ProductDetailPageClient slug={slug} />;
+	return <CheckoutPageClient slug={slug} />;
 }

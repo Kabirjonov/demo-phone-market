@@ -1,21 +1,20 @@
-import ProductSection from "@/components/sections/Products";
-import { hitProducts } from "@/mockInfo/data";
-import React from "react";
+"use client";
 
-export default function page() {
+import ProductSection from "@/components/sections/Products";
+import { useProducts } from "@/hooks/useProducts";
+
+export default function ProductPage() {
+	const { products, loading, error } = useProducts();
+
 	return (
 		<div>
 			<ProductSection
-				// title='Xit savdo'
-				products={hitProducts}
-				// viewAllHref='/products'
+				title='Barcha mahsulotlar'
+				products={products}
+				loading={loading}
+				error={!!error}
+				viewAllHref='/product'
 			/>
-			<ProductSection
-				// title='Foydali xaridlar'
-				products={hitProducts}
-				// viewAllHref='/products'
-			/>
-			<ProductSection title='' products={hitProducts} viewAllHref='/products' />
 		</div>
 	);
 }

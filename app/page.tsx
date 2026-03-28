@@ -6,9 +6,7 @@ import BrandsSection from "@/components/sections/Brands";
 import Hero from "@/components/sections/Hero";
 import ProductSection from "@/components/sections/Products";
 // import { createSeoMetadata } from "@/config/seo.config";
-import { hitProducts } from "@/mockInfo/data";
-import { GET_Products } from "@/hooks/useProducts";
-import { useQuery } from "@apollo/client/react";
+import { useProducts } from "@/hooks/useProducts";
 
 // export const metadata: Metadata = createSeoMetadata({
 // 	title: "Bosh sahifa",
@@ -19,8 +17,8 @@ import { useQuery } from "@apollo/client/react";
 // });
 
 export default function HomePage() {
-	const { data, loading, error } = useQuery(GET_Products);
-	console.log("get Products:", data);
+	const { products, loading, error } = useProducts();
+
 	return (
 		<div className='min-h-screen bg-background w-[80%] mx-auto'>
 			<Hero />
@@ -28,7 +26,9 @@ export default function HomePage() {
 			<BrandsSection />
 			<ProductSection
 				title='Xit savdo'
-				products={hitProducts}
+				products={products}
+				loading={loading}
+				error={!!error}
 				// viewAllHref='/products'
 			/>
 		</div>

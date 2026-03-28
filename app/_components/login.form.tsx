@@ -18,9 +18,12 @@ import { loginSchema, type LoginFormValues } from "@/lib/validation";
 import { formatUzPhone } from "@/lib/PhoneFormater";
 import { useTranslation } from "react-i18next";
 import { useAuthLogin } from "@/hooks/useAuth";
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function LoginForm() {
 	const { t } = useTranslation();
+	const [showPassword, setShowPassword] = useState(false);
 	const { mutate, isPending } = useAuthLogin();
 	const { setPhone, setStep } = useAuthFlowStore();
 	const form = useForm<LoginFormValues>({
@@ -80,16 +83,36 @@ export default function LoginForm() {
 						control={form.control}
 						name='password'
 						render={({ field }) => (
-							<FormItem>
+							<FormItem className='relative'>
 								<FormLabel>{t("auth.login.passwordLabel")}</FormLabel>
 								<FormControl>
-									<Input
-										type='password'
-										placeholder={t("auth.login.passwordPlaceholder")}
-										autoComplete='current-password'
-										{...field}
-										disabled={isPending}
-									/>
+									<div className='relative'>
+										<Input
+											type={showPassword ? "text" : "password"}
+											placeholder={t("auth.login.passwordPlaceholder")}
+											autoComplete='current-password'
+											className='pr-11'
+											{...field}
+											disabled={isPending}
+										/>
+										<Button
+											type='button'
+											variant='ghost'
+											size='sm'
+											className='absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent'
+											onClick={() => setShowPassword(prev => !prev)}
+											disabled={isPending}
+										>
+											{showPassword ? (
+												<EyeOffIcon className='h-4 w-4' aria-hidden='true' />
+											) : (
+												<EyeIcon className='h-4 w-4' aria-hidden='true' />
+											)}
+											<span className='sr-only'>
+												{showPassword ? "Hide password" : "Show password"}
+											</span>
+										</Button>
+									</div>
 								</FormControl>
 								<FormMessage />
 							</FormItem>

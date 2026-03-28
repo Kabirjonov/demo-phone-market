@@ -99,9 +99,6 @@ const Navbar = () => {
 					)}
 
 					{/* Mobile Menu */}
-					<div className='md:hidden'>
-						<NavigationSheet />
-					</div>
 				</div>
 			</div>
 		</nav>

@@ -1,12 +1,29 @@
 import api from "@/http/api";
+import { setAccessToken } from "@/lib/auth-token";
 import { normalizePhone } from "@/lib/PhoneFormater";
 import { loginSchema, registerSchema, verifySchema } from "@/lib/validation";
 import { useAuthFlowStore } from "@/store/useAuth.store";
 import { useSessionStore } from "@/store/useSession.store";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import z from "zod";
+
+type ApiErrorResponse = {
+	message?: string;
+};
+
+function getErrorMessage(error: unknown) {
+	if (error instanceof AxiosError) {
+		return (
+			(error.response?.data as ApiErrorResponse | undefined)?.message ||
+			"Something want wrong"
+		);
+	}
+
+	return "Something want wrong";
+}
 
 export function useAuthLogin() {
 	const { resetFlow } = useAuthFlowStore();
@@ -25,7 +42,7 @@ export function useAuthLogin() {
 		},
 		onSuccess: data => {
 			if (data?.accessToken) {
-				localStorage.setItem("accessToken", data.accessToken);
+				setAccessToken(data.accessToken);
 			}
 
 			if (data?.user) {
@@ -35,8 +52,8 @@ export function useAuthLogin() {
 			resetFlow();
 			toast.success(data.message);
 		},
-		onError: (error: any) => {
-			toast.error(error.response.data.message || "Something want wrong");
+		onError: error => {
+			toast.error(getErrorMessage(error));
 		},
 	});
 	return { mutate, isPending };
@@ -59,8 +76,8 @@ export function useAuthRegister() {
 			setStep("verify");
 			toast.success(data.message);
 		},
-		onError: (error: any) => {
-			toast.error(error.response.data.message || "Something want wrong");
+		onError: error => {
+			toast.error(getErrorMessage(error));
 		},
 	});
 	return { mutate, isPending };
@@ -83,7 +100,7 @@ export function useAuthVerify() {
 		},
 		onSuccess: data => {
 			if (data?.accessToken) {
-				localStorage.setItem("accessToken", data.accessToken);
+				setAccessToken(data.accessToken);
 			}
 
 			if (data?.user) {
@@ -94,8 +111,8 @@ export function useAuthVerify() {
 			resetFlow();
 			toast.success(data.message);
 		},
-		onError: (error: any) => {
-			toast.error(error.response.data.message || "Something want wrong");
+		onError: error => {
+			toast.error(getErrorMessage(error));
 		},
 	});
 	return { mutate, isPending };

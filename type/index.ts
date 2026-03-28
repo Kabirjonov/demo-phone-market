@@ -34,20 +34,20 @@ export interface IProduct {
 	specifications?: IProductSpecification[];
 
 	// not-need
-	monthlyPrice: number;
-	monthlyDuration: number;
-	rating?: number;
-	reviewsText?: string;
-	badge?: string;
-	discount?: string;
-	discountSecondary?: string;
-	capacity?: string;
-	storeCount?: number;
-	warranty?: string;
-	installmentNote?: string;
-	providers?: string[];
-	availability: boolean;
-	user: IUser;
+	// monthlyPrice: number;
+	// monthlyDuration: number;
+	// rating?: number;
+	// reviewsText?: string;
+	// badge?: string;
+	// discount?: string;
+	// discountSecondary?: string;
+	// capacity?: string;
+	// storeCount?: number;
+	// warranty?: string;
+	// installmentNote?: string;
+	// providers?: string[];
+	// availability: boolean;
+	// user: IUser;
 }
 export interface IProductFormState {
 	title: string;
@@ -63,17 +63,32 @@ export interface IProductFormState {
 	specifications: IProductSpecification[];
 }
 
+export type PromotionKind = "promotion" | "news" | "announcement";
+
+export type PromotionProduct = {
+	name: string;
+	price: string;
+	tag: string;
+};
+
+export type PromotionSection = {
+	title: string;
+	text: string;
+};
+
 export type PromotionItem = {
+	kind: PromotionKind;
+	label: string;
+	image: string;
 	slug: string;
 	title: string;
+	summary: string;
+	publishedAt: string;
 	period: string;
 	daysLeft: number;
 	kicker: string;
 	description: string[];
 	highlights: string[];
-	newsTitle: string;
-	newsText: string;
-	opportunityTitle: string;
-	opportunityText: string;
-	products: { name: string; price: string; tag: string }[];
+	sections: PromotionSection[];
+	products?: PromotionProduct[];
 };

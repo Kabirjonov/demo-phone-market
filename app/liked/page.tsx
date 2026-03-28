@@ -1,23 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProductCard from "@/components/cards/product-card";
-import { hitProducts } from "@/mockInfo/data";
-import { IProduct } from "@/type";
+import ProductCardSkeleton from "@/components/loadings/product-card-skeleton";
+import { useProducts } from "@/hooks/useProducts";
 import {
 	getLikedProductIds,
 	likedProductsUpdatedEvent,
 } from "@/lib/liked-products";
 
 export default function LikedPage() {
-	const [likedProducts, setLikedProducts] = useState<IProduct[]>([]);
+	const [likedIds, setLikedIds] = useState<string[]>([]);
+	const { products, loading } = useProducts();
 
 	useEffect(() => {
 		const syncLikedProducts = () => {
-			const likedIds = getLikedProductIds();
-			const likedSet = new Set(likedIds);
-			setLikedProducts(hitProducts.filter(product => likedSet.has(product.id)));
+			setLikedIds(getLikedProductIds());
 		};
 
 		syncLikedProducts();
@@ -30,12 +29,23 @@ export default function LikedPage() {
 		};
 	}, []);
 
+	const likedProducts = useMemo(() => {
+		const likedSet = new Set(likedIds);
+		return products.filter(product => likedSet.has(String(product.id)));
+	}, [likedIds, products]);
+
 	return (
 		<section className='py-40'>
 			<div className='container mx-auto px-4'>
 				<h1 className='mb-8 text-3xl font-bold'>Saqlangan mahsulotlar</h1>
 
-				{likedProducts.length === 0 ? (
+				{loading ? (
+					<div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'>
+						{Array.from({ length: 5 }).map((_, index) => (
+							<ProductCardSkeleton key={`liked-product-skeleton-${index}`} />
+						))}
+					</div>
+				) : likedProducts.length === 0 ? (
 					<div className='rounded-2xl border border-dashed p-8 text-center'>
 						<p className='mb-3 text-lg font-medium'>
 							Hozircha saqlangan mahsulot yo&apos;q

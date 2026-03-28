@@ -17,6 +17,18 @@ export type Dictionary = {
 		title: string;
 		description: string;
 	};
+	productDetail?: {
+		seo?: {
+			title: string;
+			description: string;
+		};
+	};
+	checkout?: {
+		seo?: {
+			title: string;
+			description: string;
+		};
+	};
 	// nav: Record<NavKey, string>;
 	// hero: {
 	// 	badge: string;

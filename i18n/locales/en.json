@@ -38,5 +38,300 @@
 		"catalog": "Catalog",
 		"searchPlaceholder": "Search",
 		"login": "Login"
+	},
+	"catalogSection": {
+		"promotionTitle": "Promotions and discounts",
+		"prevAriaLabel": "Slide left",
+		"nextAriaLabel": "Slide right",
+		"categories": {
+			"smartphones": "Smartphones and gadgets",
+			"computers": "Computer equipment",
+			"tvAudio": "TV and audio equipment",
+			"climate": "Climate equipment",
+			"homeAppliances": "Home appliances",
+			"household": "Household equipment",
+			"kitchen": "Kitchen appliances"
+		}
+	},
+	"productDetail": {
+		"seo": {
+			"title": "Product details",
+			"description": "Explore the product price, description, and key specifications."
+		},
+		"page": {
+			"notFoundTitle": "Product not found",
+			"notFoundDescription": "The requested product details were not found or failed to load.",
+			"backToProducts": "Back to products"
+		},
+		"badges": {
+			"saved": "Saved to liked",
+			"cashOrCard": "Cash or card",
+			"officialProduct": "Official product"
+		},
+		"labels": {
+			"code": "Code",
+			"productCode": "Product code",
+			"brand": "Brand",
+			"category": "Category",
+			"status": "Status",
+			"availability": "Availability"
+		},
+		"values": {
+			"notSpecified": "Not specified",
+			"inStock": "In stock ({{count}} pcs)",
+			"outOfStock": "Out of stock",
+			"available": "Available"
+		},
+		"actions": {
+			"allSpecifications": "All specifications",
+			"order": "Place order",
+			"contact": "Contact",
+			"sendRequest": "Send request"
+		},
+		"contact": {
+			"tabs": {
+				"contactMe": "Contact me",
+				"selfCall": "I will call myself"
+			},
+			"fields": {
+				"firstName": "First name",
+				"lastName": "Last name",
+				"phone": "Phone"
+			},
+			"callCenter": "Call center"
+		},
+		"summary": {
+			"paymentDescription": "You can pay for the product in cash or by bank card in the store or on delivery.",
+			"finishPurchase": "Complete your purchase in the most convenient way: pay in cash or by card.",
+			"providers": [
+				"Cash",
+				"Visa",
+				"Mastercard",
+				"Humo",
+				"Uzcard"
+			]
+		},
+		"pickup": {
+			"title": "Free store pickup",
+			"availableStock": "{{count}} item(s) available in stock"
+		},
+		"specifications": {
+			"title": "Product specifications",
+			"description": "Core information and technical characteristics of the product.",
+			"defaultGroup": "Main specifications",
+			"empty": "Technical specifications have not been added yet."
+		},
+		"descriptionTitle": "Details",
+		"relatedTitle": "Similar products"
+	},
+	"admin": {
+		"page": {
+			"checking": "Checking..."
+		},
+		"currency": "UZS",
+		"badge": "Tech market admin",
+		"title": "Admin panel",
+		"description": "Create, update, delete products, and manage specifications from a single page.",
+		"stats": {
+			"totalProducts": "Total products",
+			"totalStock": "Total stock",
+			"inventoryValue": "Inventory value",
+			"lowStock": "Low stock"
+		},
+		"actions": {
+			"newForm": "New form",
+			"saveChanges": "Save changes",
+			"addProduct": "Add product",
+			"clear": "Clear"
+		},
+		"form": {
+			"createTitle": "New product",
+			"editTitle": "Edit product",
+			"fields": {
+				"productName": "Product name",
+				"brand": "Brand",
+				"code": "Code / SKU",
+				"price": "Price",
+				"stock": "Stock",
+				"category": "Category",
+				"shortDescription": "Short description",
+				"description": "Full description",
+				"images": "Image URLs (one per line)"
+			},
+			"placeholders": {
+				"productName": "For example, iPhone 15 Pro",
+				"brand": "Apple",
+				"code": "APL-IP15PRO",
+				"category": "Select a category",
+				"shortDescription": "Short description for the card",
+				"description": "Full product details"
+			},
+			"specifications": {
+				"title": "Specifications",
+				"description": "Add dynamic specs like RAM, SSD, processor, and more.",
+				"add": "Add spec",
+				"item": "Spec #{{number}}",
+				"placeholders": {
+					"group": "Group",
+					"label": "Label",
+					"value": "Value"
+				}
+			}
+		},
+		"products": {
+			"title": "Product list",
+			"count": "items",
+			"searchPlaceholder": "Search by name, brand, or code",
+			"loading": "Loading...",
+			"error": "An error occurred while loading products.",
+			"empty": "No products found.",
+			"columns": {
+				"name": "Name",
+				"brand": "Brand",
+				"category": "Category",
+				"price": "Price",
+				"stock": "Stock",
+				"specs": "Specs",
+				"action": "Action"
+			}
+		}
+	},
+	"checkout": {
+		"seo": {
+			"title": "Checkout",
+			"description": "Order placement page for the selected product."
+		},
+		"page": {
+			"notFoundTitle": "Product not found",
+			"notFoundDescription": "The product for checkout was not found or failed to load.",
+			"backToProducts": "Back to products",
+			"home": "Home",
+			"back": "Back",
+			"title": "Complete your purchase"
+		},
+		"sections": {
+			"customerInfo": "Your information",
+			"receiveMethod": "Receive method",
+			"paymentMethod": "Choose payment method"
+		},
+		"fields": {
+			"phone": "Phone",
+			"firstName": "First name",
+			"lastName": "Last name",
+			"region": "Region",
+			"cityDistrict": "City / district",
+			"address": "Address",
+			"floor": "Floor",
+			"select": "Select",
+			"comment": "Order note",
+			"promoCode": "Enter promo code"
+		},
+		"placeholders": {
+			"address": "For example, Yunusobod 13-quarter",
+			"floor": "If any",
+			"comment": "Leave a note for the recipient or delivery"
+		},
+		"delivery": {
+			"delivery": "Delivery",
+			"pickup": "Store pickup",
+			"addressTitle": "Enter delivery address",
+			"conditionsTitle": "Delivery conditions",
+			"standard": "Tomorrow or later",
+			"express": "Express delivery"
+		},
+		"pickup": {
+			"description": "You can pick up the product from the store for free. Our operator will contact you after the order.",
+			"mapTitle": "Store location",
+			"mapDescription": "See the nearest branch on the map and visit for pickup."
+		},
+		"paymentMethods": {
+			"payme": "Payme",
+			"click": "Click",
+			"card": "Online card payment",
+			"cash": "On delivery",
+			"corp": "Corporate card",
+			"installment": "Installment payment"
+		},
+		"summary": {
+			"productsTitle": "Products in your order",
+			"change": "Change",
+			"oneItem": "1 item",
+			"orderTitle": "Your order",
+			"singlePrice": "Price for 1 item",
+			"delivery": "Delivery",
+			"total": "Total"
+		},
+		"values": {
+			"free": "Free",
+			"paid": "Paid"
+		},
+		"actions": {
+			"submit": "Place order",
+			"agreementPrefix": "By confirming the order, I accept the",
+			"agreementLink": "User agreement",
+			"agreementSuffix": "."
+		},
+		"validation": {
+			"userInfo": "Please fill in phone, first name, and last name.",
+			"address": "Please enter the delivery address.",
+			"success": "Your order for {{product}} has been received. We will contact you soon."
+		}
+	},
+	"catalogPage": {
+		"items": {
+			"smartphones": "Smartphones",
+			"phones": "Phones",
+			"tablets": "Tablets",
+			"gadgets": "Gadgets",
+			"phoneAccessories": "Phone accessories",
+			"laptops": "Laptops",
+			"monitors": "Monitors",
+			"monoblocks": "Monoblocks",
+			"computerAccessories": "Computer accessories",
+			"externalDrives": "External hard drives",
+			"flashStorage": "Flash storage",
+			"speakers": "Speakers",
+			"stabilizers": "Stabilizers",
+			"tvs": "TVs",
+			"tvAccessories": "TV accessories",
+			"musicCenters": "Music centers",
+			"wirelessSpeakers": "Wireless speakers",
+			"soundbars": "Soundbars",
+			"tvSubscription": "TV subscription",
+			"airConditioners": "Air conditioners",
+			"fans": "Fans",
+			"heaters": "Heaters",
+			"waterHeaters": "Water heaters",
+			"humidifiers": "Humidifiers",
+			"airPurifiers": "Air purifiers",
+			"homeCare": "Home care products",
+			"clothingCare": "Clothing care products",
+			"dispensers": "Dispensers"
+		}
+	},
+	"hero": {
+		"promotions": {
+			"ustamasiz-muddatli-tolov-0012": {
+				"label": "Promotion",
+				"title": "0-0-12 installment plan with no markup",
+				"summary": "Smartphones, TVs, and home appliances can be purchased for 12 months with a 0% markup.",
+				"period": "From March 20 to April 30",
+				"publishedAt": "2026-03-20"
+			},
+			"samsung-a56-oldindan-buyurtma": {
+				"label": "News",
+				"title": "Pre-orders for Samsung Galaxy A56 have started",
+				"summary": "Sales for the new model have opened, and a bonus accessories package has been announced for the first buyers.",
+				"period": "From March 24 to April 10",
+				"publishedAt": "2026-03-24"
+			},
+			"ramazon-ish-jadvali-yetkazib-berish": {
+				"label": "Announcement",
+				"title": "Ramadan working hours and delivery schedule",
+				"summary": "An updated schedule for branch working hours, call center operations, and order delivery has been announced.",
+				"period": "From March 26 to April 10",
+				"publishedAt": "2026-03-26"
+			}
+		}
 	}
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import { useMutation, useQuery } from "@apollo/client/react";
-
 import {
 	AlertCircle,
 	Loader2,
@@ -15,7 +13,7 @@ import {
 	Layers3,
 	ScanBarcode,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,19 +38,17 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { IProduct, IProductFormState, IProductSpecification } from "@/type";
+import { useTranslation } from "react-i18next";
 import {
-	ICategory,
-	IProduct,
-	IProductFormState,
-	IProductSpecification,
-} from "@/type";
-import {
-	CREATE_PRODUCT,
-	GET_CATEGORIES,
-	GET_PRODUCTS,
-	REMOVE_PRODUCT,
-	UPDATE_PRODUCT,
+	ProductMutationInput,
+	useCategories,
+	useCreateProduct,
+	useProducts,
+	useRemoveProduct,
+	useUpdateProduct,
 } from "@/hooks/useProducts";
+import { toast } from "sonner";
 
 const emptySpecification: IProductSpecification = {
 	label: "",
@@ -78,7 +74,7 @@ function formatPrice(value: number) {
 	return new Intl.NumberFormat("uz-UZ").format(value);
 }
 
-function normalizeFormToInput(form: IProductFormState) {
+function normalizeFormToInput(form: IProductFormState): ProductMutationInput {
 	return {
 		title: form.title.trim(),
 		price: Number(form.price || 0),
@@ -104,52 +100,20 @@ function normalizeFormToInput(form: IProductFormState) {
 }
 
 export default function AdminProductsPage() {
+	const { t } = useTranslation();
 	const [search, setSearch] = useState("");
 	const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
 	const [form, setForm] = useState<IProductFormState>(emptyForm);
 
 	const {
-		data: productsData,
+		products,
 		loading: productsLoading,
 		error: productsError,
-		refetch: refetchProducts,
-	} = useQuery(GET_PRODUCTS);
-
-	const { data: categoriesData } = useQuery(GET_CATEGORIES);
-
-	const [createProduct, { loading: createLoading }] = useMutation(
-		CREATE_PRODUCT,
-		{
-			onCompleted: () => {
-				resetForm();
-				refetchProducts();
-			},
-		},
-	);
-
-	const [updateProduct, { loading: updateLoading }] = useMutation(
-		UPDATE_PRODUCT,
-		{
-			onCompleted: () => {
-				resetForm();
-				refetchProducts();
-			},
-		},
-	);
-
-	const [removeProduct, { loading: removeLoading }] = useMutation(
-		REMOVE_PRODUCT,
-		{
-			onCompleted: () => {
-				refetchProducts();
-			},
-		},
-	);
-	// @ts-ignore
-	const products: IProduct[] = productsData?.products ?? [];
-	// @ts-ignore
-
-	const categories: ICategory[] = categoriesData?.categories ?? [];
+	} = useProducts();
+	const { categories } = useCategories();
+	const { createProduct, loading: createLoading } = useCreateProduct();
+	const { updateProduct, loading: updateLoading } = useUpdateProduct();
+	const { removeProduct, loading: removeLoading } = useRemoveProduct();
 
 	const filteredProducts = useMemo(() => {
 		const q = search.toLowerCase().trim();
@@ -176,8 +140,6 @@ export default function AdminProductsPage() {
 			0,
 		);
 		const totalValue = products.reduce(
-			// @ts-ignore
-
 			(sum, item) => sum + (item.price || 0) * (item.stock || 0),
 			0,
 		);
@@ -253,34 +215,30 @@ export default function AdminProductsPage() {
 		const input = normalizeFormToInput(form);
 
 		if (
-			!input.title ||
-			!input.brand ||
-			!input.code ||
-			!input.description ||
-			!input.categoryId
+			!input.title?.trim() ||
+			!input.brand?.trim() ||
+			!input.description?.trim() ||
+			!input.shortDescription?.trim() ||
+			!input.categoryId ||
+			input.price == null ||
+			input.stock == null
 		) {
+			toast.error("Iltimos, barcha majburiy maydonlarni to‘ldiring");
 			return;
 		}
 
 		if (editingProduct) {
-			await updateProduct({
-				variables: {
-					id: editingProduct.id,
-					input,
-				},
-			});
+			await updateProduct(editingProduct.id, input);
+			resetForm();
 			return;
 		}
-
-		await createProduct({
-			variables: {
-				input,
-			},
-		});
+		console.log("create input", input);
+		await createProduct(input);
+		resetForm();
 	}
 
 	async function handleDelete(id: number) {
-		await removeProduct({ variables: { id } });
+		await removeProduct(id);
 		if (editingProduct?.id === id) resetForm();
 	}
 
@@ -291,44 +249,43 @@ export default function AdminProductsPage() {
 			<div className='mb-8 flex flex-col gap-4'>
 				<div className='inline-flex w-fit items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium shadow-sm'>
 					<Package2 className='h-4 w-4' />
-					Tech market admin
+					{t("admin.badge")}
 				</div>
 
 				<div className='flex flex-col gap-3 md:flex-row md:items-end md:justify-between'>
 					<div>
 						<h1 className='text-3xl font-bold tracking-tight md:text-4xl'>
-							Admin Panel
+							{t("admin.title")}
 						</h1>
 						<p className='mt-2 max-w-3xl text-sm text-muted-foreground md:text-base'>
-							Product create, update, delete va specifications boshqaruvi bitta
-							sahifada.
+							{t("admin.description")}
 						</p>
 					</div>
 
 					<Button variant='outline' onClick={resetForm} className='rounded-2xl'>
-						Yangi forma
+						{t("admin.actions.newForm")}
 					</Button>
 				</div>
 			</div>
 
 			<div className='mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
 				<StatCard
-					title='Jami product'
+					title={t("admin.stats.totalProducts")}
 					value={String(stats.total)}
 					icon={<Boxes className='h-5 w-5' />}
 				/>
 				<StatCard
-					title='Jami stock'
+					title={t("admin.stats.totalStock")}
 					value={String(stats.totalStock)}
 					icon={<Layers3 className='h-5 w-5' />}
 				/>
 				<StatCard
-					title='Ombor qiymati'
-					value={`${formatPrice(stats.totalValue)} so'm`}
+					title={t("admin.stats.inventoryValue")}
+					value={`${formatPrice(stats.totalValue)} ${t("admin.currency")}`}
 					icon={<BadgeDollarSign className='h-5 w-5' />}
 				/>
 				<StatCard
-					title='Kam qolganlar'
+					title={t("admin.stats.lowStock")}
 					value={String(stats.lowStock)}
 					icon={<AlertCircle className='h-5 w-5' />}
 				/>
@@ -338,29 +295,31 @@ export default function AdminProductsPage() {
 				<Card className='rounded-3xl border shadow-sm'>
 					<CardHeader>
 						<CardTitle className='text-2xl'>
-							{editingProduct ? "Product update" : "Yangi product"}
+							{editingProduct
+								? t("admin.form.editTitle")
+								: t("admin.form.createTitle")}
 						</CardTitle>
 					</CardHeader>
 
 					<CardContent className='space-y-6'>
 						<div className='grid gap-4 sm:grid-cols-2'>
-							<FieldWrap label='Product nomi'>
+							<FieldWrap label={t("admin.form.fields.productName")}>
 								<Input
 									value={form.title}
 									onChange={e =>
 										setForm(prev => ({ ...prev, title: e.target.value }))
 									}
-									placeholder='Masalan, iPhone 15 Pro'
+									placeholder={t("admin.form.placeholders.productName")}
 								/>
 							</FieldWrap>
 
-							<FieldWrap label='Brand'>
+							<FieldWrap label={t("admin.form.fields.brand")}>
 								<Input
 									value={form.brand}
 									onChange={e =>
 										setForm(prev => ({ ...prev, brand: e.target.value }))
 									}
-									placeholder='Apple'
+									placeholder={t("admin.form.placeholders.brand")}
 								/>
 							</FieldWrap>
 							{/* 
@@ -374,17 +333,17 @@ export default function AdminProductsPage() {
 								/>
 							</FieldWrap> */}
 
-							<FieldWrap label='Code / SKU'>
+							<FieldWrap label={t("admin.form.fields.code")}>
 								<Input
 									value={form.code}
 									onChange={e =>
 										setForm(prev => ({ ...prev, code: e.target.value }))
 									}
-									placeholder='APL-IP15PRO'
+									placeholder={t("admin.form.placeholders.code")}
 								/>
 							</FieldWrap>
 
-							<FieldWrap label='Narx'>
+							<FieldWrap label={t("admin.form.fields.price")}>
 								<Input
 									type='number'
 									value={form.price}
@@ -395,7 +354,7 @@ export default function AdminProductsPage() {
 								/>
 							</FieldWrap>
 
-							<FieldWrap label='Stock'>
+							<FieldWrap label={t("admin.form.fields.stock")}>
 								<Input
 									type='number'
 									value={form.stock}
@@ -407,7 +366,7 @@ export default function AdminProductsPage() {
 							</FieldWrap>
 						</div>
 
-						<FieldWrap label='Category'>
+						<FieldWrap label={t("admin.form.fields.category")}>
 							<Select
 								value={form.categoryId}
 								onValueChange={value =>
@@ -415,7 +374,9 @@ export default function AdminProductsPage() {
 								}
 							>
 								<SelectTrigger>
-									<SelectValue placeholder='Category tanlang' />
+									<SelectValue
+										placeholder={t("admin.form.placeholders.category")}
+									/>
 								</SelectTrigger>
 								<SelectContent>
 									{categories.map(category => (
@@ -427,7 +388,7 @@ export default function AdminProductsPage() {
 							</Select>
 						</FieldWrap>
 
-						<FieldWrap label='Qisqa tavsif'>
+						<FieldWrap label={t("admin.form.fields.shortDescription")}>
 							<Textarea
 								value={form.shortDescription}
 								onChange={e =>
@@ -436,23 +397,23 @@ export default function AdminProductsPage() {
 										shortDescription: e.target.value,
 									}))
 								}
-								placeholder='Kartochka uchun qisqa description'
+								placeholder={t("admin.form.placeholders.shortDescription")}
 								className='min-h-[90px]'
 							/>
 						</FieldWrap>
 
-						<FieldWrap label="To'liq tavsif">
+						<FieldWrap label={t("admin.form.fields.description")}>
 							<Textarea
 								value={form.description}
 								onChange={e =>
 									setForm(prev => ({ ...prev, description: e.target.value }))
 								}
-								placeholder="Product haqida to'liq ma'lumot"
+								placeholder={t("admin.form.placeholders.description")}
 								className='min-h-[140px]'
 							/>
 						</FieldWrap>
 
-						<FieldWrap label='Rasm URL lar (har qatorga 1 ta)'>
+						<FieldWrap label={t("admin.form.fields.images")}>
 							<Textarea
 								value={form.imagesText}
 								onChange={e =>
@@ -466,14 +427,16 @@ export default function AdminProductsPage() {
 						<div className='space-y-4'>
 							<div className='flex items-center justify-between'>
 								<div>
-									<h3 className='text-base font-semibold'>Specifications</h3>
+									<h3 className='text-base font-semibold'>
+										{t("admin.form.specifications.title")}
+									</h3>
 									<p className='text-sm text-muted-foreground'>
-										Dynamic spec qo'shing: RAM, SSD, protsessor va hokazo.
+										{t("admin.form.specifications.description")}
 									</p>
 								</div>
 								<Button type='button' variant='outline' onClick={addSpecRow}>
 									<Plus className='mr-2 h-4 w-4' />
-									Spec qo'shish
+									{t("admin.form.specifications.add")}
 								</Button>
 							</div>
 
@@ -486,7 +449,9 @@ export default function AdminProductsPage() {
 										>
 											<div className='mb-3 flex items-center justify-between'>
 												<span className='text-sm font-medium'>
-													Spec #{index + 1}
+													{t("admin.form.specifications.item", {
+														number: index + 1,
+													})}
 												</span>
 												<Button
 													type='button'
@@ -500,21 +465,27 @@ export default function AdminProductsPage() {
 
 											<div className='grid gap-3 md:grid-cols-3'>
 												<Input
-													placeholder='Group'
+													placeholder={t(
+														"admin.form.specifications.placeholders.group",
+													)}
 													value={spec.group ?? ""}
 													onChange={e =>
 														updateSpec(index, "group", e.target.value)
 													}
 												/>
 												<Input
-													placeholder='Label'
+													placeholder={t(
+														"admin.form.specifications.placeholders.label",
+													)}
 													value={spec.label}
 													onChange={e =>
 														updateSpec(index, "label", e.target.value)
 													}
 												/>
 												<Input
-													placeholder='Value'
+													placeholder={t(
+														"admin.form.specifications.placeholders.value",
+													)}
 													value={spec.value}
 													onChange={e =>
 														updateSpec(index, "value", e.target.value)
@@ -540,7 +511,9 @@ export default function AdminProductsPage() {
 								) : (
 									<Plus className='mr-2 h-4 w-4' />
 								)}
-								{editingProduct ? "O'zgarishni saqlash" : "Product qo'shish"}
+								{editingProduct
+									? t("admin.actions.saveChanges")
+									: t("admin.actions.addProduct")}
 							</Button>
 
 							<Button
@@ -548,7 +521,7 @@ export default function AdminProductsPage() {
 								onClick={resetForm}
 								className='flex-1 rounded-2xl'
 							>
-								Tozalash
+								{t("admin.actions.clear")}
 							</Button>
 						</div>
 					</CardContent>
@@ -557,7 +530,9 @@ export default function AdminProductsPage() {
 				<Card className='rounded-3xl border shadow-sm'>
 					<CardHeader className='gap-4'>
 						<div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
-							<CardTitle className='text-2xl'>Product ro'yxati</CardTitle>
+							<CardTitle className='text-2xl'>
+								{t("admin.products.title")}
+							</CardTitle>
 
 							<div className='relative w-full lg:max-w-sm'>
 								<Search className='pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
@@ -565,7 +540,7 @@ export default function AdminProductsPage() {
 									className='pl-9'
 									value={search}
 									onChange={e => setSearch(e.target.value)}
-									placeholder="Nomi, brand, code bo'yicha qidirish"
+									placeholder={t("admin.products.searchPlaceholder")}
 								/>
 							</div>
 						</div>
@@ -575,24 +550,28 @@ export default function AdminProductsPage() {
 						{productsLoading ? (
 							<div className='flex min-h-[300px] items-center justify-center text-muted-foreground'>
 								<Loader2 className='mr-2 h-5 w-5 animate-spin' />
-								Yuklanmoqda...
+								{t("admin.products.loading")}
 							</div>
 						) : productsError ? (
 							<div className='flex min-h-[300px] items-center justify-center text-destructive'>
-								Productlarni olishda xatolik yuz berdi.
+								{t("admin.products.error")}
 							</div>
 						) : (
 							<div className='overflow-hidden rounded-2xl border'>
 								<Table>
 									<TableHeader>
 										<TableRow>
-											<TableHead>Nomi</TableHead>
-											<TableHead>Brand</TableHead>
-											<TableHead>Category</TableHead>
-											<TableHead>Narx</TableHead>
-											<TableHead>Stock</TableHead>
-											<TableHead>Specs</TableHead>
-											<TableHead className='text-right'>Action</TableHead>
+											<TableHead>{t("admin.products.columns.name")}</TableHead>
+											<TableHead>{t("admin.products.columns.brand")}</TableHead>
+											<TableHead>
+												{t("admin.products.columns.category")}
+											</TableHead>
+											<TableHead>{t("admin.products.columns.price")}</TableHead>
+											<TableHead>{t("admin.products.columns.stock")}</TableHead>
+											<TableHead>{t("admin.products.columns.specs")}</TableHead>
+											<TableHead className='text-right'>
+												{t("admin.products.columns.action")}
+											</TableHead>
 										</TableRow>
 									</TableHeader>
 									<TableBody>
@@ -602,7 +581,7 @@ export default function AdminProductsPage() {
 													colSpan={7}
 													className='h-28 text-center text-muted-foreground'
 												>
-													Hech qanday product topilmadi.
+													{t("admin.products.empty")}
 												</TableCell>
 											</TableRow>
 										) : (
@@ -618,7 +597,7 @@ export default function AdminProductsPage() {
 													<TableCell>{product.brand}</TableCell>
 													<TableCell>{product.category?.name ?? "-"}</TableCell>
 													<TableCell>
-														{formatPrice(product.price)} so'm
+														{formatPrice(product.price)} {t("admin.currency")}
 													</TableCell>
 													<TableCell>
 														<Badge
@@ -630,7 +609,8 @@ export default function AdminProductsPage() {
 														</Badge>
 													</TableCell>
 													<TableCell>
-														{product.specifications?.length ?? 0} ta
+														{product.specifications?.length ?? 0}{" "}
+														{t("admin.products.count")}
 													</TableCell>
 													<TableCell>
 														<div className='flex justify-end gap-2'>

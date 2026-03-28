@@ -8,7 +8,7 @@ import {
 	toggleLikedProduct,
 } from "@/lib/liked-products";
 
-export function useLikedProduct(productId: number) {
+export function useLikedProduct(productId: string | number) {
 	const [liked, setLiked] = useState(false);
 
 	useEffect(() => {

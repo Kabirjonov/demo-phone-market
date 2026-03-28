@@ -38,5 +38,300 @@
 		"catalog": "Katalog",
 		"searchPlaceholder": "Qidirish",
 		"login": "Kirish"
+	},
+	"catalogSection": {
+		"promotionTitle": "Aksiyalar va chegirmalar",
+		"prevAriaLabel": "Chapga surish",
+		"nextAriaLabel": "O'ngga surish",
+		"categories": {
+			"smartphones": "Smartfonlar va gadjetlar",
+			"computers": "Kompyuter texnikasi",
+			"tvAudio": "Televizorlar va audiotexnikalar",
+			"climate": "Iqlim texnikasi",
+			"homeAppliances": "Maishiy texnika",
+			"household": "Uy uchun texnika",
+			"kitchen": "Oshxona uchun texnika"
+		}
+	},
+	"productDetail": {
+		"seo": {
+			"title": "Mahsulot tafsiloti",
+			"description": "Mahsulot narxi, tavsifi va asosiy xususiyatlari bilan tanishing."
+		},
+		"page": {
+			"notFoundTitle": "Mahsulot topilmadi",
+			"notFoundDescription": "So'ralgan mahsulot tafsiloti topilmadi yoki yuklashda xatolik yuz berdi.",
+			"backToProducts": "Mahsulotlarga qaytish"
+		},
+		"badges": {
+			"saved": "Sevimlilarga saqlangan",
+			"cashOrCard": "Naqd yoki karta",
+			"officialProduct": "Rasmiy mahsulot"
+		},
+		"labels": {
+			"code": "Kod",
+			"productCode": "Mahsulot kodi",
+			"brand": "Brend",
+			"category": "Kategoriya",
+			"status": "Holati",
+			"availability": "Mavjudligi"
+		},
+		"values": {
+			"notSpecified": "Ko'rsatilmagan",
+			"inStock": "Sotuvda ({{count}} ta)",
+			"outOfStock": "Tugagan",
+			"available": "Mavjud"
+		},
+		"actions": {
+			"allSpecifications": "Barcha xususiyatlar",
+			"order": "Buyurtma berish",
+			"contact": "Bog'lanish",
+			"sendRequest": "Ariza yuborish"
+		},
+		"contact": {
+			"tabs": {
+				"contactMe": "Men bilan bog'laning",
+				"selfCall": "O'zim bog'lanaman"
+			},
+			"fields": {
+				"firstName": "Ism",
+				"lastName": "Familiya",
+				"phone": "Telefon"
+			},
+			"callCenter": "Aloqa markazi"
+		},
+		"summary": {
+			"paymentDescription": "Mahsulotni do'konda yoki yetkazib berishda naqd pul va bank kartasi orqali to'lashingiz mumkin.",
+			"finishPurchase": "Xaridni o'zingizga qulay usulda yakunlang: naqd pul yoki kartalar orqali to'lov qiling.",
+			"providers": [
+				"Naqd to'lov",
+				"Visa",
+				"Mastercard",
+				"Humo",
+				"Uzcard"
+			]
+		},
+		"pickup": {
+			"title": "Do'kondan olib ketish bepul",
+			"availableStock": "Omborda {{count}} ta mavjud"
+		},
+		"specifications": {
+			"title": "Mahsulot xususiyatlari",
+			"description": "Mahsulot haqida asosiy ma'lumotlar va texnik ko'rsatkichlar.",
+			"defaultGroup": "Asosiy xususiyatlar",
+			"empty": "Texnik xususiyatlar hali qo'shilmagan."
+		},
+		"descriptionTitle": "Batafsil",
+		"relatedTitle": "O'xshash mahsulotlar"
+	},
+	"admin": {
+		"page": {
+			"checking": "Tekshirilmoqda..."
+		},
+		"currency": "so'm",
+		"badge": "Tech market admin",
+		"title": "Admin panel",
+		"description": "Mahsulot yaratish, yangilash, o'chirish va specifications boshqaruvi bitta sahifada.",
+		"stats": {
+			"totalProducts": "Jami mahsulot",
+			"totalStock": "Jami stock",
+			"inventoryValue": "Ombor qiymati",
+			"lowStock": "Kam qolganlar"
+		},
+		"actions": {
+			"newForm": "Yangi forma",
+			"saveChanges": "O'zgarishni saqlash",
+			"addProduct": "Mahsulot qo'shish",
+			"clear": "Tozalash"
+		},
+		"form": {
+			"createTitle": "Yangi mahsulot",
+			"editTitle": "Mahsulotni tahrirlash",
+			"fields": {
+				"productName": "Mahsulot nomi",
+				"brand": "Brand",
+				"code": "Code / SKU",
+				"price": "Narx",
+				"stock": "Jami Soni",
+				"category": "Kategoriya",
+				"shortDescription": "Qisqa tavsif",
+				"description": "To'liq tavsif",
+				"images": "Rasm URL'lari (har qatorga 1 ta)"
+			},
+			"placeholders": {
+				"productName": "Masalan, iPhone 15 Pro",
+				"brand": "Apple",
+				"code": "APL-IP15PRO",
+				"category": "Kategoriya tanlang",
+				"shortDescription": "Kartochka uchun qisqa description",
+				"description": "Mahsulot haqida to'liq ma'lumot"
+			},
+			"specifications": {
+				"title": "Specifications",
+				"description": "Dynamic spec qo'shing: RAM, SSD, protsessor va hokazo.",
+				"add": "Spec qo'shish",
+				"item": "Spec #{{number}}",
+				"placeholders": {
+					"group": "Group",
+					"label": "Label",
+					"value": "Value"
+				}
+			}
+		},
+		"products": {
+			"title": "Mahsulotlar ro'yxati",
+			"count": "ta",
+			"searchPlaceholder": "Nomi, brand, code bo'yicha qidirish",
+			"loading": "Yuklanmoqda...",
+			"error": "Mahsulotlarni olishda xatolik yuz berdi.",
+			"empty": "Hech qanday mahsulot topilmadi.",
+			"columns": {
+				"name": "Nomi",
+				"brand": "Brand",
+				"category": "Kategoriya",
+				"price": "Narx",
+				"stock": "Jami Soni",
+				"specs": "Specs",
+				"action": "Action"
+			}
+		}
+	},
+	"checkout": {
+		"seo": {
+			"title": "Buyurtmani rasmiylashtirish",
+			"description": "Tanlangan mahsulot uchun buyurtma rasmiylashtirish sahifasi."
+		},
+		"page": {
+			"notFoundTitle": "Mahsulot topilmadi",
+			"notFoundDescription": "Checkout uchun mahsulot topilmadi yoki yuklashda xatolik yuz berdi.",
+			"backToProducts": "Mahsulotlarga qaytish",
+			"home": "Bosh sahifa",
+			"back": "Orqaga",
+			"title": "Xaridni rasmiylashtirish"
+		},
+		"sections": {
+			"customerInfo": "Sizning ma'lumotlaringiz",
+			"receiveMethod": "Qabul qilish usuli",
+			"paymentMethod": "To'lov usulini tanlang"
+		},
+		"fields": {
+			"phone": "Telefon",
+			"firstName": "Ism",
+			"lastName": "Familiya",
+			"region": "Viloyat",
+			"cityDistrict": "Shahar / tuman",
+			"address": "Manzil",
+			"floor": "Qavat",
+			"select": "Tanlang",
+			"comment": "Buyurtmaga izoh",
+			"promoCode": "Promokodni kiriting"
+		},
+		"placeholders": {
+			"address": "Masalan, Yunusobod 13-kvartal",
+			"floor": "Agar bo'lsa",
+			"comment": "Qabul qiluvchi yoki yetkazib berish bo'yicha izoh qoldiring"
+		},
+		"delivery": {
+			"delivery": "Yetkazib berish",
+			"pickup": "Do'kondan olib ketish",
+			"addressTitle": "Yetkazib berish manzilini kiriting",
+			"conditionsTitle": "Yetkazib berish shartlari",
+			"standard": "Ertaga yoki keyinroq",
+			"express": "Tez yetkazib berish"
+		},
+		"pickup": {
+			"description": "Mahsulotni do'kondan bepul olib ketishingiz mumkin. Buyurtmadan keyin operator siz bilan bog'lanadi.",
+			"mapTitle": "Do'kon manzili",
+			"mapDescription": "Eng yaqin filialni xaritada ko'ring va olib ketish uchun tashrif buyuring."
+		},
+		"paymentMethods": {
+			"payme": "Payme",
+			"click": "Click",
+			"card": "Onlayn karta orqali",
+			"cash": "Qabul qilinganda",
+			"corp": "Korporativ karta",
+			"installment": "Muddatli to'lov"
+		},
+		"summary": {
+			"productsTitle": "Buyurtmadagi mahsulotlar",
+			"change": "O'zgartirish",
+			"oneItem": "1 ta",
+			"orderTitle": "Sizning buyurtmangiz",
+			"singlePrice": "1 dona mahsulot narxi",
+			"delivery": "Yetkazib berish",
+			"total": "Jami"
+		},
+		"values": {
+			"free": "Bepul",
+			"paid": "To'lovli"
+		},
+		"actions": {
+			"submit": "Xaridni rasmiylashtirish",
+			"agreementPrefix": "Buyurtmani tasdiqlash orqali men",
+			"agreementLink": "Foydalanuvchi shartnomasi",
+			"agreementSuffix": "qabul qilaman."
+		},
+		"validation": {
+			"userInfo": "Telefon, ism va familiyani to'ldiring.",
+			"address": "Yetkazib berish uchun manzilni kiriting.",
+			"success": "{{product}} uchun buyurtma qabul qilindi. Tez orada siz bilan bog'lanamiz."
+		}
+	},
+	"catalogPage": {
+		"items": {
+			"smartphones": "Smartfonlar",
+			"phones": "Telefonlar",
+			"tablets": "Planshetlar",
+			"gadgets": "Gadjetlar",
+			"phoneAccessories": "Telefon aksessuarlari",
+			"laptops": "Noutbuklar",
+			"monitors": "Monitorlar",
+			"monoblocks": "Monobloklar",
+			"computerAccessories": "Kompyuter aksessuarlari",
+			"externalDrives": "Tashqi qattiq disklar",
+			"flashStorage": "Flash xotiralar",
+			"speakers": "Kolonkalar",
+			"stabilizers": "Stabilizatorlar",
+			"tvs": "Televizorlar",
+			"tvAccessories": "TV aksessuarlari",
+			"musicCenters": "Musiqiy markazlar",
+			"wirelessSpeakers": "Simsiz kolonkalar",
+			"soundbars": "Soundbarlar",
+			"tvSubscription": "TV obuna",
+			"airConditioners": "Konditsionerlar",
+			"fans": "Ventilyatorlar",
+			"heaters": "Isitgichlar",
+			"waterHeaters": "Suv isitgichlar",
+			"humidifiers": "Namlagichlar",
+			"airPurifiers": "Havo tozalagichlar",
+			"homeCare": "Uy parvarishi tovarlari",
+			"clothingCare": "Kiyim parvarishi mahsulotlari",
+			"dispensers": "Dispenserlar"
+		}
+	},
+	"hero": {
+		"promotions": {
+			"ustamasiz-muddatli-tolov-0012": {
+				"label": "Aksiya",
+				"title": "Ustamasiz muddatli to'lov 0-0-12",
+				"summary": "Smartfon, televizor va maishiy texnikalarni 12 oyga 0% ustama bilan rasmiylashtirish mumkin.",
+				"period": "20 Martdan 30 Aprelgacha",
+				"publishedAt": "2026-03-20"
+			},
+			"samsung-a56-oldindan-buyurtma": {
+				"label": "Yangilik",
+				"title": "Samsung Galaxy A56 uchun oldindan buyurtma boshlandi",
+				"summary": "Yangi model savdosi ochildi va birinchi xaridorlar uchun bonus aksessuarlar paketi e'lon qilindi.",
+				"period": "24 Martdan 10 Aprelgacha",
+				"publishedAt": "2026-03-24"
+			},
+			"ramazon-ish-jadvali-yetkazib-berish": {
+				"label": "E'lon",
+				"title": "Ramazon oyidagi ish jadvali va yetkazib berish tartibi",
+				"summary": "Filiallar ish vaqti, call-markaz grafigi hamda buyurtmalarni yetkazish bo'yicha yangilangan jadval e'lon qilindi.",
+				"period": "26 Martdan 10 Aprelgacha",
+				"publishedAt": "2026-03-26"
+			}
+		}
 	}
 }

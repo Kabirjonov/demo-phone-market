@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 type LikedProductButtonProps = {
-	productId: number;
+	productId: string | number;
 	className?: string;
 	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };

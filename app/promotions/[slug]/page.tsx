@@ -11,10 +11,6 @@ import {
 import { createSeoMetadata } from "@/config/seo.config";
 import { promotions } from "@/mockInfo/data";
 
-function decodePromotionSlug(slug: string) {
-	return decodeURIComponent(slug).toLowerCase().replace(/\s+/g, "-");
-}
-
 export function generateStaticParams() {
 	return promotions.map(item => ({
 		slug: item.slug,
@@ -27,9 +23,7 @@ export async function generateMetadata({
 	params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
 	const { slug } = await params;
-	const currentPromotion = promotions.find(
-		item => item.slug === decodePromotionSlug(slug),
-	);
+	const currentPromotion = promotions.find(item => item.slug === slug);
 
 	if (!currentPromotion) {
 		return createSeoMetadata({
@@ -55,9 +49,10 @@ export default async function PromotionsPageOne({
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
-	const currentPromotion = promotions.find(
-		item => item.slug === decodePromotionSlug(slug),
-	);
+	console.log("slug datil", slug);
+
+	const currentPromotion = promotions.find(item => item.slug === slug);
+
 	if (!currentPromotion) {
 		notFound();
 	}
@@ -147,16 +142,16 @@ export default async function PromotionsPageOne({
 								<div className='flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-600'>
 									<Newspaper size={20} />
 								</div>
-								<h2 className='text-2xl font-semibold text-foreground'>
+								{/* <h2 className='text-2xl font-semibold text-foreground'>
 									{currentPromotion.newsTitle}
-								</h2>
+								</h2> */}
 							</div>
-							<p className='text-base leading-7 text-muted-foreground'>
+							{/* <p className='text-base leading-7 text-muted-foreground'>
 								{currentPromotion.newsText}
-							</p>
+							</p> */}
 						</div>
 
-						<div className='rounded-[28px] border border-border bg-white p-6 shadow-sm'>
+						{/* <div className='rounded-[28px] border border-border bg-white p-6 shadow-sm'>
 							<div className='mb-4 flex items-center gap-3'>
 								<div className='flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-600'>
 									<Sparkles size={20} />
@@ -168,7 +163,7 @@ export default async function PromotionsPageOne({
 							<p className='text-base leading-7 text-muted-foreground'>
 								{currentPromotion.opportunityText}
 							</p>
-						</div>
+						</div> */}
 					</div>
 
 					<div className='space-y-5'>
@@ -176,7 +171,7 @@ export default async function PromotionsPageOne({
 							Aksiyadagi mahsulotlar
 						</h2>
 
-						<div className='grid gap-5 md:grid-cols-3'>
+						{/* <div className='grid gap-5 md:grid-cols-3'>
 							{currentPromotion.products.map(product => (
 								<div
 									key={product.name}
@@ -193,7 +188,7 @@ export default async function PromotionsPageOne({
 									</p>
 								</div>
 							))}
-						</div>
+						</div> */}
 					</div>
 				</div>
 

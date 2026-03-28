@@ -19,8 +19,12 @@ import { registerSchema, type RegisterFormValues } from "@/lib/validation";
 import { formatUzPhone } from "@/lib/PhoneFormater";
 import { useTranslation } from "react-i18next";
 import { useAuthRegister } from "@/hooks/useAuth";
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 export default function RegisterForm() {
 	const { t } = useTranslation();
+	const [showPassword, setShowPassword] = useState(false);
+
 	const { setStep, setPhone } = useAuthFlowStore();
 	const { mutate, isPending } = useAuthRegister();
 	const form = useForm<RegisterFormValues>({
@@ -105,13 +109,32 @@ export default function RegisterForm() {
 							<FormItem>
 								<FormLabel>{t("auth.register.passwordLabel")}</FormLabel>
 								<FormControl>
-									<Input
-										type='password'
-										placeholder={t("auth.register.passwordPlaceholder")}
-										autoComplete='new-password'
-										{...field}
-										disabled={isPending}
-									/>
+									<div className='relative'>
+										<Input
+											type={showPassword ? "text" : "password"}
+											placeholder={t("auth.register.passwordPlaceholder")}
+											autoComplete='new-password'
+											{...field}
+											disabled={isPending}
+										/>
+										<Button
+											type='button'
+											variant='ghost'
+											size='sm'
+											className='absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent'
+											onClick={() => setShowPassword(prev => !prev)}
+											disabled={isPending}
+										>
+											{showPassword ? (
+												<EyeOffIcon className='h-4 w-4' aria-hidden='true' />
+											) : (
+												<EyeIcon className='h-4 w-4' aria-hidden='true' />
+											)}
+											<span className='sr-only'>
+												{showPassword ? "Hide password" : "Show password"}
+											</span>
+										</Button>
+									</div>
 								</FormControl>
 								<FormDescription>
 									{t("auth.register.passwordHint")}

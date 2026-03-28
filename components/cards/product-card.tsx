@@ -1,23 +1,29 @@
 "use client";
 
-import Image from "next/image";
-import { Star } from "lucide-react";
 import { IProduct } from "@/type";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRouter } from "next/navigation";
-import { slugifyProduct } from "@/mockInfo/data";
 import LikedProductButton from "@/components/shared/Liked-product-button";
 
 import "swiper/css";
+import { resolveProductImage } from "@/lib/resolveProductImage";
 
 type ProductCardProps = {
 	product: IProduct;
 };
 
+function formatPrice(value: number) {
+	return new Intl.NumberFormat("uz-UZ").format(value);
+}
+
 export default function ProductCard({ product }: ProductCardProps) {
 	const router = useRouter();
-	const productHref = `/product/detail/${slugifyProduct(product.title)}`;
+	const productHref = `/product/detail/${product.slug ?? product.id}`;
+	const productImages =
+		product.images?.length > 0
+			? product.images.map(image => resolveProductImage(image))
+			: ["/logo.png"];
 
 	return (
 		<div className=''>
@@ -36,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 			>
 				<div className='rounded-3xl bg-muted/40 p-3 '>
 					<div className='relative h-[220px] overflow-hidden'>
-						{product.images.length > 1 ? (
+						{productImages.length > 1 ? (
 							<Swiper
 								modules={[Autoplay]}
 								slidesPerView={1}
@@ -50,42 +56,38 @@ export default function ProductCard({ product }: ProductCardProps) {
 								}}
 								className='h-full'
 							>
-								{product.images.map((imageSrc, index) => (
+								{productImages.map((imageSrc, index) => (
 									<SwiperSlide key={`${product.id}-${index}`}>
 										<div className='relative flex h-[220px] items-center justify-center'>
-											<Image
+											<img
 												src={imageSrc}
 												alt={`${product.title} ${index + 1}`}
-												width={220}
-												height={220}
 												className='h-auto rounded-xl max-h-[210px] w-auto object-contain transition-transform duration-300 group-hover:scale-105'
 											/>
-
+											{/* 
 											{product.badge && (
 												<div className='absolute left-2 bottom-2'>
 													<span className='rounded-lg bg-orange-500 px-3 py-1 text-sm font-medium text-white'>
 														{product.badge}
 													</span>
 												</div>
-											)}
+											)} */}
 										</div>
 									</SwiperSlide>
 								))}
 							</Swiper>
 						) : (
 							<div className='flex h-[220px]  items-center justify-center'>
-								<Image
-									src={product.images[0]}
+								<img
+									src={productImages[0]}
 									alt={product.title}
-									width={220}
-									height={220}
 									className='h-auto rounded-xl max-h-[210px] w-auto object-contain transition-transform duration-300 group-hover:scale-105'
 								/>
 
-								{product.badge && (
+								{product.brand && (
 									<div className='mt-2'>
 										<span className='rounded-lg bg-orange-500 px-3 py-1 text-sm font-medium text-white'>
-											{product.badge}
+											{product.brand}
 										</span>
 									</div>
 								)}
@@ -96,34 +98,36 @@ export default function ProductCard({ product }: ProductCardProps) {
 				</div>
 
 				<div className='mt-4 space-y-3'>
-					<h3 className='line-clamp-2 min-h-[56px] text-lg font-medium leading-7 text-foreground'>
-						{product.title}
-					</h3>
-
-					<div className='flex items-center gap-1 text-muted-foreground'>
-						{product.rating ? (
-							<>
-								<Star size={16} className='fill-yellow-400 text-yellow-400' />
-								<span className='font-medium text-foreground'>
-									{product.rating}
-								</span>
-							</>
-						) : (
-							<Star size={16} className='fill-muted text-muted' />
-						)}
-						<span>• {product.reviewsText || "Sharh yo‘q"}</span>
-					</div>
-
-					<div>
-						<span className='rounded-full bg-muted px-3 py-1 text-sm font-semibold'>
-							Naqd yoki karta orqali to&apos;lov
+					<div className='flex justify-between items-center'>
+						<h3 className='line-clamp-2 min-h-[56px] text-lg font-medium leading-7 text-foreground'>
+							{product.title}
+						</h3>
+						<span className='rounded-lg bg-orange-500 px-3 py-1 text-sm font-medium text-white'>
+							{product.brand}
 						</span>
 					</div>
 
+					<p className='line-clamp-2 min-h-[48px] text-sm leading-6 text-muted-foreground'>
+						{product.shortDescription || product.description}
+					</p>
+
+					{/* <div>
+						<span className='rounded-full bg-muted px-3 py-1 text-sm font-semibold'>
+							Naqd yoki karta orqali to&apos;lov
+						</span>
+					</div> */}
+					{product.specifications?.map(item => (
+						<p
+							key={`${product.id}-${item.group ?? "general"}-${item.label}`}
+							className=' text-sm  text-muted-foreground'
+						>
+							{item.label}:{item.value}
+						</p>
+					))}
+
 					<div className='flex items-end justify-between gap-3'>
 						<p className='text-2xl font-bold text-foreground'>
-							{/* {formatPrice(product.price)} so‘m */}
-							{product.price}
+							{formatPrice(product.price)} so&apos;m
 						</p>
 
 						<LikedProductButton
