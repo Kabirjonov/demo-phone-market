@@ -16,7 +16,7 @@ export default function ProductDetailPageClient({
 }: ProductDetailPageClientProps) {
 	const { t } = useTranslation();
 	const { product, loading, error } = useProduct(slug);
-	const { products, categories, loading: productsLoading } = useProducts();
+	const { products, loading: productsLoading } = useProducts();
 
 	if (loading) {
 		return (
@@ -55,7 +55,7 @@ export default function ProductDetailPageClient({
 
 	return (
 		<ProductDetailView
-			categories={categories}
+			categories={[]}
 			product={product}
 			relatedProducts={productsLoading ? [] : relatedProducts}
 		/>

@@ -52,7 +52,7 @@ export const useProducts = () => {
 
 	return {
 		products: data?.products ?? [],
-		categories: data?.categories ?? [],
+		// categories: data?.categories ?? [],
 		loading,
 		error,
 		refetch,

@@ -19,11 +19,6 @@ export const GET_PRODUCTS = gql`
 				group
 			}
 		}
-		categories {
-			slug
-			name
-			id
-		}
 	}
 `;
 
