@@ -65,9 +65,10 @@ export function useAuthRegister() {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ["auth-register"],
 		mutationFn: async (values: z.infer<typeof registerSchema>) => {
+			const phone = normalizePhone(values.phoneNumber);
 			const res = await api.post("/api/auth/register", {
 				name: values.name,
-				phone: values.phoneNumber,
+				phone: phone,
 				password: values.password,
 			});
 			return res.data;
@@ -92,7 +93,7 @@ export function useAuthVerify() {
 		mutationKey: ["auth-verify"],
 		mutationFn: async (values: z.infer<typeof verifySchema>) => {
 			const res = await api.post("/api/auth/verify-phone", {
-				phone: phone,
+				phone: normalizePhone(phone),
 				code: values.code,
 			});
 

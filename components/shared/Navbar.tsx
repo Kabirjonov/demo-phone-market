@@ -74,12 +74,12 @@ const Navbar = () => {
 											<DropdownMenuItem>
 												<Link href={"/profile"}>Profile</Link>
 											</DropdownMenuItem>
-											<DropdownMenuItem>
+											{/* <DropdownMenuItem>
 												<Link href={"/profile"}>History</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem>
 												<Link href={"/orders"}>Orders</Link>
-											</DropdownMenuItem>
+											</DropdownMenuItem> */}
 										</>
 									)}
 

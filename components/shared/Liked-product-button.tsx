@@ -1,7 +1,7 @@
 "use client";
 
 import type { MouseEvent } from "react";
-import { ShoppingCart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 
 import { useLikedProduct } from "@/hooks/useLikedProduct";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ export default function LikedProductButton({
 				toggle();
 			}}
 		>
-			<ShoppingCart
+			<Heart
 				className={cn(liked ? "text-primary-foreground" : "text-primary")}
 			/>
 		</Button>

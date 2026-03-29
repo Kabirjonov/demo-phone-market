@@ -9,7 +9,14 @@ import {
 } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Heart, ShoppingCart, User } from "lucide-react";
+import {
+	Ellipsis,
+	EllipsisVertical,
+	Heart,
+	Home,
+	ShoppingCart,
+	User,
+} from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +24,7 @@ export const NavLinks = [
 	{
 		link: "/",
 		titleKey: "nav.home",
-		icon: User,
+		icon: Home,
 	},
 	// {
 	// 	link: "/product",
@@ -28,7 +35,7 @@ export const NavLinks = [
 	{
 		link: "/catalog",
 		titleKey: "nav.catalog",
-		// icon: ShoppingCart,
+		icon: EllipsisVertical,
 	},
 	{
 		link: "/liked",
