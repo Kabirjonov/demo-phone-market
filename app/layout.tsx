@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import MainProvider from "@/providers/Main-provider";
 import AppShell from "@/components/shared/App-shell";
+import { createDefaultMetadata } from "@/config/seo.config";
 import { getDictionary } from "@/lib/dictionaries";
 import { getRequestLocale } from "@/lib/request-locale";
 
@@ -16,12 +17,7 @@ const fontMono = JetBrains_Mono({
 	variable: "--font-mono",
 });
 
-// export const metadata: Metadata = createDefaultMetadata();
-export const metadata = {
-	icons: {
-		icon: "/favicon.jpg", // Reference path from the /public directory
-	},
-};
+export const metadata = createDefaultMetadata();
 
 export default async function RootLayout({
 	children,

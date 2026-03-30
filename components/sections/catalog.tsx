@@ -64,8 +64,8 @@ export default function CatalogSection() {
 					}}
 					className='!pb-2'
 				>
-					<div className='flex bg-red-500'>
-						<Link
+					<div className='flex '>
+						{/* <Link
 							href={promotionCard.href}
 							className={`group relative block overflow-hidden rounded-xl p-4 bg-card shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(15,23,42,0.10)]`}
 						>
@@ -86,7 +86,7 @@ export default function CatalogSection() {
 							</div>
 
 							<div className='absolute -bottom-8 right-6 h-20 w-20 rounded-full bg-white/35 blur-2xl' />
-						</Link>
+						</Link> */}
 						{mockData.map(item => (
 							<SwiperSlide key={item.id}>
 								<Link

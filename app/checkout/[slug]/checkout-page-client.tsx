@@ -41,12 +41,12 @@ import {
 import { formatUzPhone } from "@/lib/PhoneFormater";
 
 const paymentMethods = [
-	{ id: "payme", labelKey: "payme", icon: Wallet },
-	{ id: "click", labelKey: "click", icon: CircleDollarSign },
+	// { id: "payme", labelKey: "payme", icon: Wallet },
+	// { id: "click", labelKey: "click", icon: CircleDollarSign },
 	{ id: "card", labelKey: "card", icon: CreditCard },
 	{ id: "cash", labelKey: "cash", icon: Package },
-	{ id: "corp", labelKey: "corp", icon: Building2 },
-	{ id: "installment", labelKey: "installment", icon: BadgePercent },
+	// { id: "corp", labelKey: "corp", icon: Building2 },
+	// { id: "installment", labelKey: "installment", icon: BadgePercent },
 ] as const;
 
 const STORE_MAP_EMBED_URL =
