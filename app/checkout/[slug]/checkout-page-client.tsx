@@ -28,15 +28,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { regionOptions } from "@/const/location";
 import { useProduct } from "@/hooks/useProducts";
 import { resolveProductImage } from "@/lib/resolveProductImage";
 import { useSessionStore } from "@/store/useSession.store";
-
-const regionOptions = {
-	"Toshkent shahri": ["Yunusobod", "Mirobod", "Chilonzor", "Olmazor"],
-	Toshkent: ["Zangiota", "Qibray", "Yangiyo'l", "Chirchiq"],
-	Samarqand: ["Samarqand shahri", "Urgut", "Jomboy", "Pastdarg'om"],
-} as const;
 
 const paymentMethods = [
 	{ id: "payme", labelKey: "payme", icon: Wallet },

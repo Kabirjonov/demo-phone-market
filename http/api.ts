@@ -3,7 +3,7 @@ import { getAccessToken } from "@/lib/auth-token";
 import axios from "axios";
 import type { InternalAxiosRequestConfig } from "axios";
 export const Base_Url =
-	process.env.BACKEND_PUBLIC_URL ||
+	process.env.NEXT_PUBLIC_BACKEND_PUBLIC_URL ||
 	"https://demo-phone-market-backend.vercel.app";
 
 const api = axios.create({

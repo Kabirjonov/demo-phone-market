@@ -71,9 +71,6 @@ const Navbar = () => {
 										</DropdownMenuItem>
 									) : (
 										<>
-											<DropdownMenuItem>
-												<Link href={"/profile"}>Profile</Link>
-											</DropdownMenuItem>
 											{/* <DropdownMenuItem>
 												<Link href={"/profile"}>History</Link>
 											</DropdownMenuItem>
@@ -82,7 +79,9 @@ const Navbar = () => {
 											</DropdownMenuItem> */}
 										</>
 									)}
-
+									<DropdownMenuItem>
+										<Link href={"/profile"}>Profile</Link>
+									</DropdownMenuItem>
 									<DropdownMenuItem
 										onClick={() => logout()}
 										variant='destructive'

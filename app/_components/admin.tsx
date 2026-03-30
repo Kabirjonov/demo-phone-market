@@ -245,7 +245,7 @@ export default function AdminProductsPage() {
 	const isSaving = createLoading || updateLoading;
 
 	return (
-		<section className='mx-auto max-w-7xl px-4 pb-12 pt-8 sm:px-6 lg:px-8'>
+		<section className='mx-auto max-w-[90%] px-4 pb-12 pt-8 sm:px-6 lg:px-8'>
 			<div className='mb-8 flex flex-col gap-4'>
 				<div className='inline-flex w-fit items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium shadow-sm'>
 					<Package2 className='h-4 w-4' />
@@ -561,6 +561,7 @@ export default function AdminProductsPage() {
 								<Table>
 									<TableHeader>
 										<TableRow>
+											<TableHead>ID</TableHead>
 											<TableHead>{t("admin.products.columns.name")}</TableHead>
 											<TableHead>{t("admin.products.columns.brand")}</TableHead>
 											<TableHead>
@@ -587,6 +588,8 @@ export default function AdminProductsPage() {
 										) : (
 											filteredProducts.map(product => (
 												<TableRow key={product.id}>
+													<TableCell>{product.id}</TableCell>
+
 													<TableCell className='min-w-[250px]'>
 														<div className='font-medium'>{product.title}</div>
 														<div className='mt-1 flex items-center gap-2 text-xs text-muted-foreground'>

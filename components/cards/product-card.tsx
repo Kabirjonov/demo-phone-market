@@ -99,10 +99,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 				<div className='mt-4 space-y-3'>
 					<div className='flex justify-between items-center'>
-						<h3 className='line-clamp-2 min-h-[56px] text-lg font-medium leading-7 text-foreground'>
+						<h3 className='line-clamp-2 min-h-[56px] text-lg font-medium leading-7 text-foreground flex items-center'>
 							{product.title}
 						</h3>
-						<span className='rounded-lg bg-orange-500 px-3 py-1 text-sm font-medium text-white'>
+						<span className='rounded-lg bg-orange-500 px-3 py-1 text-sm font-medium text-white flex items-center'>
 							{product.brand}
 						</span>
 					</div>
