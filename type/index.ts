@@ -49,6 +49,69 @@ export interface IProduct {
 	// availability: boolean;
 	// user: IUser;
 }
+
+export type DeliveryMethod = "COURIER" | "PICKUP";
+export type PaymentMethod = "CASH" | "CARD";
+export type DeliveryStatus =
+	| "NEW"
+	| "CONFIRMED"
+	| "SHIPPED"
+	| "DELIVERED"
+	| "CANCELLED";
+export type PaymentStatus = "PENDING" | "PAID" | "FAILED";
+
+export interface IOrderItem {
+	id: number;
+	orderId: number;
+	productId: number;
+	product: IProduct | null;
+	productTitle: string;
+	productImage: string | null;
+	orderTimePrice: number;
+	quantity: number;
+	totalPrice: number;
+}
+
+export interface IOrder {
+	id: number;
+	userId: number | null;
+	user: IUser | null;
+	name: string;
+	phone: string;
+	region: string;
+	district: string;
+	address: string;
+	comment: string | null;
+	deliveryMethod: DeliveryMethod;
+	paymentMethod: PaymentMethod;
+	deliveryStatus: DeliveryStatus;
+	paymentStatus: PaymentStatus;
+	subtotal: number;
+	deliveryFee: number;
+	totalAmount: number;
+	items: IOrderItem[];
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface ICreateOrderItemInput {
+	productId: number;
+	quantity: number;
+}
+
+export interface ICreateOrderInput {
+	userId?: number | null;
+	name: string;
+	phone: string;
+	region: string;
+	district: string;
+	address: string;
+	comment?: string | null;
+	deliveryMethod: DeliveryMethod;
+	paymentMethod: PaymentMethod;
+	deliveryFee?: number | null;
+	items: ICreateOrderItemInput[];
+}
 export interface IProductFormState {
 	title: string;
 	price: string;

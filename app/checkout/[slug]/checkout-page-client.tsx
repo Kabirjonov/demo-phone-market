@@ -12,6 +12,7 @@ import {
 	ChevronRight,
 	CircleDollarSign,
 	CreditCard,
+	Loader2,
 	MapPin,
 	Package,
 	Wallet,
@@ -29,9 +30,15 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { regionOptions } from "@/const/location";
+import { useCreateOrder } from "@/hooks/useOrders";
 import { useProduct } from "@/hooks/useProducts";
 import { resolveProductImage } from "@/lib/resolveProductImage";
 import { useSessionStore } from "@/store/useSession.store";
+import {
+	DeliveryMethod as ApiDeliveryMethod,
+	PaymentMethod as ApiPaymentMethod,
+} from "@/type";
+import { formatUzPhone } from "@/lib/PhoneFormater";
 
 const paymentMethods = [
 	{ id: "payme", labelKey: "payme", icon: Wallet },
@@ -44,6 +51,9 @@ const paymentMethods = [
 
 const STORE_MAP_EMBED_URL =
 	"https://yandex.com/map-widget/v1/?ll=69.273777%2C41.321114&mode=whatshere&whatshere%5Bpoint%5D=69.273777%2C41.321114&whatshere%5Bzoom%5D=17&z=17";
+const STORE_PICKUP_REGION = "Toshkent shahri";
+const STORE_PICKUP_DISTRICT = "Yunusobod";
+const STORE_PICKUP_ADDRESS = "Texnool do'koni, Toshkent shahri";
 
 type DeliveryMethod = "delivery" | "pickup";
 type ShippingSpeed = "standard" | "express";
@@ -62,6 +72,16 @@ function splitUserName(name?: string | null) {
 		firstName: parts[0] ?? "",
 		lastName: parts.slice(1).join(" "),
 	};
+}
+
+function mapPaymentMethodToApi(
+	value: (typeof paymentMethods)[number]["id"],
+): ApiPaymentMethod {
+	return value === "cash" ? "CASH" : "CARD";
+}
+
+function mapDeliveryMethodToApi(value: DeliveryMethod): ApiDeliveryMethod {
+	return value === "pickup" ? "PICKUP" : "COURIER";
 }
 
 function SectionNumber({ value }: { value: number }) {
@@ -122,18 +142,24 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 	const { t } = useTranslation();
 	const { product, loading, error } = useProduct(slug);
 	const user = useSessionStore(state => state.user);
+	const { createOrder, loading: createOrderLoading } = useCreateOrder();
 
 	const initialName = useMemo(() => splitUserName(user?.name), [user?.name]);
 	const [phone, setPhone] = useState(user?.phone ?? "+998");
 	const [firstName, setFirstName] = useState(initialName.firstName);
 	const [lastName, setLastName] = useState(initialName.lastName);
-	const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>("delivery");
-	const [region, setRegion] = useState<keyof typeof regionOptions>("Toshkent shahri");
-	const [district, setDistrict] = useState<string>(regionOptions["Toshkent shahri"][0]);
+	const [deliveryMethod, setDeliveryMethod] =
+		useState<DeliveryMethod>("delivery");
+	const [region, setRegion] =
+		useState<keyof typeof regionOptions>("Toshkent shahri");
+	const [district, setDistrict] = useState<string>(
+		regionOptions["Toshkent shahri"][0],
+	);
 	const [address, setAddress] = useState("");
 	const [floor, setFloor] = useState("");
 	const [shippingSpeed, setShippingSpeed] = useState<ShippingSpeed>("standard");
-	const [paymentMethod, setPaymentMethod] = useState<(typeof paymentMethods)[number]["id"]>("payme");
+	const [paymentMethod, setPaymentMethod] =
+		useState<(typeof paymentMethods)[number]["id"]>("payme");
 	const [promoCode, setPromoCode] = useState("");
 	const [comment, setComment] = useState("");
 
@@ -153,7 +179,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 	const totalPrice = (product?.price ?? 0) + deliveryPrice;
 	const productImage = resolveProductImage(product?.images?.[0]);
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		if (!product) return;
 
 		if (!phone.trim() || !firstName.trim() || !lastName.trim()) {
@@ -165,6 +191,46 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 			toast.error(t("checkout.validation.address"));
 			return;
 		}
+
+		const customerName = [firstName.trim(), lastName.trim()]
+			.filter(Boolean)
+			.join(" ");
+
+		const orderRegion =
+			deliveryMethod === "pickup" ? STORE_PICKUP_REGION : region;
+		const orderDistrict =
+			deliveryMethod === "pickup" ? STORE_PICKUP_DISTRICT : district;
+		const orderAddress =
+			deliveryMethod === "pickup" ? STORE_PICKUP_ADDRESS : address.trim();
+
+		const createdOrder = await createOrder({
+			userId: user?.id ? Number(user.id) : null,
+			name: customerName,
+			phone: phone.trim(),
+			region: orderRegion,
+			district: orderDistrict,
+			address: orderAddress,
+
+			comment: comment.trim() || null,
+			deliveryMethod: mapDeliveryMethodToApi(deliveryMethod),
+			paymentMethod: mapPaymentMethodToApi(paymentMethod),
+			deliveryFee: deliveryPrice,
+			items: [
+				{
+					productId: product.id,
+					quantity: 1,
+				},
+			],
+		});
+
+		if (!createdOrder) {
+			return;
+		}
+
+		setComment("");
+		setPromoCode("");
+		setAddress("");
+		setFloor("");
 
 		toast.success(
 			t("checkout.validation.success", {
@@ -249,7 +315,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 								</label>
 								<Input
 									value={phone}
-									onChange={e => setPhone(e.target.value)}
+									onChange={e => setPhone(formatUzPhone(e.target.value))}
 									className='h-14 rounded-2xl'
 								/>
 							</div>
@@ -318,7 +384,9 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 											}
 										>
 											<SelectTrigger className='h-14 w-full rounded-2xl px-4'>
-												<SelectValue placeholder={t("checkout.fields.select")} />
+												<SelectValue
+													placeholder={t("checkout.fields.select")}
+												/>
 											</SelectTrigger>
 											<SelectContent>
 												{Object.keys(regionOptions).map(item => (
@@ -335,7 +403,9 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 										</label>
 										<Select value={district} onValueChange={setDistrict}>
 											<SelectTrigger className='h-14 w-full rounded-2xl px-4'>
-												<SelectValue placeholder={t("checkout.fields.select")} />
+												<SelectValue
+													placeholder={t("checkout.fields.select")}
+												/>
 											</SelectTrigger>
 											<SelectContent>
 												{regionOptions[region].map(item => (
@@ -435,9 +505,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 										key={method.id}
 										active={paymentMethod === method.id}
 										onClick={() => setPaymentMethod(method.id)}
-										title={t(
-											`checkout.paymentMethods.${method.labelKey}`,
-										)}
+										title={t(`checkout.paymentMethods.${method.labelKey}`)}
 										icon={method.icon}
 									/>
 								))}
@@ -457,12 +525,17 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 
 							<Button
 								onClick={handleSubmit}
+								disabled={createOrderLoading}
 								className='h-14 w-full rounded-full bg-primary text-lg font-semibold text-primary-foreground hover:bg-primary/90'
 							>
-								{t("checkout.actions.submit")}
+								{createOrderLoading ? (
+									<Loader2 className='h-5 w-5 animate-spin' />
+								) : (
+									t("checkout.actions.submit")
+								)}
 							</Button>
 							<p className='text-sm text-muted-foreground'>
-								{t("checkout.actions.agreementPrefix")} {" "}
+								{t("checkout.actions.agreementPrefix")}{" "}
 								<span className='text-primary'>
 									{t("checkout.actions.agreementLink")}
 								</span>{" "}
@@ -473,12 +546,17 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 						<section className='space-y-5'>
 							<Button
 								onClick={handleSubmit}
+								disabled={createOrderLoading}
 								className='h-14 w-full rounded-full bg-primary text-lg font-semibold text-primary-foreground hover:bg-primary/90'
 							>
-								{t("checkout.actions.submit")}
+								{createOrderLoading ? (
+									<Loader2 className='h-5 w-5 animate-spin' />
+								) : (
+									t("checkout.actions.submit")
+								)}
 							</Button>
 							<p className='text-sm text-muted-foreground'>
-								{t("checkout.actions.agreementPrefix")} {" "}
+								{t("checkout.actions.agreementPrefix")}{" "}
 								<span className='text-primary'>
 									{t("checkout.actions.agreementLink")}
 								</span>{" "}

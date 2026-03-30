@@ -196,6 +196,79 @@
 			}
 		}
 	},
+	"adminOrders": {
+		"badge": "Admin buyurtmalar",
+		"title": "Buyurtmalar",
+		"description": "Buyurtmalarni qidiring, statuslarni o'zgartiring va tafsilotlarni shu sahifaning o'zida ko'ring.",
+		"stats": {
+			"totalOrders": "Jami buyurtmalar",
+			"newOrders": "Yangi buyurtmalar",
+			"pendingPayment": "To'lov kutilmoqda",
+			"totalAmount": "Jami summa"
+		},
+		"list": {
+			"title": "Buyurtmalar ro'yxati",
+			"searchPlaceholder": "Ism yoki telefon bo'yicha qidirish",
+			"loading": "Buyurtmalar yuklanmoqda...",
+			"error": "Buyurtmalarni olishda xatolik yuz berdi.",
+			"empty": "Buyurtma topilmadi",
+			"columns": {
+				"customer": "Mijoz",
+				"phone": "Telefon",
+				"amount": "Summa",
+				"payment": "To'lov",
+				"delivery": "Yetkazish",
+				"date": "Sana"
+			}
+		},
+		"detail": {
+			"title": "Buyurtma tafsiloti",
+			"placeholder": "Tafsilotni ko'rish uchun chap tomondan buyurtmani tanlang.",
+			"loading": "Tafsilotlar yuklanmoqda...",
+			"error": "Buyurtma tafsilotlarini yuklab bo'lmadi.",
+			"paymentStatus": "To'lov statusi",
+			"deliveryStatus": "Yetkazish statusi",
+			"addressTitle": "Manzil",
+			"itemsTitle": "Mahsulotlar",
+			"quantity": "Soni",
+			"orderTimePrice": "Buyurtma vaqtidagi narx",
+			"subtotal": "Subtotal",
+			"deliveryFee": "Yetkazish haqi",
+			"total": "Jami",
+			"fields": {
+				"customer": "Mijoz",
+				"phone": "Telefon",
+				"paymentMethod": "To'lov usuli",
+				"deliveryMethod": "Yetkazish usuli",
+				"date": "Sana",
+				"totalAmount": "Jami summa"
+			}
+		},
+		"status": {
+			"payment": {
+				"pending": "Kutilmoqda",
+				"paid": "To'langan",
+				"failed": "Muvaffaqiyatsiz"
+			},
+			"delivery": {
+				"new": "Yangi",
+				"confirmed": "Tasdiqlangan",
+				"shipped": "Jo'natilgan",
+				"delivered": "Yetkazilgan",
+				"cancelled": "Bekor qilingan"
+			}
+		},
+		"methods": {
+			"payment": {
+				"card": "Karta",
+				"cash": "Naqd"
+			},
+			"delivery": {
+				"pickup": "Olib ketish",
+				"courier": "Kuryer"
+			}
+		}
+	},
 	"checkout": {
 		"seo": {
 			"title": "Buyurtmani rasmiylashtirish",

@@ -196,6 +196,79 @@
 			}
 		}
 	},
+	"adminOrders": {
+		"badge": "Admin orders",
+		"title": "Orders",
+		"description": "Search orders, update statuses, and view details directly on this page.",
+		"stats": {
+			"totalOrders": "Total orders",
+			"newOrders": "New orders",
+			"pendingPayment": "Pending payment",
+			"totalAmount": "Total amount"
+		},
+		"list": {
+			"title": "Orders list",
+			"searchPlaceholder": "Search by name or phone",
+			"loading": "Loading orders...",
+			"error": "An error occurred while loading orders.",
+			"empty": "No orders found",
+			"columns": {
+				"customer": "Customer",
+				"phone": "Phone",
+				"amount": "Amount",
+				"payment": "Payment",
+				"delivery": "Delivery",
+				"date": "Date"
+			}
+		},
+		"detail": {
+			"title": "Order details",
+			"placeholder": "Select an order from the left to view the details.",
+			"loading": "Loading details...",
+			"error": "Failed to load order details.",
+			"paymentStatus": "Payment status",
+			"deliveryStatus": "Delivery status",
+			"addressTitle": "Address",
+			"itemsTitle": "Items",
+			"quantity": "Quantity",
+			"orderTimePrice": "Order-time price",
+			"subtotal": "Subtotal",
+			"deliveryFee": "Delivery fee",
+			"total": "Total",
+			"fields": {
+				"customer": "Customer",
+				"phone": "Phone",
+				"paymentMethod": "Payment method",
+				"deliveryMethod": "Delivery method",
+				"date": "Date",
+				"totalAmount": "Total amount"
+			}
+		},
+		"status": {
+			"payment": {
+				"pending": "Pending",
+				"paid": "Paid",
+				"failed": "Failed"
+			},
+			"delivery": {
+				"new": "New",
+				"confirmed": "Confirmed",
+				"shipped": "Shipped",
+				"delivered": "Delivered",
+				"cancelled": "Cancelled"
+			}
+		},
+		"methods": {
+			"payment": {
+				"card": "Card",
+				"cash": "Cash"
+			},
+			"delivery": {
+				"pickup": "Pickup",
+				"courier": "Courier"
+			}
+		}
+	},
 	"checkout": {
 		"seo": {
 			"title": "Checkout",

@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { NavigationSheet } from "@/components/navigation-sheet";
 import Image from "next/image";
 import { Search, User } from "lucide-react";
 import { Input } from "../ui/input";
@@ -10,7 +9,6 @@ import NavMenu from "../navMenu";
 import Link from "next/link";
 import { LanguageSwitcher } from "./language-switcher";
 import { useTranslation } from "react-i18next";
-import { ModeToggle } from "./mode-toggle";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -18,7 +16,6 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useRouter } from "next/navigation";
 import { useSessionStore } from "@/store/useSession.store";
 
 const Navbar = () => {
@@ -66,9 +63,14 @@ const Navbar = () => {
 							<DropdownMenuContent>
 								<DropdownMenuGroup>
 									{user?.role === "admin" ? (
-										<DropdownMenuItem>
-											<Link href={"/admin"}>Admin Panel</Link>
-										</DropdownMenuItem>
+										<>
+											<DropdownMenuItem>
+												<Link href={"/admin"}>Admin Panel</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/admin/orders"}>Orders</Link>
+											</DropdownMenuItem>
+										</>
 									) : (
 										<>
 											{/* <DropdownMenuItem>

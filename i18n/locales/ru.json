@@ -196,6 +196,79 @@
 			}
 		}
 	},
+	"adminOrders": {
+		"badge": "Заказы админа",
+		"title": "Заказы",
+		"description": "Ищите заказы, меняйте статусы и просматривайте детали прямо на этой странице.",
+		"stats": {
+			"totalOrders": "Всего заказов",
+			"newOrders": "Новые заказы",
+			"pendingPayment": "Ожидает оплаты",
+			"totalAmount": "Общая сумма"
+		},
+		"list": {
+			"title": "Список заказов",
+			"searchPlaceholder": "Поиск по имени или телефону",
+			"loading": "Загрузка заказов...",
+			"error": "Произошла ошибка при получении заказов.",
+			"empty": "Заказы не найдены",
+			"columns": {
+				"customer": "Клиент",
+				"phone": "Телефон",
+				"amount": "Сумма",
+				"payment": "Оплата",
+				"delivery": "Доставка",
+				"date": "Дата"
+			}
+		},
+		"detail": {
+			"title": "Детали заказа",
+			"placeholder": "Выберите заказ слева, чтобы посмотреть детали.",
+			"loading": "Загрузка деталей...",
+			"error": "Не удалось загрузить детали заказа.",
+			"paymentStatus": "Статус оплаты",
+			"deliveryStatus": "Статус доставки",
+			"addressTitle": "Адрес",
+			"itemsTitle": "Товары",
+			"quantity": "Количество",
+			"orderTimePrice": "Цена на момент заказа",
+			"subtotal": "Подытог",
+			"deliveryFee": "Стоимость доставки",
+			"total": "Итого",
+			"fields": {
+				"customer": "Клиент",
+				"phone": "Телефон",
+				"paymentMethod": "Способ оплаты",
+				"deliveryMethod": "Способ доставки",
+				"date": "Дата",
+				"totalAmount": "Общая сумма"
+			}
+		},
+		"status": {
+			"payment": {
+				"pending": "Ожидается",
+				"paid": "Оплачено",
+				"failed": "Неуспешно"
+			},
+			"delivery": {
+				"new": "Новый",
+				"confirmed": "Подтвержден",
+				"shipped": "Отправлен",
+				"delivered": "Доставлен",
+				"cancelled": "Отменен"
+			}
+		},
+		"methods": {
+			"payment": {
+				"card": "Карта",
+				"cash": "Наличные"
+			},
+			"delivery": {
+				"pickup": "Самовывоз",
+				"courier": "Курьер"
+			}
+		}
+	},
 	"checkout": {
 		"seo": {
 			"title": "Оформление заказа",
