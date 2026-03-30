@@ -39,6 +39,11 @@
 		"searchPlaceholder": "Search",
 		"login": "Login"
 	},
+	"likedPage": {
+		"title": "Saved products",
+		"empty": "There are no saved products yet",
+		"cta": "Browse products"
+	},
 	"catalogSection": {
 		"promotionTitle": "Promotions and discounts",
 		"prevAriaLabel": "Slide left",

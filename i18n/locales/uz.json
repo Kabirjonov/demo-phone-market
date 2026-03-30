@@ -39,6 +39,11 @@
 		"searchPlaceholder": "Qidirish",
 		"login": "Kirish"
 	},
+	"likedPage": {
+		"title": "Saqlangan mahsulotlar",
+		"empty": "Hozircha saqlangan mahsulot yo'q",
+		"cta": "Mahsulotlarni ko'rish"
+	},
 	"catalogSection": {
 		"promotionTitle": "Aksiyalar va chegirmalar",
 		"prevAriaLabel": "Chapga surish",

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ProductCard from "@/components/cards/product-card";
 import ProductCardSkeleton from "@/components/loadings/product-card-skeleton";
 import { useProducts } from "@/hooks/useProducts";
@@ -11,6 +12,7 @@ import {
 } from "@/lib/liked-products";
 
 export default function LikedPage() {
+	const { t } = useTranslation();
 	const [likedIds, setLikedIds] = useState<string[]>([]);
 	const { products, loading } = useProducts();
 
@@ -37,7 +39,7 @@ export default function LikedPage() {
 	return (
 		<section className='py-40'>
 			<div className='container mx-auto px-4'>
-				<h1 className='mb-8 text-3xl font-bold'>Saqlangan mahsulotlar</h1>
+				<h1 className='mb-8 text-3xl font-bold'>{t("likedPage.title")}</h1>
 
 				{loading ? (
 					<div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'>
@@ -48,10 +50,10 @@ export default function LikedPage() {
 				) : likedProducts.length === 0 ? (
 					<div className='rounded-2xl border border-dashed p-8 text-center'>
 						<p className='mb-3 text-lg font-medium'>
-							Hozircha saqlangan mahsulot yo&apos;q
+							{t("likedPage.empty")}
 						</p>
 						<Link href='/product' className='text-primary hover:underline'>
-							Mahsulotlarni ko&apos;rish
+							{t("likedPage.cta")}
 						</Link>
 					</div>
 				) : (

@@ -18,6 +18,11 @@ export const GET_PRODUCTS = gql`
 				value
 				group
 			}
+			category {
+				id
+				name
+				slug
+			}
 		}
 	}
 `;

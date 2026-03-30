@@ -55,11 +55,12 @@ interface UpdatePaymentStatusVariables {
 	status: PaymentStatus;
 }
 
-export const useOrders = () => {
+export const useOrders = (enabled = true) => {
 	const { data, loading, error, refetch } = useQuery<GetOrdersResponse>(
 		GET_ORDERS,
 		{
 			fetchPolicy: "cache-and-network",
+			skip: !enabled,
 		},
 	);
 

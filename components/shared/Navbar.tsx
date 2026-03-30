@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Search, User } from "lucide-react";
 import { Input } from "../ui/input";
@@ -16,12 +17,18 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { useOrders } from "@/hooks/useOrders";
 import { useSessionStore } from "@/store/useSession.store";
 
 const Navbar = () => {
 	const { theme } = useTheme();
 	const { t } = useTranslation();
 	const { isAuth, logout, user } = useSessionStore();
+	const isAdmin = user?.role === "admin";
+	const { orders } = useOrders(isAdmin);
+	const newOrdersCount = orders.filter(
+		order => order.deliveryStatus === "NEW",
+	).length;
 
 	return (
 		<nav className='fixed left-1/2 top-6 z-50 h-16 w-[calc(100%-1rem)] -translate-x-1/2 rounded-full border bg-background/95 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:w-[calc(100%-2rem)] xl:w-[80%]'>
@@ -62,13 +69,23 @@ const Navbar = () => {
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
 								<DropdownMenuGroup>
-									{user?.role === "admin" ? (
+									{isAdmin ? (
 										<>
 											<DropdownMenuItem>
 												<Link href={"/admin"}>Admin Panel</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem>
-												<Link href={"/admin/orders"}>Orders</Link>
+												<Link
+													href={"/admin/orders"}
+													className='flex w-full items-center justify-between gap-3'
+												>
+													<span>Orders</span>
+													{newOrdersCount > 0 ? (
+														<Badge className='min-w-5 justify-center rounded-full px-1.5'>
+															{newOrdersCount}
+														</Badge>
+													) : null}
+												</Link>
 											</DropdownMenuItem>
 										</>
 									) : (

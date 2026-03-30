@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Home, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { hitProducts } from "@/mockInfo/data";
-import ProductSection from "@/components/sections/Products";
+// import ProductSection from "@/components/sections/Products";
+// import { useProducts } from "@/hooks/useProducts";
 
 function ErrorRobot() {
 	return (
@@ -50,6 +50,8 @@ function ErrorRobot() {
 }
 
 export default function NotFound() {
+	// const { products, loading, error } = useProducts();
+
 	return (
 		<section className='mx-auto flex min-h-[calc(100vh-8rem)] max-w-[1440px] flex-col items-center justify-center px-4 py-24 text-center sm:px-6 lg:px-10'>
 			<ErrorRobot />
@@ -82,7 +84,12 @@ export default function NotFound() {
 					</Link>
 				</Button>
 			</div>
-			<ProductSection products={hitProducts} viewAllHref='/products' />
+			{/* <ProductSection
+				products={products.slice(0, 10)}
+				loading={loading}
+				error={!!error}
+				viewAllHref='/catalog'
+			/> */}
 		</section>
 	);
 }

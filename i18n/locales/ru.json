@@ -39,6 +39,11 @@
 		"searchPlaceholder": "Поиск",
 		"login": "Войти"
 	},
+	"likedPage": {
+		"title": "Сохраненные товары",
+		"empty": "Пока нет сохраненных товаров",
+		"cta": "Посмотреть товары"
+	},
 	"catalogSection": {
 		"promotionTitle": "Акции и скидки",
 		"prevAriaLabel": "Прокрутить влево",
