@@ -1,114 +1,9 @@
 "use client";
 
-import ProductSection from "@/components/sections/Products";
-import { hitProducts, slugifyProduct } from "@/mockInfo/data";
+import { mockData, slugifyProduct } from "@/mockInfo/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-
-export const mockData = [
-	{
-		id: 1,
-		title: "Smartfonlar va gadjetlar",
-		titleKey: "catalogSection.categories.smartphones",
-		image: "/catalog/1.webp",
-		items: [
-			"Smartfonlar",
-			"Telefonlar",
-			"Planshetlar",
-			"Gadjetlar",
-			"Telefon aksessuarlari",
-		],
-	},
-	{
-		id: 2,
-		title: "Kompyuter texnikasi",
-		titleKey: "catalogSection.categories.computers",
-		image: "/catalog/2.webp",
-		items: [
-			"Noutbuklar",
-			"Monitorlar",
-			"Monobloklar",
-			"Kompyuter aksessuarlari",
-			"Tashqi qattiq disklar",
-			"Flash xotiralar",
-			"Kolonkalar",
-			"Stabilizatorlar",
-		],
-	},
-	{
-		id: 3,
-		title: " Televizorlar va audiotexnikalar ",
-		titleKey: "catalogSection.categories.tvAudio",
-		image: "/catalog/3.webp",
-		items: [
-			"Noutbuklar",
-			"Monitorlar",
-			"Monobloklar",
-			"Kompyuter aksessuarlari",
-			"Tashqi qattiq disklar",
-			"Flash xotiralar",
-			"Kolonkalar",
-			"Stabilizatorlar",
-		],
-	},
-	{
-		id: 4,
-		title: "Iqlim texnikasi ",
-		titleKey: "catalogSection.categories.climate",
-		image: "/catalog/4.webp",
-		items: [
-			"Noutbuklar",
-			"Monitorlar",
-			"Monobloklar",
-			"Kompyuter aksessuarlari",
-			"Tashqi qattiq disklar",
-			"Flash xotiralar",
-			"Kolonkalar",
-			"Stabilizatorlar",
-		],
-	},
-	{
-		id: 5,
-		title: "Maishiy texnika ",
-		titleKey: "catalogSection.categories.homeAppliances",
-		image: "/catalog/5.webp",
-		items: [
-			"Televizorlar",
-			"TV aksessuarlari",
-			"Musiqiy markazlar",
-			"Simsiz kolonkalar",
-			"Soundbarlar",
-			"TV obuna",
-		],
-	},
-
-	{
-		id: 6,
-		title: "Maishiy texnika ",
-		titleKey: "catalogSection.categories.household",
-		image: "/catalog/6.webp",
-		items: [
-			"Konditsionerlar",
-			"Ventilyatorlar",
-			"Isitgichlar",
-			"Suv isitgichlar",
-			"Namlagichlar",
-			"Havo tozalagichlar",
-		],
-	},
-	{
-		id: 7,
-		title: "Oshxona uchun texnika ",
-		titleKey: "catalogSection.categories.kitchen",
-		image: "/catalog/7.webp",
-		items: [
-			"Uy parvarishi tovarlari",
-			"Kiyim parvarishi mahsulotlari",
-			"Dispenserlar",
-		],
-	},
-];
 
 const catalogItemLabelKeys: Record<string, string> = {
 	Smartfonlar: "catalogPage.items.smartphones",
@@ -184,7 +79,7 @@ export default function CatalogPage() {
 						</div>
 					))}
 				</div>
-				<ProductSection products={hitProducts} viewAllHref='/products' />
+				{/* <ProductSection products={hitProducts} viewAllHref='/products' /> */}
 			</div>
 		</section>
 	);

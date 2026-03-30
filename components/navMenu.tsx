@@ -26,11 +26,11 @@ export const NavLinks = [
 		titleKey: "nav.home",
 		icon: Home,
 	},
-	// {
-	// 	link: "/product",
-	// 	titleKey: "nav.products",
-	// 	icon: ShoppingCart,
-	// },
+	{
+		link: "/product",
+		titleKey: "nav.products",
+		icon: ShoppingCart,
+	},
 
 	{
 		link: "/catalog",

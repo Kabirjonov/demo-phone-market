@@ -9,8 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { slugifyProduct } from "@/mockInfo/data";
-import { mockData } from "@/app/catalog/page";
+import { mockData, slugifyProduct } from "@/mockInfo/data";
 
 export default function CatalogSection() {
 	const { t } = useTranslation();
