@@ -1,11 +1,66 @@
 import type { MetadataRoute } from "next";
 
 import { seoConfig } from "@/config/seo.config";
-import { hitProducts, promotions, slugifyProduct } from "@/mockInfo/data";
+import { Base_Url } from "@/http/api";
+import { resolveProductImage } from "@/lib/resolveProductImage";
+import { mockData, promotions, slugifyProduct } from "@/mockInfo/data";
+import type { IProduct } from "@/type";
 
 const now = new Date();
+const GET_PRODUCTS_SITEMAP_QUERY = `
+	query GetProductsForSitemap {
+		products {
+			id
+			title
+			slug
+			images
+		}
+	}
+`;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+type SitemapProductsResponse = {
+	data?: {
+		products?: IProduct[];
+	};
+};
+
+async function getProductsForSitemap() {
+	try {
+		const response = await fetch(`${Base_Url}/graphql`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				query: GET_PRODUCTS_SITEMAP_QUERY,
+			}),
+			next: { revalidate: 3600 },
+		});
+
+		if (!response.ok) {
+			return [];
+		}
+
+		const payload = (await response.json()) as SitemapProductsResponse;
+		return payload.data?.products ?? [];
+	} catch {
+		return [];
+	}
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+	const catalogSlugs = [...new Set(mockData.flatMap(section => section.items))];
+	const products = await getProductsForSitemap();
+	const getProductSlug = (slug?: string, title?: string) =>
+		slug || slugifyProduct(title ?? "");
+
+	const catalogRoutes: MetadataRoute.Sitemap = catalogSlugs.map(item => ({
+		url: `${seoConfig.url}/catalog/${slugifyProduct(item)}`,
+		lastModified: now,
+		changeFrequency: "weekly",
+		priority: 0.7,
+	}));
+
 	const staticRoutes: MetadataRoute.Sitemap = [
 		{
 			url: seoConfig.url,
@@ -33,34 +88,44 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		},
 	];
 
-	const productRoutes: MetadataRoute.Sitemap = hitProducts.map(product => ({
-		url: `${seoConfig.url}/product/detail/${slugifyProduct(product.title)}`,
+	const productRoutes: MetadataRoute.Sitemap = products.map(product => ({
+		url: `${seoConfig.url}/product/detail/${getProductSlug(
+			product.slug,
+			product.title,
+		)}`,
 		lastModified: now,
 		changeFrequency: "weekly",
 		priority: 0.8,
-		images: product.images.map(image => `${seoConfig.url}${image}`),
+		images: (product.images ?? []).map(image => {
+			const resolvedImage = resolveProductImage(image);
+			return resolvedImage.startsWith("http")
+				? resolvedImage
+				: `${seoConfig.url}${resolvedImage}`;
+		}),
 	}));
 
-	const catalogDetailRoutes: MetadataRoute.Sitemap = hitProducts.map(
-		product => ({
-			url: `${seoConfig.url}/catalog/${slugifyProduct(product.title)}`,
-			lastModified: now,
-			changeFrequency: "weekly",
-			priority: 0.7,
-		}),
-	);
+	const catalogProductRoutes: MetadataRoute.Sitemap = products.map(product => ({
+		url: `${seoConfig.url}/catalog/${getProductSlug(
+			product.slug,
+			product.title,
+		)}`,
+		lastModified: now,
+		changeFrequency: "weekly",
+		priority: 0.7,
+	}));
 
 	const promotionRoutes: MetadataRoute.Sitemap = promotions.map(promotion => ({
 		url: `${seoConfig.url}/promotions/${promotion.slug}`,
-		lastModified: now,
+		lastModified: new Date(promotion.publishedAt),
 		changeFrequency: "daily",
 		priority: 0.8,
 	}));
 
 	return [
 		...staticRoutes,
+		...catalogRoutes,
 		...productRoutes,
-		...catalogDetailRoutes,
+		...catalogProductRoutes,
 		...promotionRoutes,
 	];
 }
