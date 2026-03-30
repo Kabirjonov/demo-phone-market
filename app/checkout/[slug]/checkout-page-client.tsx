@@ -159,7 +159,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 	const [floor, setFloor] = useState("");
 	const [shippingSpeed, setShippingSpeed] = useState<ShippingSpeed>("standard");
 	const [paymentMethod, setPaymentMethod] =
-		useState<(typeof paymentMethods)[number]["id"]>("payme");
+		useState<(typeof paymentMethods)[number]["id"]>("cash");
 	const [promoCode, setPromoCode] = useState("");
 	const [comment, setComment] = useState("");
 
