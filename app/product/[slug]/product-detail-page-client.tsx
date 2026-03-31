@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
-import ProductCardSkeleton from "@/components/loadings/product-card-skeleton";
+import ProductDetailSkeleton from "@/components/loadings/product-detail-skeleton";
 import ProductDetailView from "@/components/sections/ProductDetailView";
 import { useProduct, useProducts } from "@/hooks/useProducts";
 
@@ -17,18 +17,9 @@ export default function ProductDetailPageClient({
 	const { t } = useTranslation();
 	const { product, loading, error } = useProduct(slug);
 	const { products, loading: productsLoading } = useProducts({ limit: 24 });
-	console.log(product);
 
 	if (loading) {
-		return (
-			<div className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
-				<div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'>
-					{Array.from({ length: 5 }).map((_, index) => (
-						<ProductCardSkeleton key={`product-detail-skeleton-${index}`} />
-					))}
-				</div>
-			</div>
-		);
+		return <ProductDetailSkeleton />;
 	}
 
 	if (error || !product) {

@@ -30,7 +30,7 @@ export const seoConfig = {
 		"Oxunjon Kabirjonov",
 		"Kabirjonov Oxunjon",
 	],
-	image: "/icon.jpg",
+	image: "/icon.png",
 };
 
 export function absoluteUrl(path = "/") {
@@ -101,10 +101,18 @@ export function createDefaultMetadata(): Metadata {
 		},
 		description: seoConfig.description,
 		applicationName: seoConfig.siteName,
+		// icons: {
+		// 	icon: "/icon.jpg",
+		// 	shortcut: "/icon.jpg",
+		// 	apple: "/icon.jpg",
+		// },
 		icons: {
-			icon: "/icon.jpg",
-			shortcut: "/icon.jpg",
-			apple: "/icon.jpg",
+			icon: [
+				{ url: "/favicon.ico" },
+				{ url: "/icon.png", type: "image/png", sizes: "512x512" },
+			],
+			apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+			shortcut: ["/favicon.ico"],
 		},
 		openGraph: {
 			siteName: seoConfig.siteName,

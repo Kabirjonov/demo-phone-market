@@ -286,7 +286,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 					{t("checkout.page.home")}
 				</Link>
 				<Link
-					href={`/product/detail/${product.slug ?? product.id}`}
+					href={`/product/${product.slug ?? product.id}`}
 					className='inline-flex items-center gap-2 rounded-xl bg-primary/10 px-4 py-2 text-sm text-foreground transition hover:bg-primary/15'
 				>
 					<ArrowLeft className='h-4 w-4' />
@@ -573,7 +573,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 								{t("checkout.summary.productsTitle")}
 							</h3>
 							<Link
-								href={`/product/detail/${product.slug ?? product.id}`}
+								href={`/product/${product.slug ?? product.id}`}
 								className='rounded-xl bg-muted px-4 py-2 text-sm hover:bg-muted/80'
 							>
 								{t("checkout.summary.change")}
