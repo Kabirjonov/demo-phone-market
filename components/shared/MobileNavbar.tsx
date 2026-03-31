@@ -1,14 +1,101 @@
-import React from "react";
+"use client";
+import React, { ComponentProps } from "react";
 import NavMenu from "../navMenu";
 
+import {
+	NavigationMenu,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import {
+	Ellipsis,
+	EllipsisVertical,
+	Heart,
+	Home,
+	ShoppingCart,
+	User,
+} from "lucide-react";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
+export const NavLinks = [
+	{
+		link: "/",
+		titleKey: "nav.home",
+		icon: Home,
+	},
+	{
+		link: "/product",
+		titleKey: "nav.products",
+		icon: ShoppingCart,
+	},
+
+	{
+		link: "/catalog",
+		titleKey: "nav.catalog",
+		icon: EllipsisVertical,
+	},
+	{
+		link: "/liked",
+		titleKey: "nav.liked",
+		icon: Heart,
+	},
+];
 export default function MobileNavbar() {
+	const pathname = usePathname();
+	const { t } = useTranslation();
 	return (
-		<div>
-			<nav className='fixed left-1/2 bottom-0 z-50 h-16 w-full -translate-x-1/2 rounded-2xl  border bg-background/95 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:w-[calc(100%-2rem)] xl:w-[80%]'>
-				<div className='mx-auto flex h-full items-center w-fit justify-between px-4'>
-					<NavMenu />
-				</div>
-			</nav>
-		</div>
+		// <nav className='fixed bottom-0 left-1/2 z-50 h-16 w-full -translate-x-1/2 border-t bg-background/95 backdrop-blur md:hidden'>
+		// 	<div className='mx-auto flex h-full w-full items-center justify-between px-2 bg-red-500'>
+		// 		{/* <NavMenu isMobile  /> */}
+		// 		<NavigationMenu className='w-full'>
+		// 			<NavigationMenuList className='flex w-full items-center justify-between'>
+		// 				{NavLinks.map(item => (
+		// 					<NavigationMenuItem
+		// 						key={item.link}
+		// 						className='flex-1 flex justify-center'
+		// 					>
+		// 						<NavigationMenuLink
+		// 							asChild
+		// 							className={navigationMenuTriggerStyle()}
+		// 						>
+		// 							<Link
+		// 								href={item.link}
+		// 								className={cn(
+		// 									"flex flex-col items-center justify-center gap-1 w-full",
+		// 									pathname === item.link && "text-primary",
+		// 								)}
+		// 							>
+		// 								{item.icon && <item.icon size={20} />}
+		// 								<span className='text-xs'>{t(item.titleKey)}</span>
+		// 							</Link>
+		// 						</NavigationMenuLink>
+		// 					</NavigationMenuItem>
+		// 				))}
+		// 			</NavigationMenuList>
+		// 		</NavigationMenu>
+		// 	</div>
+		// </nav>
+		<nav className='fixed bottom-0 left-1/2 z-50 h-16 w-full -translate-x-1/2 border-t bg-background/95 backdrop-blur md:hidden'>
+			<div className='mx-auto flex h-full w-full '>
+				{NavLinks.map(item => (
+					<Link
+						key={item.link}
+						href={item.link}
+						className={cn(
+							"flex flex-1 flex-col items-center justify-center gap-1",
+							pathname === item.link ? "text-primary" : "text-muted-foreground",
+						)}
+					>
+						<item.icon size={20} />
+						<span className='hidden sm:block text-xs '>{t(item.titleKey)}</span>
+					</Link>
+				))}
+			</div>
+		</nav>
 	);
 }

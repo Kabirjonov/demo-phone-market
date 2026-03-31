@@ -166,7 +166,7 @@ export default function Footer() {
 				</div>
 			</div>
 
-			<div className='fixed bottom-6 right-6 z-40 flex flex-col gap-4 justify-end'>
+			<div className='fixed bottom-20 md:bottom-6 right-6 z-40 flex flex-col gap-4 justify-end'>
 				<button
 					type='button'
 					aria-label='Yuqoriga qaytish'

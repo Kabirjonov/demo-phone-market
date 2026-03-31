@@ -98,11 +98,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 				</div>
 
 				<div className='mt-4 space-y-3'>
-					<div className='flex justify-between items-center'>
-						<h3 className='line-clamp-2 min-h-[56px] text-lg font-medium leading-7 text-foreground flex items-center'>
+					<div className='flex justify-between items-start gap-2'>
+						<h3 className='min-w-0 flex-1 line-clamp-2 min-h-[56px] text-lg font-medium leading-7 text-foreground'>
 							{product.title}
 						</h3>
-						<span className='rounded-lg bg-orange-500 px-3 py-1 text-sm font-medium text-white flex items-center'>
+						<span className='rounded-lg shrink-0  bg-orange-500 px-3 py-1 text-sm font-medium text-white flex items-center'>
 							{product.brand}
 						</span>
 					</div>
@@ -124,18 +124,19 @@ export default function ProductCard({ product }: ProductCardProps) {
 							{item.label}:{item.value}
 						</p>
 					))}
-
-					<div className='flex items-end justify-between gap-3'>
-						<p className='text-2xl font-bold text-foreground'>
+					<div className='flex items-center justify-between gap-2'>
+						<p className='min-w-0 flex-1 text-xl font-bold text-foreground md:text-2xl'>
 							{formatPrice(product.price)} so&apos;m
 						</p>
 
-						<LikedProductButton
-							productId={product.id}
-							onClick={event => {
-								event.stopPropagation();
-							}}
-						/>
+						<div className='shrink-0'>
+							<LikedProductButton
+								productId={product.id}
+								onClick={event => {
+									event.stopPropagation();
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
