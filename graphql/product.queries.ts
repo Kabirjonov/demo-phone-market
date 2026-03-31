@@ -32,8 +32,8 @@ export const GET_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCT_BY_SLUG = gql`
-	query GetProductBySlug($slug: String!) {
-		productBySlug(slug: $slug) {
+	query GetProductBySlug($id: Int, $slug: String) {
+		productBySlug(id: $id, slug: $slug) {
 			id
 			title
 			price

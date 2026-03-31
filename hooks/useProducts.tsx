@@ -128,16 +128,23 @@ interface GetProductBySlugResponse {
 }
 
 interface GetProductBySlugVariables {
-	slug: string;
+	id?: number;
+	slug?: string;
 }
 
-export const useProduct = (slug: string) => {
+export const useProduct = (identifier: string) => {
+	const numericId = Number(identifier);
+	const isNumericIdentifier =
+		identifier.trim().length > 0 && Number.isInteger(numericId);
+
 	const { data, loading, error, refetch } = useQuery<
 		GetProductBySlugResponse,
 		GetProductBySlugVariables
 	>(GET_PRODUCT_BY_SLUG, {
-		variables: { slug },
-		skip: !slug,
+		variables: isNumericIdentifier
+			? { id: numericId }
+			: { slug: identifier },
+		skip: !identifier,
 		fetchPolicy: "cache-first",
 	});
 

@@ -104,7 +104,7 @@ export const useMyOrders = (userId: number | null, enabled = true) => {
 		skip: !enabled || !userId,
 		fetchPolicy: "cache-and-network",
 	});
-
+	console.log("My Orders Data:", data);
 	return {
 		orders: data?.myOrders ?? [],
 		loading,

@@ -88,7 +88,14 @@
 		"orderTitle": "Заказ #{{id}}",
 		"itemsCount": "{{count}} товар(ов)",
 		"totalAmount": "Общая сумма",
+		"subtotal": "Сумма товара",
 		"itemQuantity": "Количество: {{quantity}}",
+		"stats": {
+			"totalOrders": "Всего заказов",
+			"pending": "Ожидающие оплаты",
+			"delivered": "Доставленные",
+			"totalSpent": "Общая сумма покупок"
+		},
 		"summary": {
 			"total": "Всего: {{count}}",
 			"userId": "User ID: {{id}}"

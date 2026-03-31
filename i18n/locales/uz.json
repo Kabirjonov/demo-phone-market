@@ -88,7 +88,14 @@
 		"orderTitle": "Buyurtma #{{id}}",
 		"itemsCount": "{{count}} ta mahsulot",
 		"totalAmount": "Jami summa",
+		"subtotal": "Mahsulot summasi",
 		"itemQuantity": "Soni: {{quantity}}",
+		"stats": {
+			"totalOrders": "Jami buyurtmalar",
+			"pending": "Kutilayotgan to'lovlar",
+			"delivered": "Yetkazilganlar",
+			"totalSpent": "Umumiy xarid summasi"
+		},
 		"summary": {
 			"total": "Jami: {{count}}",
 			"userId": "User ID: {{id}}"
