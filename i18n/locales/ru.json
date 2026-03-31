@@ -44,6 +44,68 @@
 		"empty": "Пока нет сохраненных товаров",
 		"cta": "Посмотреть товары"
 	},
+	"profilePage": {
+		"checking": "Проверка профиля...",
+		"verified": "Подтвержден",
+		"notVerified": "Не подтвержден",
+		"sessionDescription": "Данные профиля получены через `useSessionStore`.",
+		"actions": {
+			"saved": "Сохраненные",
+			"orders": "Заказы",
+			"logout": "Выйти",
+			"goCatalog": "Перейти в каталог"
+		},
+		"personal": {
+			"title": "Личные данные",
+			"description": "Данные пользователя, сохраненные в сессии"
+		},
+		"fields": {
+			"fullName": "Ф.И.О.",
+			"phone": "Номер телефона",
+			"role": "Роль",
+			"userId": "ID пользователя"
+		},
+		"status": {
+			"title": "Статус",
+			"description": "Статус аккаунта и быстрые действия",
+			"phoneVerification": {
+				"title": "Проверка телефона",
+				"verified": "Номер телефона подтвержден",
+				"notVerified": "Номер телефона еще не подтвержден"
+			},
+			"accessLevel": {
+				"title": "Уровень доступа"
+			}
+		}
+	},
+	"ordersPage": {
+		"checking": "Проверка заказов...",
+		"backToProfile": "Вернуться в профиль",
+		"title": "История заказов",
+		"description": "Здесь отображаются все ваши заказы.",
+		"invalidUserId": "ID пользователя не в числовом формате. Для `myOrders` нужен numeric `userId`.",
+		"error": "Произошла ошибка при загрузке заказов.",
+		"orderTitle": "Заказ #{{id}}",
+		"itemsCount": "{{count}} товар(ов)",
+		"totalAmount": "Общая сумма",
+		"itemQuantity": "Количество: {{quantity}}",
+		"summary": {
+			"total": "Всего: {{count}}",
+			"userId": "User ID: {{id}}"
+		},
+		"empty": {
+			"title": "Заказов пока нет",
+			"description": "После первого заказа история появится на этой странице.",
+			"cta": "Открыть каталог"
+		},
+		"fields": {
+			"phone": "Телефон",
+			"region": "Регион",
+			"payment": "Оплата",
+			"delivery": "Доставка",
+			"items": "Товары в заказе"
+		}
+	},
 	"catalogSection": {
 		"promotionTitle": "Акции и скидки",
 		"prevAriaLabel": "Прокрутить влево",

@@ -44,6 +44,68 @@
 		"empty": "Hozircha saqlangan mahsulot yo'q",
 		"cta": "Mahsulotlarni ko'rish"
 	},
+	"profilePage": {
+		"checking": "Profil tekshirilmoqda...",
+		"verified": "Tasdiqlangan",
+		"notVerified": "Tasdiqlanmagan",
+		"sessionDescription": "Profil ma'lumotlari `useSessionStore` orqali olindi.",
+		"actions": {
+			"saved": "Saqlanganlar",
+			"orders": "Buyurtmalar",
+			"logout": "Chiqish",
+			"goCatalog": "Katalogga o'tish"
+		},
+		"personal": {
+			"title": "Shaxsiy ma'lumotlar",
+			"description": "Sessiyada saqlangan foydalanuvchi ma'lumotlari"
+		},
+		"fields": {
+			"fullName": "F.I.Sh",
+			"phone": "Telefon raqam",
+			"role": "Rol",
+			"userId": "Foydalanuvchi ID"
+		},
+		"status": {
+			"title": "Holat",
+			"description": "Account holati va tezkor amallar",
+			"phoneVerification": {
+				"title": "Telefon tekshiruvi",
+				"verified": "Telefon raqam tasdiqlangan",
+				"notVerified": "Telefon raqam hali tasdiqlanmagan"
+			},
+			"accessLevel": {
+				"title": "Ruxsat darajasi"
+			}
+		}
+	},
+	"ordersPage": {
+		"checking": "Buyurtmalar tekshirilmoqda...",
+		"backToProfile": "Profilga qaytish",
+		"title": "Buyurtmalar tarixi",
+		"description": "Sizning barcha buyurtmalaringiz shu yerda ko'rinadi.",
+		"invalidUserId": "Foydalanuvchi ID raqam formatida emas. `myOrders` query uchun numeric `userId` kerak.",
+		"error": "Buyurtmalarni yuklashda xatolik yuz berdi.",
+		"orderTitle": "Buyurtma #{{id}}",
+		"itemsCount": "{{count}} ta mahsulot",
+		"totalAmount": "Jami summa",
+		"itemQuantity": "Soni: {{quantity}}",
+		"summary": {
+			"total": "Jami: {{count}}",
+			"userId": "User ID: {{id}}"
+		},
+		"empty": {
+			"title": "Buyurtmalar hali yo'q",
+			"description": "Birinchi buyurtmangizdan keyin tarix shu sahifada chiqadi.",
+			"cta": "Katalogni ko'rish"
+		},
+		"fields": {
+			"phone": "Telefon",
+			"region": "Hudud",
+			"payment": "To'lov",
+			"delivery": "Yetkazish",
+			"items": "Buyurtmadagi mahsulotlar"
+		}
+	},
 	"catalogSection": {
 		"promotionTitle": "Aksiyalar va chegirmalar",
 		"prevAriaLabel": "Chapga surish",

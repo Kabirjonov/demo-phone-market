@@ -44,6 +44,68 @@
 		"empty": "There are no saved products yet",
 		"cta": "Browse products"
 	},
+	"profilePage": {
+		"checking": "Checking profile...",
+		"verified": "Verified",
+		"notVerified": "Not verified",
+		"sessionDescription": "Profile data was loaded from `useSessionStore`.",
+		"actions": {
+			"saved": "Saved",
+			"orders": "Orders",
+			"logout": "Logout",
+			"goCatalog": "Go to catalog"
+		},
+		"personal": {
+			"title": "Personal information",
+			"description": "User details stored in the current session"
+		},
+		"fields": {
+			"fullName": "Full name",
+			"phone": "Phone number",
+			"role": "Role",
+			"userId": "User ID"
+		},
+		"status": {
+			"title": "Status",
+			"description": "Account status and quick actions",
+			"phoneVerification": {
+				"title": "Phone verification",
+				"verified": "Phone number is verified",
+				"notVerified": "Phone number is not verified yet"
+			},
+			"accessLevel": {
+				"title": "Access level"
+			}
+		}
+	},
+	"ordersPage": {
+		"checking": "Checking orders...",
+		"backToProfile": "Back to profile",
+		"title": "Order history",
+		"description": "All of your orders are shown here.",
+		"invalidUserId": "The user ID is not numeric. The `myOrders` query requires a numeric `userId`.",
+		"error": "An error occurred while loading orders.",
+		"orderTitle": "Order #{{id}}",
+		"itemsCount": "{{count}} item(s)",
+		"totalAmount": "Total amount",
+		"itemQuantity": "Quantity: {{quantity}}",
+		"summary": {
+			"total": "Total: {{count}}",
+			"userId": "User ID: {{id}}"
+		},
+		"empty": {
+			"title": "No orders yet",
+			"description": "Your order history will appear here after your first purchase.",
+			"cta": "Browse catalog"
+		},
+		"fields": {
+			"phone": "Phone",
+			"region": "Region",
+			"payment": "Payment",
+			"delivery": "Delivery",
+			"items": "Items in the order"
+		}
+	},
 	"catalogSection": {
 		"promotionTitle": "Promotions and discounts",
 		"prevAriaLabel": "Slide left",

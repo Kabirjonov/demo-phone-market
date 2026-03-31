@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, CalendarDays, Package, ShoppingBag, Truck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,6 +46,7 @@ function deliveryBadgeVariant(value: IOrder["deliveryStatus"]) {
 }
 
 export default function ProfileOrdersPage() {
+	const { t } = useTranslation();
 	const router = useRouter();
 	const user = useSessionStore(state => state.user);
 	const isAuth = useSessionStore(state => state.isAuth);
@@ -93,7 +95,7 @@ export default function ProfileOrdersPage() {
 			<section className='min-h-screen px-4 pb-24 pt-36'>
 				<div className='container mx-auto max-w-6xl'>
 					<div className='rounded-3xl border border-dashed p-8 text-center text-muted-foreground'>
-						Buyurtmalar tekshirilmoqda...
+						{t("ordersPage.checking")}
 					</div>
 				</div>
 			</section>
@@ -110,28 +112,27 @@ export default function ProfileOrdersPage() {
 							className='inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground'
 						>
 							<ArrowLeft className='size-4' />
-							Profilga qaytish
+							{t("ordersPage.backToProfile")}
 						</Link>
-						<h1 className='text-3xl font-semibold'>Buyurtmalar tarixi</h1>
+						<h1 className='text-3xl font-semibold'>{t("ordersPage.title")}</h1>
 						<p className='text-sm text-muted-foreground'>
-							Sizning barcha buyurtmalaringiz shu yerda ko&apos;rinadi.
+							{t("ordersPage.description")}
 						</p>
 					</div>
 
 					<div className='flex flex-wrap gap-3'>
 						<Badge variant='outline' className='px-4 py-2'>
-							Jami: {orders.length}
+							{t("ordersPage.summary.total", { count: orders.length })}
 						</Badge>
 						<Badge variant='outline' className='px-4 py-2'>
-							User ID: {user.id}
+							{t("ordersPage.summary.userId", { id: user.id })}
 						</Badge>
 					</div>
 				</div>
 
 				{numericUserId === null ? (
 					<div className='rounded-3xl border border-dashed p-8 text-center text-muted-foreground'>
-						Foydalanuvchi ID raqam formatida emas. `myOrders` query uchun
-						numeric `userId` kerak.
+						{t("ordersPage.invalidUserId")}
 					</div>
 				) : null}
 
@@ -149,7 +150,7 @@ export default function ProfileOrdersPage() {
 
 				{!loading && error ? (
 					<div className='rounded-3xl border border-destructive/20 bg-destructive/5 p-8 text-center text-destructive'>
-						Buyurtmalarni yuklashda xatolik yuz berdi.
+						{t("ordersPage.error")}
 					</div>
 				) : null}
 
@@ -158,15 +159,17 @@ export default function ProfileOrdersPage() {
 						<div className='mx-auto flex size-16 items-center justify-center rounded-2xl bg-primary/10 text-primary'>
 							<ShoppingBag className='size-8' />
 						</div>
-						<h2 className='mt-5 text-2xl font-semibold'>Buyurtmalar hali yo&apos;q</h2>
+						<h2 className='mt-5 text-2xl font-semibold'>
+							{t("ordersPage.empty.title")}
+						</h2>
 						<p className='mt-2 text-sm text-muted-foreground'>
-							Birinchi buyurtmangizdan keyin tarix shu sahifada chiqadi.
+							{t("ordersPage.empty.description")}
 						</p>
 						<Link
 							href='/catalog'
 							className='mt-6 inline-flex rounded-xl bg-primary px-5 py-3 text-sm font-medium text-primary-foreground'
 						>
-							Katalogni ko&apos;rish
+							{t("ordersPage.empty.cta")}
 						</Link>
 					</div>
 				) : null}
@@ -178,7 +181,7 @@ export default function ProfileOrdersPage() {
 								<CardHeader className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
 									<div className='space-y-2'>
 										<CardTitle className='flex flex-wrap items-center gap-3 text-2xl'>
-											<span>Buyurtma #{order.id}</span>
+											<span>{t("ordersPage.orderTitle", { id: order.id })}</span>
 											<Badge variant={paymentBadgeVariant(order.paymentStatus)}>
 												{order.paymentStatus}
 											</Badge>
@@ -199,13 +202,15 @@ export default function ProfileOrdersPage() {
 											</span>
 											<span className='inline-flex items-center gap-2'>
 												<Package className='size-4' />
-												{order.items.length} ta mahsulot
+												{t("ordersPage.itemsCount", { count: order.items.length })}
 											</span>
 										</div>
 									</div>
 
 									<div className='text-left md:text-right'>
-										<p className='text-sm text-muted-foreground'>Jami summa</p>
+										<p className='text-sm text-muted-foreground'>
+											{t("ordersPage.totalAmount")}
+										</p>
 										<p className='text-2xl font-semibold'>
 											{formatPrice(order.totalAmount)} so&apos;m
 										</p>
@@ -215,28 +220,36 @@ export default function ProfileOrdersPage() {
 								<CardContent className='space-y-4'>
 									<div className='grid gap-3 md:grid-cols-2 xl:grid-cols-4'>
 										<div className='rounded-2xl border bg-muted/20 p-4'>
-											<p className='text-sm text-muted-foreground'>Telefon</p>
+											<p className='text-sm text-muted-foreground'>
+												{t("ordersPage.fields.phone")}
+											</p>
 											<p className='mt-1 font-medium'>{order.phone}</p>
 										</div>
 										<div className='rounded-2xl border bg-muted/20 p-4'>
-											<p className='text-sm text-muted-foreground'>Hudud</p>
+											<p className='text-sm text-muted-foreground'>
+												{t("ordersPage.fields.region")}
+											</p>
 											<p className='mt-1 font-medium'>
 												{order.region}, {order.district}
 											</p>
 										</div>
 										<div className='rounded-2xl border bg-muted/20 p-4'>
-											<p className='text-sm text-muted-foreground'>To&apos;lov</p>
+											<p className='text-sm text-muted-foreground'>
+												{t("ordersPage.fields.payment")}
+											</p>
 											<p className='mt-1 font-medium'>{order.paymentMethod}</p>
 										</div>
 										<div className='rounded-2xl border bg-muted/20 p-4'>
-											<p className='text-sm text-muted-foreground'>Yetkazish</p>
+											<p className='text-sm text-muted-foreground'>
+												{t("ordersPage.fields.delivery")}
+											</p>
 											<p className='mt-1 font-medium'>{order.deliveryMethod}</p>
 										</div>
 									</div>
 
 									<div className='rounded-2xl border p-4'>
 										<p className='mb-3 text-sm text-muted-foreground'>
-											Buyurtmadagi mahsulotlar
+											{t("ordersPage.fields.items")}
 										</p>
 										<div className='space-y-3'>
 											{order.items.map(item => (
@@ -247,7 +260,10 @@ export default function ProfileOrdersPage() {
 													<div>
 														<p className='font-medium'>{item.productTitle}</p>
 														<p className='text-sm text-muted-foreground'>
-															Soni: {item.quantity} x{" "}
+															{t("ordersPage.itemQuantity", {
+																quantity: item.quantity,
+															})}{" "}
+															x{" "}
 															{formatPrice(item.orderTimePrice)} so&apos;m
 														</p>
 													</div>

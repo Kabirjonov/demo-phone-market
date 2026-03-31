@@ -97,7 +97,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	];
 
 	const productRoutes: MetadataRoute.Sitemap = products.map(product => ({
-		url: `${seoConfig.url}/product/detail/${getProductSlug(
+		url: `${seoConfig.url}/product/${getProductSlug(
 			product.slug,
 			product.title,
 		)}`,

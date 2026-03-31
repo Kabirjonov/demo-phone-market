@@ -19,7 +19,7 @@ function formatPrice(value: number) {
 
 export default function ProductCard({ product }: ProductCardProps) {
 	const router = useRouter();
-	const productHref = `/product/detail/${product.slug ?? product.id}`;
+	const productHref = `/product/${product.slug ?? product.id}`;
 	const productImages =
 		product.images?.length > 0
 			? product.images.map(image => resolveProductImage(image))

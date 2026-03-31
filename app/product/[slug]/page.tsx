@@ -20,7 +20,7 @@ export async function generateMetadata({
 		description:
 			dictionary.productDetail?.seo?.description ||
 			"Mahsulot narxi, tavsifi va asosiy xususiyatlari bilan tanishing.",
-		path: `/product/detail/${slug}`,
+		path: `/product/${slug}`,
 	});
 }
 

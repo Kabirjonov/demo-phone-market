@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,20 +18,21 @@ import { CheckCircle2, Shield, UserRound } from "lucide-react";
 
 const profileFields = [
 	{
-		label: "F.I.Sh",
+		labelKey: "profilePage.fields.fullName",
 		key: "name",
 	},
 	{
-		label: "Telefon raqam",
+		labelKey: "profilePage.fields.phone",
 		key: "phone",
 	},
 	{
-		label: "Rol",
+		labelKey: "profilePage.fields.role",
 		key: "role",
 	},
 ] as const;
 
 export default function ProfilePage() {
+	const { t } = useTranslation();
 	const router = useRouter();
 	const user = useSessionStore(state => state.user);
 	const isAuth = useSessionStore(state => state.isAuth);
@@ -69,7 +71,7 @@ export default function ProfilePage() {
 			<section className='min-h-screen px-4 pb-20 pt-36'>
 				<div className='container mx-auto max-w-5xl'>
 					<div className='rounded-3xl border border-dashed p-8 text-center text-muted-foreground'>
-						Profil tekshirilmoqda...
+						{t("profilePage.checking")}
 					</div>
 				</div>
 			</section>
@@ -88,21 +90,23 @@ export default function ProfilePage() {
 							<div className='flex flex-wrap items-center gap-2'>
 								<h1 className='text-3xl font-semibold'>{user.name}</h1>
 								<Badge variant={user.isVerified ? "default" : "outline"}>
-									{user.isVerified ? "Tasdiqlangan" : "Tasdiqlanmagan"}
+									{user.isVerified
+										? t("profilePage.verified")
+										: t("profilePage.notVerified")}
 								</Badge>
 							</div>
 							<p className='text-sm text-muted-foreground'>
-								Profil ma&apos;lumotlari `useSessionStore` orqali olindi.
+								{t("profilePage.sessionDescription")}
 							</p>
 						</div>
 					</div>
 
 					<div className='flex flex-wrap gap-3'>
 						<Button variant='outline' asChild>
-							<Link href='/liked'>Saqlanganlar</Link>
+							<Link href='/liked'>{t("profilePage.actions.saved")}</Link>
 						</Button>
 						<Button variant='outline' asChild>
-							<Link href='/profile/orders'>Buyurtmalar</Link>
+							<Link href='/orders'>{t("profilePage.actions.orders")}</Link>
 						</Button>
 						<Button
 							variant='destructive'
@@ -111,7 +115,7 @@ export default function ProfilePage() {
 								router.replace("/auth");
 							}}
 						>
-							Chiqish
+							{t("profilePage.actions.logout")}
 						</Button>
 					</div>
 				</div>
@@ -119,9 +123,9 @@ export default function ProfilePage() {
 				<div className='grid gap-6 lg:grid-cols-[1.5fr_0.9fr]'>
 					<Card>
 						<CardHeader>
-							<CardTitle>Shaxsiy ma&apos;lumotlar</CardTitle>
+							<CardTitle>{t("profilePage.personal.title")}</CardTitle>
 							<CardDescription>
-								Sessiyada saqlangan foydalanuvchi ma&apos;lumotlari
+								{t("profilePage.personal.description")}
 							</CardDescription>
 						</CardHeader>
 						<CardContent className='grid gap-4 sm:grid-cols-2'>
@@ -131,7 +135,7 @@ export default function ProfilePage() {
 									className='rounded-2xl border bg-muted/30 p-4'
 								>
 									<p className='mb-1 text-sm text-muted-foreground'>
-										{field.label}
+										{t(field.labelKey)}
 									</p>
 									<p className='text-base font-medium'>
 										{user[field.key] || "-"}
@@ -140,7 +144,7 @@ export default function ProfilePage() {
 							))}
 							<div className='rounded-2xl border bg-muted/30 p-4'>
 								<p className='mb-1 text-sm text-muted-foreground'>
-									Foydalanuvchi ID
+									{t("profilePage.fields.userId")}
 								</p>
 								<p className='break-all text-base font-medium'>{user.id}</p>
 							</div>
@@ -149,20 +153,22 @@ export default function ProfilePage() {
 
 					<Card>
 						<CardHeader>
-							<CardTitle>Holat</CardTitle>
+							<CardTitle>{t("profilePage.status.title")}</CardTitle>
 							<CardDescription>
-								Account holati va tezkor amallar
+								{t("profilePage.status.description")}
 							</CardDescription>
 						</CardHeader>
 						<CardContent className='space-y-4'>
 							<div className='flex items-center gap-3 rounded-2xl border bg-muted/30 p-4'>
 								<CheckCircle2 className='size-5 text-primary' />
 								<div>
-									<p className='font-medium'>Telefon tekshiruvi</p>
+									<p className='font-medium'>
+										{t("profilePage.status.phoneVerification.title")}
+									</p>
 									<p className='text-sm text-muted-foreground'>
 										{user.isVerified
-											? "Telefon raqam tasdiqlangan"
-											: "Telefon raqam hali tasdiqlanmagan"}
+											? t("profilePage.status.phoneVerification.verified")
+											: t("profilePage.status.phoneVerification.notVerified")}
 									</p>
 								</div>
 							</div>
@@ -170,7 +176,9 @@ export default function ProfilePage() {
 							<div className='flex items-center gap-3 rounded-2xl border bg-muted/30 p-4'>
 								<Shield className='size-5 text-primary' />
 								<div>
-									<p className='font-medium'>Ruxsat darajasi</p>
+									<p className='font-medium'>
+										{t("profilePage.status.accessLevel.title")}
+									</p>
 									<p className='text-sm capitalize text-muted-foreground'>
 										{user.role}
 									</p>
@@ -178,7 +186,7 @@ export default function ProfilePage() {
 							</div>
 
 							<Button asChild className='w-full'>
-								<Link href='/catalog'>Katalogga o&apos;tish</Link>
+								<Link href='/catalog'>{t("profilePage.actions.goCatalog")}</Link>
 							</Button>
 						</CardContent>
 					</Card>
