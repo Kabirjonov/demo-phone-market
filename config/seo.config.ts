@@ -19,8 +19,11 @@ export const seoConfig = {
 	url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://texnool.uz",
 	locale: "uz_UZ",
 	keywords: [
-		"Texnool",
+		"bosh sahifa",
 		"telefon market",
+		"texnool uz",
+		"texnool.com",
+		"Texnool",
 		"texnika do'koni",
 		"smartfonlar",
 		"maishiy texnika",
