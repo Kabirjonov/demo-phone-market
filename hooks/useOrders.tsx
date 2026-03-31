@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import {
 	CREATE_ORDER,
 	GET_ORDER_BY_ID,
+	GET_MY_ORDERS,
 	GET_ORDERS,
 	UPDATE_DELIVERY_STATUS,
 	UPDATE_PAYMENT_STATUS,
@@ -19,6 +20,10 @@ import {
 
 interface GetOrdersResponse {
 	orders: IOrder[];
+}
+
+interface GetMyOrdersResponse {
+	myOrders: IOrder[];
 }
 
 interface GetOrderResponse {
@@ -84,6 +89,24 @@ export const useOrder = (id: number | null, enabled = true) => {
 
 	return {
 		order: data?.order ?? null,
+		loading,
+		error,
+		refetch,
+	};
+};
+
+export const useMyOrders = (userId: number | null, enabled = true) => {
+	const { data, loading, error, refetch } = useQuery<
+		GetMyOrdersResponse,
+		{ userId: number }
+	>(GET_MY_ORDERS, {
+		variables: { userId: userId ?? 0 },
+		skip: !enabled || !userId,
+		fetchPolicy: "cache-and-network",
+	});
+
+	return {
+		orders: data?.myOrders ?? [],
 		loading,
 		error,
 		refetch,

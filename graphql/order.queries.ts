@@ -161,3 +161,49 @@ export const GET_ORDER_BY_ID = gql`
 		}
 	}
 `;
+
+export const GET_MY_ORDERS = gql`
+	query GetMyOrders($userId: Int!) {
+		myOrders(userId: $userId) {
+			id
+			userId
+			name
+			phone
+			region
+			district
+			address
+			comment
+			deliveryMethod
+			paymentMethod
+			deliveryStatus
+			paymentStatus
+			subtotal
+			deliveryFee
+			totalAmount
+			createdAt
+			updatedAt
+			items {
+				id
+				orderId
+				productId
+				productTitle
+				productImage
+				orderTimePrice
+				quantity
+				totalPrice
+				product {
+					id
+					title
+					price
+					slug
+					brand
+					code
+					stock
+					shortDescription
+					description
+					images
+				}
+			}
+		}
+	}
+`;

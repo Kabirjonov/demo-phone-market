@@ -101,6 +101,9 @@ export default function ProfilePage() {
 						<Button variant='outline' asChild>
 							<Link href='/liked'>Saqlanganlar</Link>
 						</Button>
+						<Button variant='outline' asChild>
+							<Link href='/profile/orders'>Buyurtmalar</Link>
+						</Button>
 						<Button
 							variant='destructive'
 							onClick={() => {

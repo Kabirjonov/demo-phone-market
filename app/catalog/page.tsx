@@ -49,18 +49,21 @@ export default function CatalogPage() {
 							// className='group rounded-2xl bg-secondary/80 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md'
 							className='group cursor-pointer  p-4 group-hover:shadow rounded-2xl border border-border/70 dark:bg-secondary/30'
 						>
-							<Link href={`/catalog/${slugifyProduct(item.items[0])}`}>
-								<div className='mb-5 flex h-[80px] items-start'>
+							<Link
+								href={`/catalog/${slugifyProduct(item.items[0])}`}
+								className='block'
+							>
+								<div className='mb-4 flex h-[110px] items-start'>
 									<Image
 										src={item.image}
 										alt={t(item.titleKey)}
 										width={90}
 										height={90}
-										className='h-auto w-auto object-contain transition-transform duration-300 group-hover:scale-105'
+										className='h-[90px] w-[90px] object-contain transition-transform duration-300 group-hover:scale-105'
 									/>
 								</div>
 
-								<h3 className='mb-5 text-[28px] font-semibold leading-[1.2] text-[#1f1f1f] transition-colors duration-200 hover:text-primary'>
+								<h3 className='mb-5 text-[28px] font-semibold leading-[1.2] text-[#1f1f1f] transition-colors duration-200 group-hover:text-primary'>
 									{t(item.titleKey)}
 								</h3>
 							</Link>
