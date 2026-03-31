@@ -67,12 +67,17 @@ const Navbar = () => {
 									<DropdownMenuGroup>
 										{isAdmin ? (
 											<>
-												<DropdownMenuItem>
-													<Link href={"/admin"}>{t("nav.adminPanel")}</Link>
-												</DropdownMenuItem>
-												<DropdownMenuItem>
-													<Link
-														href={"/admin/orders"}
+											<DropdownMenuItem>
+												<Link href={"/admin"}>{t("nav.adminPanel")}</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link href={"/admin/categories"}>
+													{t("nav.categories")}
+												</Link>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<Link
+													href={"/admin/orders"}
 														className='flex w-full items-center justify-between gap-3'
 													>
 														<span>{t("nav.orders")}</span>

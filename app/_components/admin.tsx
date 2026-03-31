@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
 	AlertCircle,
 	Loader2,
@@ -71,6 +72,15 @@ const emptyForm: IProductFormState = {
 	specifications: [emptySpecification],
 };
 
+type ProductSortOption =
+	| "newest"
+	| "oldest"
+	| "price-high"
+	| "price-low"
+	| "stock-high"
+	| "stock-low"
+	| "name-asc";
+
 function normalizeFormToInput(form: IProductFormState): ProductMutationInput {
 	return {
 		title: form.title.trim(),
@@ -99,6 +109,7 @@ function normalizeFormToInput(form: IProductFormState): ProductMutationInput {
 export default function AdminProductsPage() {
 	const { t } = useTranslation();
 	const [search, setSearch] = useState("");
+	const [sortBy, setSortBy] = useState<ProductSortOption>("oldest");
 	const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
 	const [form, setForm] = useState<IProductFormState>(emptyForm);
 
@@ -114,21 +125,41 @@ export default function AdminProductsPage() {
 
 	const filteredProducts = useMemo(() => {
 		const q = search.toLowerCase().trim();
-		if (!q) return products;
+		const matchingProducts = !q
+			? products
+			: products.filter(product =>
+					[
+						product.title,
+						product.brand,
+						product.category?.name,
+						product.code,
+						product.slug,
+					]
+						.join(" ")
+						.toLowerCase()
+						.includes(q),
+				);
 
-		return products.filter(product =>
-			[
-				product.title,
-				product.brand,
-				product.category?.name,
-				product.code,
-				product.slug,
-			]
-				.join(" ")
-				.toLowerCase()
-				.includes(q),
-		);
-	}, [products, search]);
+		return [...matchingProducts].sort((a, b) => {
+			switch (sortBy) {
+				case "oldest":
+					return a.id - b.id;
+				case "price-high":
+					return (b.price ?? 0) - (a.price ?? 0);
+				case "price-low":
+					return (a.price ?? 0) - (b.price ?? 0);
+				case "stock-high":
+					return (b.stock ?? 0) - (a.stock ?? 0);
+				case "stock-low":
+					return (a.stock ?? 0) - (b.stock ?? 0);
+				case "name-asc":
+					return a.title.localeCompare(b.title);
+				case "newest":
+				default:
+					return b.id - a.id;
+			}
+		});
+	}, [products, search, sortBy]);
 
 	const stats = useMemo(() => {
 		const total = products.length;
@@ -261,6 +292,12 @@ export default function AdminProductsPage() {
 
 					<Button variant='outline' onClick={resetForm} className='rounded-2xl'>
 						{t("admin.actions.newForm")}
+					</Button>
+					<Button asChild variant='outline' className='rounded-2xl'>
+						<Link href='/admin/categories'>Categories</Link>
+					</Button>
+					<Button asChild variant='outline' className='rounded-2xl'>
+						<Link href='/admin/orders'>Orders</Link>
 					</Button>
 				</div>
 			</div>
@@ -527,9 +564,39 @@ export default function AdminProductsPage() {
 				<Card className='rounded-3xl border shadow-sm'>
 					<CardHeader className='gap-4'>
 						<div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
-							<CardTitle className='text-2xl'>
-								{t("admin.products.title")}
-							</CardTitle>
+							<div className='w-full lg:max-w-xs'>
+								<Select
+									value={sortBy}
+									onValueChange={value => setSortBy(value as ProductSortOption)}
+								>
+									<SelectTrigger>
+										<SelectValue placeholder={t("admin.products.sort.label")} />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value='newest'>
+											{t("admin.products.sort.options.newest")}
+										</SelectItem>
+										<SelectItem value='oldest'>
+											{t("admin.products.sort.options.oldest")}
+										</SelectItem>
+										<SelectItem value='price-high'>
+											{t("admin.products.sort.options.priceHigh")}
+										</SelectItem>
+										<SelectItem value='price-low'>
+											{t("admin.products.sort.options.priceLow")}
+										</SelectItem>
+										<SelectItem value='stock-high'>
+											{t("admin.products.sort.options.stockHigh")}
+										</SelectItem>
+										<SelectItem value='stock-low'>
+											{t("admin.products.sort.options.stockLow")}
+										</SelectItem>
+										<SelectItem value='name-asc'>
+											{t("admin.products.sort.options.nameAsc")}
+										</SelectItem>
+									</SelectContent>
+								</Select>
+							</div>
 
 							<div className='relative w-full lg:max-w-sm'>
 								<Search className='pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
