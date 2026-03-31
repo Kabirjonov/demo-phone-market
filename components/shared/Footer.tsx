@@ -40,7 +40,7 @@ const helpLinks = [
 
 export const socialLinks = [
 	// { label: "Facebook", href: "#", icon: Facebook },
-	{ label: "Telegram", href: "https://t.me/texnool_rayxona", icon: Send },
+	{ label: "Telegram", href: "https://t.me/burxonbv", icon: Send },
 	{
 		label: "Instagram",
 		href: "https://www.instagram.com/texnool?igsh=cTdhMnY0eWhldHUx",
@@ -71,7 +71,7 @@ const contactActions = [
 	},
 	{
 		label: "Telegram",
-		href: "https://t.me/texnool_rayxona",
+		href: "https://t.me/burxonbv",
 		icon: Send,
 		className: "bg-[#229ed9] text-white",
 	},
