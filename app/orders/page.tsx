@@ -22,13 +22,10 @@ import { useTranslation } from "react-i18next";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMyOrders } from "@/hooks/useOrders";
+import { formatPrice } from "@/lib/formatPrice";
 import { cn } from "@/lib/utils";
 import { useSessionStore } from "@/store/useSession.store";
 import { IOrder } from "@/type";
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
-}
 
 function formatDate(value: string) {
 	return new Intl.DateTimeFormat("uz-UZ", {

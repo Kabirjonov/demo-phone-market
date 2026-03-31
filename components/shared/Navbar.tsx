@@ -19,6 +19,8 @@ import {
 } from "../ui/dropdown-menu";
 import { useOrders } from "@/hooks/useOrders";
 import { useSessionStore } from "@/store/useSession.store";
+import { Input } from "../ui/input";
+import { socialLinks } from "./Footer";
 
 const Navbar = () => {
 	const { theme } = useTheme();
@@ -67,14 +69,14 @@ const Navbar = () => {
 									{isAdmin ? (
 										<>
 											<DropdownMenuItem>
-												<Link href={"/admin"}>Admin Panel</Link>
+												<Link href={"/admin"}>{t("nav.adminPanel")}</Link>
 											</DropdownMenuItem>
 											<DropdownMenuItem>
 												<Link
 													href={"/admin/orders"}
 													className='flex w-full items-center justify-between gap-3'
 												>
-													<span>Orders</span>
+													<span>{t("nav.orders")}</span>
 													{newOrdersCount > 0 ? (
 														<Badge className='min-w-5 justify-center rounded-full px-1.5'>
 															{newOrdersCount}
@@ -89,18 +91,18 @@ const Navbar = () => {
 												<Link href={"/profile"}>History</Link>
 											</DropdownMenuItem> */}
 											<DropdownMenuItem>
-												<Link href={"/orders"}>Orders</Link>
+												<Link href={"/orders"}>{t("nav.myOrders")}</Link>
 											</DropdownMenuItem>
 										</>
 									)}
 									<DropdownMenuItem>
-										<Link href={"/profile"}>Profile</Link>
+										<Link href={"/profile"}>{t("nav.profile")}</Link>
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										onClick={() => logout()}
 										variant='destructive'
 									>
-										LogOut
+										{t("nav.logout")}
 									</DropdownMenuItem>
 								</DropdownMenuGroup>
 							</DropdownMenuContent>
@@ -113,6 +115,10 @@ const Navbar = () => {
 
 					{/* Mobile Menu */}
 				</div>
+			</div>
+			<div className='md:hidden block absolute left-1/2 top-full  w-max -translate-x-1/2 rounded-lg bg-background p-4 shadow-lg flex flex-col items-center gap-4 mt-2'>
+				{/*search input for mobile */}
+				<ProductSearch />
 			</div>
 		</nav>
 	);

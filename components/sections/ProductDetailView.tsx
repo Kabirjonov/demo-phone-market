@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ProductSection from "./Products";
 import { useLikedProduct } from "@/hooks/useLikedProduct";
+import { formatPrice } from "@/lib/formatPrice";
 import { resolveProductImage } from "@/lib/resolveProductImage";
 import { cn } from "@/lib/utils";
 import { CALL_CENTER_PHONE_NUMBER } from "@/const/data";
@@ -29,10 +30,6 @@ type ProductDetailViewProps = {
 	product: IProduct;
 	relatedProducts?: IProduct[];
 };
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
-}
 
 export default function ProductDetailView({
 	categories,

@@ -36,6 +36,7 @@ import {
 	useUpdateDeliveryStatus,
 	useUpdatePaymentStatus,
 } from "@/hooks/useOrders";
+import { formatPrice } from "@/lib/formatPrice";
 import { DeliveryStatus, IOrder, PaymentStatus } from "@/type";
 
 const deliveryStatusOptions: DeliveryStatus[] = [
@@ -47,10 +48,6 @@ const deliveryStatusOptions: DeliveryStatus[] = [
 ];
 
 const paymentStatusOptions: PaymentStatus[] = ["PENDING", "PAID", "FAILED"];
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
-}
 
 function formatDate(value: string) {
 	return new Intl.DateTimeFormat("uz-UZ", {

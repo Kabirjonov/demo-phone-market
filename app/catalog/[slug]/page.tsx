@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { useProducts } from "@/hooks/useProducts";
+import { formatPrice } from "@/lib/formatPrice";
 import { slugifyProduct } from "@/mockInfo/data";
 import { IProduct } from "@/type";
 
@@ -22,10 +23,6 @@ const sortOptions = [
 
 function normalizeSlug(value?: string | null) {
 	return slugifyProduct(value ?? "");
-}
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
 }
 
 function matchesCatalogSlug(product: IProduct, slug: string) {

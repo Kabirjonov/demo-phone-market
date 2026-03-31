@@ -37,7 +37,12 @@
 		"liked": "Избранное",
 		"catalog": "Каталог",
 		"searchPlaceholder": "Поиск",
-		"login": "Войти"
+		"login": "Войти",
+		"adminPanel": "Админ панель",
+		"orders": "Заказы",
+		"myOrders": "Мои заказы",
+		"profile": "Профиль",
+		"logout": "Выйти"
 	},
 	"likedPage": {
 		"title": "Сохраненные товары",

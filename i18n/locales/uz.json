@@ -37,7 +37,12 @@
 		"liked": "Sevimlilar",
 		"catalog": "Katalog",
 		"searchPlaceholder": "Qidirish",
-		"login": "Kirish"
+		"login": "Kirish",
+		"adminPanel": "Admin panel",
+		"orders": "Buyurtmalar",
+		"myOrders": "Mening buyurtmalarim",
+		"profile": "Profil",
+		"logout": "Chiqish"
 	},
 	"likedPage": {
 		"title": "Saqlangan mahsulotlar",

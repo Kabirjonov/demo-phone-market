@@ -7,15 +7,12 @@ import { useRouter } from "next/navigation";
 import LikedProductButton from "@/components/shared/Liked-product-button";
 
 import "swiper/css";
+import { formatPrice } from "@/lib/formatPrice";
 import { resolveProductImage } from "@/lib/resolveProductImage";
 
 type ProductCardProps = {
 	product: IProduct;
 };
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
-}
 
 export default function ProductCard({ product }: ProductCardProps) {
 	const router = useRouter();

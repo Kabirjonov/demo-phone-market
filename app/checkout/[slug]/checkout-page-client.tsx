@@ -32,6 +32,7 @@ import {
 import { regionOptions } from "@/const/location";
 import { useCreateOrder } from "@/hooks/useOrders";
 import { useProduct } from "@/hooks/useProducts";
+import { formatPrice } from "@/lib/formatPrice";
 import { resolveProductImage } from "@/lib/resolveProductImage";
 import { useSessionStore } from "@/store/useSession.store";
 import {
@@ -58,10 +59,6 @@ const STORE_PICKUP_ADDRESS = "Texnool do'koni, Toshkent shahri";
 
 type DeliveryMethod = "delivery" | "pickup";
 type ShippingSpeed = "standard" | "express";
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
-}
 
 function splitUserName(name?: string | null) {
 	if (!name) {

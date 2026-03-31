@@ -37,7 +37,12 @@
 		"liked": "Liked",
 		"catalog": "Catalog",
 		"searchPlaceholder": "Search",
-		"login": "Login"
+		"login": "Login",
+		"adminPanel": "Admin Panel",
+		"orders": "Orders",
+		"myOrders": "My Orders",
+		"profile": "Profile",
+		"logout": "Logout"
 	},
 	"likedPage": {
 		"title": "Saved products",

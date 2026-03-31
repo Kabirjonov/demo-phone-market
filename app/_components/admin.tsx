@@ -48,6 +48,7 @@ import {
 	useRemoveProduct,
 	useUpdateProduct,
 } from "@/hooks/useProducts";
+import { formatPrice } from "@/lib/formatPrice";
 import { toast } from "sonner";
 
 const emptySpecification: IProductSpecification = {
@@ -69,10 +70,6 @@ const emptyForm: IProductFormState = {
 	imagesText: "",
 	specifications: [emptySpecification],
 };
-
-function formatPrice(value: number) {
-	return new Intl.NumberFormat("uz-UZ").format(value);
-}
 
 function normalizeFormToInput(form: IProductFormState): ProductMutationInput {
 	return {
