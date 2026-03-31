@@ -109,7 +109,7 @@ export default function AdminProductsPage() {
 		products,
 		loading: productsLoading,
 		error: productsError,
-	} = useProducts();
+	} = useProducts({ limit: 100 });
 	const { categories } = useCategories();
 	const { createProduct, loading: createLoading } = useCreateProduct();
 	const { updateProduct, loading: updateLoading } = useUpdateProduct();

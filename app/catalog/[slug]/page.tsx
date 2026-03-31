@@ -54,7 +54,7 @@ function humanizeSlug(slug: string) {
 export default function CatalogSlugPage() {
 	const params = useParams<{ slug: string }>();
 	const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug ?? "";
-	const { products, loading, error } = useProducts();
+	const { products, loading, error } = useProducts({ limit: 100 });
 
 	const [search, setSearch] = useState("");
 	const [selectedBrand, setSelectedBrand] = useState("all");

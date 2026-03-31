@@ -1,6 +1,8 @@
 "use client";
 
 import { useQuery, useMutation } from "@apollo/client/react";
+import { NetworkStatus } from "@apollo/client";
+import { useRef } from "react";
 import {
 	GET_PRODUCTS,
 	GET_PRODUCT_BY_SLUG,
@@ -42,24 +44,81 @@ function getGraphqlErrorMessage(error: unknown) {
 }
 
 interface GetProductsResponse {
-	products: IProduct[];
-	categories: ICategory[];
+	products: {
+		items: IProduct[];
+		total: number;
+		hasMore: boolean;
+	};
 }
 
-export const useProducts = () => {
-	const { data, loading, error, refetch } = useQuery<GetProductsResponse>(
-		GET_PRODUCTS,
-		{
+type UseProductsOptions = {
+	limit?: number;
+};
+
+export const useProducts = ({ limit = 12 }: UseProductsOptions = {}) => {
+	const isFetchingMoreRef = useRef(false);
+	const { data, loading, error, refetch, fetchMore, networkStatus } =
+		useQuery<GetProductsResponse>(GET_PRODUCTS, {
+			variables: {
+				limit,
+				offset: 0,
+			},
+			notifyOnNetworkStatusChange: true,
 			fetchPolicy: "cache-first",
-		},
-	);
+		});
+
+	const products = data?.products.items ?? [];
+	const total = data?.products.total ?? 0;
+	const hasMore = data?.products.hasMore ?? false;
+	const loadingMore = networkStatus === NetworkStatus.fetchMore;
+
+	const loadMore = async () => {
+		if (loading || loadingMore || isFetchingMoreRef.current || !hasMore) {
+			return;
+		}
+
+		isFetchingMoreRef.current = true;
+
+		try {
+			await fetchMore({
+				variables: {
+					limit,
+					offset: products.length,
+				},
+				updateQuery: (previousResult, { fetchMoreResult }) => {
+					if (!fetchMoreResult?.products) {
+						return previousResult;
+					}
+
+					const previousItems = previousResult.products.items ?? [];
+					const nextItems = fetchMoreResult.products.items ?? [];
+					const mergedItems = [...previousItems, ...nextItems].filter(
+						(item, index, array) =>
+							index === array.findIndex(candidate => candidate.id === item.id),
+					);
+
+					return {
+						products: {
+							...fetchMoreResult.products,
+							items: mergedItems,
+						},
+					};
+				},
+			});
+		} finally {
+			isFetchingMoreRef.current = false;
+		}
+	};
 
 	return {
-		products: data?.products ?? [],
-		// categories: data?.categories ?? [],
+		products,
+		total,
+		hasMore,
 		loading,
+		loadingMore,
 		error,
 		refetch,
+		loadMore,
 	};
 };
 

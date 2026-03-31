@@ -14,7 +14,7 @@ import {
 export default function LikedPage() {
 	const { t } = useTranslation();
 	const [likedIds, setLikedIds] = useState<string[]>([]);
-	const { products, loading } = useProducts();
+	const { products, loading } = useProducts({ limit: 100 });
 
 	useEffect(() => {
 		const syncLikedProducts = () => {

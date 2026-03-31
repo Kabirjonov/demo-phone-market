@@ -16,7 +16,7 @@ export default function ProductDetailPageClient({
 }: ProductDetailPageClientProps) {
 	const { t } = useTranslation();
 	const { product, loading, error } = useProduct(slug);
-	const { products, loading: productsLoading } = useProducts();
+	const { products, loading: productsLoading } = useProducts({ limit: 24 });
 	console.log(product);
 
 	if (loading) {

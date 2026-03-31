@@ -8,19 +8,23 @@ import type { IProduct } from "@/type";
 
 const now = new Date();
 const GET_PRODUCTS_SITEMAP_QUERY = `
-	query GetProductsForSitemap {
-		products {
-			id
-			title
-			slug
-			images
+	query GetProductsForSitemap($limit: Int!, $offset: Int!) {
+		products(limit: $limit, offset: $offset) {
+			items {
+				id
+				title
+				slug
+				images
+			}
 		}
 	}
 `;
 
 type SitemapProductsResponse = {
 	data?: {
-		products?: IProduct[];
+		products?: {
+			items?: IProduct[];
+		};
 	};
 };
 
@@ -33,6 +37,10 @@ async function getProductsForSitemap() {
 			},
 			body: JSON.stringify({
 				query: GET_PRODUCTS_SITEMAP_QUERY,
+				variables: {
+					limit: 1000,
+					offset: 0,
+				},
 			}),
 			next: { revalidate: 3600 },
 		});
@@ -42,7 +50,7 @@ async function getProductsForSitemap() {
 		}
 
 		const payload = (await response.json()) as SitemapProductsResponse;
-		return payload.data?.products ?? [];
+		return payload.data?.products?.items ?? [];
 	} catch {
 		return [];
 	}
