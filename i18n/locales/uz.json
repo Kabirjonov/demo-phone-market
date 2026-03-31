@@ -39,6 +39,7 @@
 		"searchPlaceholder": "Qidirish",
 		"login": "Kirish",
 		"adminPanel": "Admin panel",
+		"categories": "Kategoriyalar",
 		"orders": "Buyurtmalar",
 		"myOrders": "Mening buyurtmalarim",
 		"profile": "Profil",
@@ -261,6 +262,18 @@
 			"title": "Mahsulotlar ro'yxati",
 			"count": "ta",
 			"searchPlaceholder": "Nomi, brand, code bo'yicha qidirish",
+			"sort": {
+				"label": "Saralash",
+				"options": {
+					"newest": "Avval yangilari",
+					"oldest": "Avval eskilari",
+					"priceHigh": "Narx: yuqoridan",
+					"priceLow": "Narx: pastdan",
+					"stockHigh": "Soni: ko'pdan",
+					"stockLow": "Soni: kamdan",
+					"nameAsc": "Nomi bo'yicha"
+				}
+			},
 			"loading": "Yuklanmoqda...",
 			"error": "Mahsulotlarni olishda xatolik yuz berdi.",
 			"empty": "Hech qanday mahsulot topilmadi.",

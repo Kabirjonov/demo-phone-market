@@ -25,7 +25,7 @@ export default function HomePage() {
 			<CatalogSection />
 			<BrandsSection />
 			<ProductSection
-				title='Xit savdo'
+				// title='Xit savdo'
 				products={products}
 				loading={loading}
 				error={!!error}

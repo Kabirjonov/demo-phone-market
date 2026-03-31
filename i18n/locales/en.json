@@ -39,6 +39,7 @@
 		"searchPlaceholder": "Search",
 		"login": "Login",
 		"adminPanel": "Admin Panel",
+		"categories": "Categories",
 		"orders": "Orders",
 		"myOrders": "My Orders",
 		"profile": "Profile",
@@ -261,6 +262,18 @@
 			"title": "Product list",
 			"count": "items",
 			"searchPlaceholder": "Search by name, brand, or code",
+			"sort": {
+				"label": "Sort products",
+				"options": {
+					"newest": "Newest first",
+					"oldest": "Oldest first",
+					"priceHigh": "Price: high to low",
+					"priceLow": "Price: low to high",
+					"stockHigh": "Stock: high to low",
+					"stockLow": "Stock: low to high",
+					"nameAsc": "Name: A to Z"
+				}
+			},
 			"loading": "Loading...",
 			"error": "An error occurred while loading products.",
 			"empty": "No products found.",
