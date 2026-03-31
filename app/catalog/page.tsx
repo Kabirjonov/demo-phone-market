@@ -1,6 +1,6 @@
 "use client";
 
-import { mockData, slugifyProduct } from "@/mockInfo/data";
+import { getMockCatalogItemSlug, mockData } from "@/mockInfo/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -50,7 +50,7 @@ export default function CatalogPage() {
 							className='group cursor-pointer  p-4 group-hover:shadow rounded-2xl border border-border/70 dark:bg-secondary/30'
 						>
 							<Link
-								href={`/catalog/${slugifyProduct(item.items[0])}`}
+								href={`/catalog/${getMockCatalogItemSlug(item.items[0])}`}
 								className='block'
 							>
 								<div className='mb-4 flex h-[110px] items-start'>
@@ -72,10 +72,10 @@ export default function CatalogPage() {
 								{item.items.map((subItem, index) => (
 									<Link
 										key={index}
-										href={`/catalog/${slugifyProduct(subItem)}`}
+										href={`/catalog/${getMockCatalogItemSlug(subItem)}`}
 										className='cursor-pointer text-sm leading-[1.4] text-[#2b2b2b] flex flex-wrap transition-colors duration-200 hover:text-primary'
 									>
-										{t(catalogItemLabelKeys[subItem] ?? subItem)}
+										{t(catalogItemLabelKeys[subItem.name] ?? subItem.name)}
 									</Link>
 								))}
 							</div>

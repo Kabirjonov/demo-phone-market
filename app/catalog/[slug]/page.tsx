@@ -50,7 +50,9 @@ function humanizeSlug(slug: string) {
 
 export default function CatalogSlugPage() {
 	const params = useParams<{ slug: string }>();
-	const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug ?? "";
+	const slug = Array.isArray(params?.slug)
+		? params.slug[0]
+		: (params?.slug ?? "");
 	const { products, loading, error } = useProducts({ limit: 100 });
 
 	const [search, setSearch] = useState("");
@@ -63,7 +65,9 @@ export default function CatalogSlugPage() {
 	}, [products, slug]);
 
 	const availableBrands = useMemo(() => {
-		return [...new Set(matchedProducts.map(product => product.brand).filter(Boolean))];
+		return [
+			...new Set(matchedProducts.map(product => product.brand).filter(Boolean)),
+		];
 	}, [matchedProducts]);
 
 	const totalMinPrice = matchedProducts.length
@@ -73,9 +77,9 @@ export default function CatalogSlugPage() {
 		? Math.max(...matchedProducts.map(product => product.price))
 		: 0;
 
-	const [customPriceRange, setCustomPriceRange] = useState<[number, number] | null>(
-		null,
-	);
+	const [customPriceRange, setCustomPriceRange] = useState<
+		[number, number] | null
+	>(null);
 
 	const priceRange = useMemo<[number, number]>(() => {
 		if (matchedProducts.length === 0) {
@@ -185,8 +189,8 @@ export default function CatalogSlugPage() {
 						</h1>
 						<p className='max-w-3xl text-sm text-muted-foreground md:text-base'>
 							Slug bo&apos;yicha backenddan kelgan haqiqiy mahsulotlar
-							ko&apos;rsatilmoqda. Hozir {filteredProducts.length} ta mos mahsulot
-							topildi.
+							ko&apos;rsatilmoqda. Hozir {filteredProducts.length} ta mos
+							mahsulot topildi.
 						</p>
 					</div>
 
@@ -232,7 +236,9 @@ export default function CatalogSlugPage() {
 						</div>
 
 						<div className='space-y-2'>
-							<label className='text-sm font-medium text-foreground'>Brend</label>
+							<label className='text-sm font-medium text-foreground'>
+								Brend
+							</label>
 							<select
 								value={selectedBrand}
 								onChange={event => setSelectedBrand(event.target.value)}
@@ -248,7 +254,9 @@ export default function CatalogSlugPage() {
 						</div>
 
 						<div className='space-y-2'>
-							<label className='text-sm font-medium text-foreground'>Narx oralig‘i</label>
+							<label className='text-sm font-medium text-foreground'>
+								Narx oralig‘i
+							</label>
 							<div className='rounded-[24px] border border-primary/10 bg-primary/5 p-4'>
 								<div className='mb-4 grid grid-cols-2 gap-3'>
 									<div className='rounded-2xl bg-background px-3 py-2'>
@@ -279,7 +287,9 @@ export default function CatalogSlugPage() {
 						</div>
 
 						<div className='space-y-2'>
-							<label className='text-sm font-medium text-foreground'>Saralash</label>
+							<label className='text-sm font-medium text-foreground'>
+								Saralash
+							</label>
 							<select
 								value={sortBy}
 								onChange={event =>

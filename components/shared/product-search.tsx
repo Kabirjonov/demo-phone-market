@@ -7,8 +7,17 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
-export function ProductSearch() {
+type ProductSearchProps = {
+	className?: string;
+	inputClassName?: string;
+};
+
+export function ProductSearch({
+	className,
+	inputClassName,
+}: ProductSearchProps = {}) {
 	const { t } = useTranslation();
 	const router = useRouter();
 	const pathname = usePathname();
@@ -42,13 +51,16 @@ export function ProductSearch() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className='hidden md:flex items-center gap-0.5'>
+		<form
+			onSubmit={handleSubmit}
+			className={cn("hidden items-center gap-0.5 md:flex", className)}
+		>
 			<div className='relative'>
 				<Input
 					value={query}
 					onChange={event => setQuery(event.target.value)}
 					placeholder={t("nav.searchPlaceholder")}
-					className='pr-10'
+					className={cn("pr-10", inputClassName)}
 				/>
 				{query ? (
 					<button

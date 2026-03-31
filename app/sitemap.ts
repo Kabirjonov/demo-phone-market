@@ -3,7 +3,12 @@ import type { MetadataRoute } from "next";
 import { seoConfig } from "@/config/seo.config";
 import { Base_Url } from "@/http/api";
 import { resolveProductImage } from "@/lib/resolveProductImage";
-import { mockData, promotions, slugifyProduct } from "@/mockInfo/data";
+import {
+	getMockCatalogItemSlug,
+	mockData,
+	promotions,
+	slugifyProduct,
+} from "@/mockInfo/data";
 import type { IProduct } from "@/type";
 
 const now = new Date();
@@ -57,13 +62,19 @@ async function getProductsForSitemap() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const catalogSlugs = [...new Set(mockData.flatMap(section => section.items))];
+	const catalogSlugs = [
+		...new Set(
+			mockData
+				.flatMap(section => section.items.map(item => getMockCatalogItemSlug(item)))
+				.filter(Boolean),
+		),
+	];
 	const products = await getProductsForSitemap();
 	const getProductSlug = (slug?: string, title?: string) =>
 		slug || slugifyProduct(title ?? "");
 
-	const catalogRoutes: MetadataRoute.Sitemap = catalogSlugs.map(item => ({
-		url: `${seoConfig.url}/catalog/${slugifyProduct(item)}`,
+	const catalogRoutes: MetadataRoute.Sitemap = catalogSlugs.map(slug => ({
+		url: `${seoConfig.url}/catalog/${slug}`,
 		lastModified: now,
 		changeFrequency: "weekly",
 		priority: 0.7,

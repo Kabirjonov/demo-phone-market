@@ -88,6 +88,19 @@ export function slugifyProduct(title: string) {
 		.replace(/^-+|-+$/g, "");
 }
 
+export type MockCatalogItem = {
+	name: string;
+	slug?: string;
+};
+
+export function getMockCatalogItemSlug(item?: MockCatalogItem | null) {
+	if (!item) {
+		return "";
+	}
+
+	return item.slug || slugifyProduct(item.name);
+}
+
 export const slides = [
 	{
 		title: "Galaxy S26 Ultra",
@@ -248,11 +261,12 @@ export const mockData = [
 		titleKey: "catalogSection.categories.smartphones",
 		image: "/catalog/1.webp",
 		items: [
-			"Smartfonlar",
-			"Telefonlar",
-			"Planshetlar",
-			"Gadjetlar",
-			"Telefon aksessuarlari",
+			{ name: "Smartfonlar", slug: "phone" },
+			{ name: "Smartfonlar", slug: "phone" },
+			{ name: "Telefonlar", slug: "phone" },
+			{ name: "Planshetlar", slug: "tablet" },
+			{ name: "Gadjetlar", slug: "gadget" },
+			{ name: "Telefon aksessuarlari", slug: "phone-accessories" },
 		],
 	},
 	{
@@ -261,14 +275,14 @@ export const mockData = [
 		titleKey: "catalogSection.categories.computers",
 		image: "/catalog/2.webp",
 		items: [
-			"Noutbuklar",
-			"Monitorlar",
-			"Monobloklar",
-			"Kompyuter aksessuarlari",
-			"Tashqi qattiq disklar",
-			"Flash xotiralar",
-			"Kolonkalar",
-			"Stabilizatorlar",
+			{ name: "Noutbuklar", slug: "laptop" },
+			{ name: "Monitorlar", slug: "monitor" },
+			{ name: "Monobloklar", slug: "monoblock" },
+			{ name: "Kompyuter aksessuarlari", slug: "computer-accessories" },
+			{ name: "Tashqi qattiq disklar", slug: "external-drives" },
+			{ name: "Flash xotiralar", slug: "flash-storage" },
+			{ name: "Kolonkalar", slug: "speakers" },
+			{ name: "Stabilizatorlar", slug: "stabilizers" },
 		],
 	},
 	{
@@ -277,14 +291,14 @@ export const mockData = [
 		titleKey: "catalogSection.categories.tvAudio",
 		image: "/catalog/3.webp",
 		items: [
-			"Noutbuklar",
-			"Monitorlar",
-			"Monobloklar",
-			"Kompyuter aksessuarlari",
-			"Tashqi qattiq disklar",
-			"Flash xotiralar",
-			"Kolonkalar",
-			"Stabilizatorlar",
+			{ name: "Noutbuklar", slug: "laptop" },
+			{ name: "Monitorlar", slug: "monitor" },
+			{ name: "Monobloklar", slug: "monoblock" },
+			{ name: "Kompyuter aksessuarlari", slug: "computer-accessories" },
+			{ name: "Tashqi qattiq disklar", slug: "external-drives" },
+			{ name: "Flash xotiralar", slug: "flash-storage" },
+			{ name: "Kolonkalar", slug: "speakers" },
+			{ name: "Stabilizatorlar", slug: "stabilizers" },
 		],
 	},
 	{
@@ -293,14 +307,14 @@ export const mockData = [
 		titleKey: "catalogSection.categories.climate",
 		image: "/catalog/4.webp",
 		items: [
-			"Noutbuklar",
-			"Monitorlar",
-			"Monobloklar",
-			"Kompyuter aksessuarlari",
-			"Tashqi qattiq disklar",
-			"Flash xotiralar",
-			"Kolonkalar",
-			"Stabilizatorlar",
+			{ name: "Noutbuklar", slug: "laptop" },
+			{ name: "Monitorlar", slug: "monitor" },
+			{ name: "Monobloklar", slug: "monoblock" },
+			{ name: "Kompyuter aksessuarlari", slug: "computer-accessories" },
+			{ name: "Tashqi qattiq disklar", slug: "external-drives" },
+			{ name: "Flash xotiralar", slug: "flash-storage" },
+			{ name: "Kolonkalar", slug: "speakers" },
+			{ name: "Stabilizatorlar", slug: "stabilizers" },
 		],
 	},
 	{
@@ -309,12 +323,12 @@ export const mockData = [
 		titleKey: "catalogSection.categories.homeAppliances",
 		image: "/catalog/5.webp",
 		items: [
-			"Televizorlar",
-			"TV aksessuarlari",
-			"Musiqiy markazlar",
-			"Simsiz kolonkalar",
-			"Soundbarlar",
-			"TV obuna",
+			{ name: "Televizorlar", slug: "tv" },
+			{ name: "TV aksessuarlari", slug: "tv-accessories" },
+			{ name: "Musiqiy markazlar", slug: "music-centers" },
+			{ name: "Simsiz kolonkalar", slug: "wireless-speakers" },
+			{ name: "Soundbarlar", slug: "soundbars" },
+			{ name: "TV obuna", slug: "tv-subscription" },
 		],
 	},
 
@@ -324,12 +338,12 @@ export const mockData = [
 		titleKey: "catalogSection.categories.household",
 		image: "/catalog/6.webp",
 		items: [
-			"Konditsionerlar",
-			"Ventilyatorlar",
-			"Isitgichlar",
-			"Suv isitgichlar",
-			"Namlagichlar",
-			"Havo tozalagichlar",
+			{ name: "Konditsionerlar", slug: "air-conditioners" },
+			{ name: "Ventilyatorlar", slug: "fans" },
+			{ name: "Isitgichlar", slug: "heaters" },
+			{ name: "Suv isitgichlar", slug: "water-heaters" },
+			{ name: "Namlagichlar", slug: "humidifiers" },
+			{ name: "Havo tozalagichlar", slug: "air-purifiers" },
 		],
 	},
 	{
@@ -338,9 +352,9 @@ export const mockData = [
 		titleKey: "catalogSection.categories.kitchen",
 		image: "/catalog/7.webp",
 		items: [
-			"Uy parvarishi tovarlari",
-			"Kiyim parvarishi mahsulotlari",
-			"Dispenserlar",
+			{ name: "Uy parvarishi tovarlari", slug: "home-care" },
+			{ name: "Kiyim parvarishi mahsulotlari", slug: "clothing-care" },
+			{ name: "Dispenserlar", slug: "dispensers" },
 		],
 	},
 ];

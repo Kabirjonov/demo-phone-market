@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
 	ArrowUp,
@@ -15,6 +15,7 @@ import {
 	Youtube,
 } from "lucide-react";
 import { CALL_CENTER_PHONE_NUMBER } from "@/const/data";
+import { cn } from "@/lib/utils";
 
 const companyLinks = [
 	{ label: "Yuridik shaxslar uchun", href: "#" },
@@ -105,6 +106,16 @@ function FooterLinkGroup({ title, links }: FooterLinkGroupProps) {
 export default function Footer() {
 	const currentYear = new Date().getFullYear();
 	const [isContactCardOpen, setIsContactCardOpen] = useState(false);
+	const [visible, setVisible] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setVisible(window.scrollY > 100); // 100px dan keyin chiqadi
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	return (
 		<footer className='relative mt-24 overflow-hidden bg-[#2f2f2f] text-white'>
@@ -166,12 +177,17 @@ export default function Footer() {
 				</div>
 			</div>
 
-			<div className='fixed bottom-20 md:bottom-6 right-6 z-40 flex flex-col gap-4 justify-end'>
+			<div className='fixed bottom-20 md:bottom-6 right-2 z-40 flex flex-col gap-4 justify-end'>
 				<button
 					type='button'
 					aria-label='Yuqoriga qaytish'
 					onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-					className='flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#2f2f2f] shadow-lg transition hover:-translate-y-0.5'
+					className={cn(
+						"flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#2f2f2f] shadow-lg transition hover:-translate-y-0.5",
+						visible
+							? "opacity-100 translate-y-0"
+							: "opacity-0 translate-y-5 pointer-events-none",
+					)}
 				>
 					<ArrowUp size={22} />
 				</button>
