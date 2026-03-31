@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 import { CALL_CENTER_PHONE_NUMBER } from "@/const/data";
 import type { ICategory, IProduct } from "@/type";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { CopyButton } from "../ui/copyButton";
 
 type ProductDetailViewProps = {
 	categories: ICategory[];
@@ -79,7 +80,7 @@ export default function ProductDetailView({
 						{product.shortDescription || product.description}
 					</p> */}
 				</div>
-				{productCategories.length > 0 ? (
+				{/* {productCategories.length > 0 ? (
 					<div className='mt-2 flex flex-wrap gap-2'>
 						{productCategories.map(item => (
 							<Link
@@ -91,15 +92,17 @@ export default function ProductDetailView({
 							</Link>
 						))}
 					</div>
-				) : null}
+				) : null} */}
 
-				<div className='flex flex-wrap items-center gap-3 text-sm text-muted-foreground'>
-					<span>
-						{t("productDetail.labels.code")}:{" "}
-						<span className='font-medium text-foreground'>{product.code}</span>
-					</span>
-					<Copy size={16} />
-				</div>
+				<CopyButton
+					className='flex flex-wrap items-center gap-3 text-sm text-muted-foreground'
+					textToCopy={product.code}
+					variant={"ghost"}
+				>
+					{t("productDetail.labels.code")}:{" "}
+					<span className='font-medium text-foreground'>{product.code}</span>
+					{/* <Copy size={16} /> */}
+				</CopyButton>
 			</div>
 
 			<div className='grid gap-8 xl:grid-cols-[1.1fr_0.9fr_360px]'>
