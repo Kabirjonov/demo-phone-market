@@ -1,6 +1,6 @@
 "use client";
 import React, { ComponentProps } from "react";
-import NavMenu from "../navMenu";
+import NavMenu, { NavLinks } from "../navMenu";
 
 import {
 	NavigationMenu,
@@ -11,40 +11,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-	Ellipsis,
-	EllipsisVertical,
-	Heart,
-	Home,
-	ShoppingCart,
-	User,
-} from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
-export const NavLinks = [
-	{
-		link: "/",
-		titleKey: "nav.home",
-		icon: Home,
-	},
-	{
-		link: "/product",
-		titleKey: "nav.products",
-		icon: ShoppingCart,
-	},
-
-	{
-		link: "/catalog",
-		titleKey: "nav.catalog",
-		icon: EllipsisVertical,
-	},
-	{
-		link: "/liked",
-		titleKey: "nav.liked",
-		icon: Heart,
-	},
-];
 export default function MobileNavbar() {
 	const pathname = usePathname();
 	const { t } = useTranslation();
@@ -91,7 +60,7 @@ export default function MobileNavbar() {
 							pathname === item.link ? "text-primary" : "text-muted-foreground",
 						)}
 					>
-						<item.icon size={20} />
+						{item.icon && <item.icon size={20} />}
 						<span className='hidden sm:block text-xs '>{t(item.titleKey)}</span>
 					</Link>
 				))}
