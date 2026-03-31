@@ -2,14 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { Search, User } from "lucide-react";
-import { Input } from "../ui/input";
+import { User } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import NavMenu from "../navMenu";
 import Link from "next/link";
 import { LanguageSwitcher } from "./language-switcher";
 import { useTranslation } from "react-i18next";
+import { ProductSearch } from "./product-search";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -54,12 +54,7 @@ const Navbar = () => {
 					{/* <ModeToggle /> */}
 					<LanguageSwitcher />
 
-					<div className='hidden md:flex items-center gap-0.5'>
-						<Input placeholder={t("nav.searchPlaceholder")} />
-						<Button size={"icon"}>
-							<Search />
-						</Button>
-					</div>
+					<ProductSearch />
 					{isAuth ? (
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
