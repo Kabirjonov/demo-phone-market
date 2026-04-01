@@ -12,6 +12,7 @@ export type AdminUser = {
 	phone: string;
 	role: string;
 	isVerified: boolean;
+	verifyCode?: string;
 };
 
 type UpdateUserInput = {
@@ -44,7 +45,8 @@ export function useUsers() {
 	const query = useQuery({
 		queryKey: ["users"],
 		queryFn: async () => {
-			const response = await api.get<AdminUser[]>("/users");
+			const response = await api.get<AdminUser[]>("/api/users");
+
 			return response.data;
 		},
 	});
@@ -68,7 +70,7 @@ export function useUpdateUser() {
 			id: number;
 			input: UpdateUserInput;
 		}) => {
-			const response = await api.patch<AdminUser>(`/users/${id}`, input);
+			const response = await api.patch<AdminUser>(`/api/users/${id}`, input);
 			return response.data;
 		},
 		onSuccess: () => {
@@ -94,7 +96,7 @@ export function useRemoveUser() {
 
 	const mutation = useMutation({
 		mutationFn: async (id: number) => {
-			await api.delete(`/users/${id}`);
+			await api.delete(`/api/users/${id}`);
 			return id;
 		},
 		onSuccess: () => {

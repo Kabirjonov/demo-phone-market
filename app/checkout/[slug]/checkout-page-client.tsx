@@ -2,23 +2,30 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import {
 	ArrowLeft,
 	BadgePercent,
 	Bike,
-	Building2,
-	Check,
 	ChevronRight,
-	CircleDollarSign,
 	CreditCard,
 	Loader2,
 	MapPin,
 	Package,
-	Wallet,
 } from "lucide-react";
 import { toast } from "sonner";
 
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -92,6 +99,7 @@ function SectionNumber({ value }: { value: number }) {
 
 export default function CheckoutPageClient({ slug }: { slug: string }) {
 	const { t } = useTranslation();
+	const router = useRouter();
 	const { product, loading, error } = useProduct(slug);
 	const user = useSessionStore(state => state.user);
 	const { createOrder, loading: createOrderLoading } = useCreateOrder();
@@ -114,6 +122,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 		useState<(typeof paymentMethods)[number]["id"]>("cash");
 	const [promoCode, setPromoCode] = useState("");
 	const [comment, setComment] = useState("");
+	const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
 	useEffect(() => {
 		setPhone(user?.phone ?? "+998");
@@ -189,6 +198,7 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 				product: product.title,
 			}),
 		);
+		setSuccessDialogOpen(true);
 	}
 
 	if (loading) {
@@ -229,7 +239,8 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 	}
 
 	return (
-		<div className='mx-auto max-w-[1320px] px-4 pb-16 pt-28 sm:px-6 lg:px-8'>
+		<>
+			<div className='mx-auto max-w-[1320px] px-4 pb-16 pt-28 sm:px-6 lg:px-8'>
 			<div className='flex flex-wrap items-center gap-3'>
 				<Link
 					href='/'
@@ -604,6 +615,43 @@ export default function CheckoutPageClient({ slug }: { slug: string }) {
 					</div>
 				</aside>
 			</div>
-		</div>
+			</div>
+
+			<AlertDialog
+				open={successDialogOpen}
+				onOpenChange={setSuccessDialogOpen}
+			>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>
+							Buyurtma muvaffaqiyatli yuborildi
+						</AlertDialogTitle>
+						<AlertDialogDescription>
+							{product
+								? `${product.title} uchun buyurtmangiz qabul qilindi. Keyingi qadamni tanlang.`
+								: "Buyurtmangiz qabul qilindi. Keyingi qadamni tanlang."}
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel
+							onClick={() => {
+								setSuccessDialogOpen(false);
+								router.push(`/product/${product?.slug ?? product?.id ?? slug}`);
+							}}
+						>
+							Yana buyurtma berish
+						</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={() => {
+								setSuccessDialogOpen(false);
+								router.push("/");
+							}}
+						>
+							Home pagega qaytish
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
+		</>
 	);
 }
