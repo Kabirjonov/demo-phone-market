@@ -6,13 +6,13 @@ import { useRef } from "react";
 import {
 	GET_PRODUCTS,
 	GET_PRODUCT_BY_SLUG,
-	GET_CATEGORIES,
 	CREATE_PRODUCT,
 	UPDATE_PRODUCT,
 	REMOVE_PRODUCT,
 } from "@/graphql/product.queries";
 import { ICategory, IProduct, IProductSpecification } from "@/type";
 import { toast } from "sonner";
+import { GET_CATEGORIES } from "@/graphql/category.queries";
 
 export interface ProductMutationInput {
 	title: string;
@@ -53,6 +53,11 @@ interface GetProductsResponse {
 
 type UseProductsOptions = {
 	limit?: number;
+};
+
+const DEFAULT_PRODUCT_QUERY_VARIABLES = {
+	limit: 12,
+	offset: 0,
 };
 
 export const useProducts = ({ limit = 12 }: UseProductsOptions = {}) => {
@@ -141,9 +146,7 @@ export const useProduct = (identifier: string) => {
 		GetProductBySlugResponse,
 		GetProductBySlugVariables
 	>(GET_PRODUCT_BY_SLUG, {
-		variables: isNumericIdentifier
-			? { id: numericId }
-			: { slug: identifier },
+		variables: isNumericIdentifier ? { id: numericId } : { slug: identifier },
 		skip: !identifier,
 		fetchPolicy: "cache-first",
 	});
@@ -191,7 +194,12 @@ export const useCreateProduct = () => {
 		CreateProductResponse,
 		CreateProductVariables
 	>(CREATE_PRODUCT, {
-		refetchQueries: [{ query: GET_PRODUCTS }],
+		refetchQueries: [
+			{
+				query: GET_PRODUCTS,
+				variables: DEFAULT_PRODUCT_QUERY_VARIABLES,
+			},
+		],
 		awaitRefetchQueries: true,
 		onCompleted: () => {
 			toast.success("Mahsulot muvaffaqiyatli qo'shildi");
@@ -243,7 +251,12 @@ export const useUpdateProduct = () => {
 		UpdateProductResponse,
 		UpdateProductVariables
 	>(UPDATE_PRODUCT, {
-		refetchQueries: [{ query: GET_PRODUCTS }],
+		refetchQueries: [
+			{
+				query: GET_PRODUCTS,
+				variables: DEFAULT_PRODUCT_QUERY_VARIABLES,
+			},
+		],
 		awaitRefetchQueries: true,
 		onCompleted: () => {
 			toast.success("Mahsulot muvaffaqiyatli yangilandi");
@@ -286,7 +299,12 @@ export const useRemoveProduct = () => {
 		RemoveProductResponse,
 		RemoveProductVariables
 	>(REMOVE_PRODUCT, {
-		refetchQueries: [{ query: GET_PRODUCTS }],
+		refetchQueries: [
+			{
+				query: GET_PRODUCTS,
+				variables: DEFAULT_PRODUCT_QUERY_VARIABLES,
+			},
+		],
 		awaitRefetchQueries: true,
 		onCompleted: () => {
 			toast.success("Mahsulot o'chirildi");

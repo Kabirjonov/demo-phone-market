@@ -43,12 +43,12 @@ import { IProduct, IProductFormState, IProductSpecification } from "@/type";
 import { useTranslation } from "react-i18next";
 import {
 	ProductMutationInput,
-	useCategories,
 	useCreateProduct,
 	useProducts,
 	useRemoveProduct,
 	useUpdateProduct,
 } from "@/hooks/useProducts";
+import { useCategories } from "@/hooks/useCategories";
 import { formatPrice } from "@/lib/formatPrice";
 import { toast } from "sonner";
 

@@ -58,27 +58,6 @@ export const GET_PRODUCT_BY_SLUG = gql`
 	}
 `;
 
-export const CREATE_Products = gql`
-	query GetUsers {
-		products {
-			title
-			price
-		}
-	}
-`;
-
-export const GET_CATEGORIES = gql`
-	query GetProducts {
-		categories {
-			id
-			name
-			slug
-			images
-			parent_id
-		}
-	}
-`;
-
 export const CREATE_PRODUCT = gql`
 	mutation CreateProduct($input: CreateProductInput!) {
 		createProduct(createProductInput: $input) {
