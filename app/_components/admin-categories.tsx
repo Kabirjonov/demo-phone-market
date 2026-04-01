@@ -18,6 +18,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import {
 	Table,
 	TableBody,
 	TableCell,
@@ -25,6 +32,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { Textarea } from "@/components/ui/textarea";
 import {
 	CategoryMutationInput,
 	useCategories,
@@ -38,20 +46,30 @@ import { ICategory } from "@/type";
 type CategoryFormState = {
 	name: string;
 	slug: string;
+	parentId: string;
+	imagesText: string;
 };
 
 const emptyForm: CategoryFormState = {
 	name: "",
 	slug: "",
+	parentId: "null",
+	imagesText: "",
 };
 
 function normalizeFormToInput(form: CategoryFormState): CategoryMutationInput {
 	const trimmedName = form.name.trim();
 	const trimmedSlug = form.slug.trim();
+	const images = form.imagesText
+		.split("\n")
+		.map(item => item.trim())
+		.filter(Boolean);
 
 	return {
 		name: trimmedName,
 		slug: trimmedSlug || slugifyProduct(trimmedName),
+		parent_id: form.parentId === "null" ? null : Number(form.parentId),
+		images,
 	};
 }
 
@@ -64,6 +82,10 @@ export default function AdminCategoriesPage() {
 	const { createCategory, loading: createLoading } = useCreateCategory();
 	const { updateCategory, loading: updateLoading } = useUpdateCategory();
 	const { removeCategory, loading: removeLoading } = useRemoveCategory();
+	const rootCategories = useMemo(
+		() => categories.filter(category => category.parent_id == null),
+		[categories],
+	);
 
 	const filteredCategories = useMemo(() => {
 		const q = search.toLowerCase().trim();
@@ -72,7 +94,12 @@ export default function AdminCategoriesPage() {
 		}
 
 		return categories.filter(category =>
-			[category.name, category.slug, String(category.id)]
+			[
+				category.name,
+				category.slug,
+				String(category.id),
+				category.parent_id == null ? "root" : String(category.parent_id),
+			]
 				.join(" ")
 				.toLowerCase()
 				.includes(q),
@@ -89,6 +116,9 @@ export default function AdminCategoriesPage() {
 		setForm({
 			name: category.name,
 			slug: category.slug,
+			parentId:
+				category.parent_id == null ? "null" : String(category.parent_id),
+			imagesText: (category.images ?? []).join("\n"),
 		});
 	}
 
@@ -212,6 +242,46 @@ export default function AdminCategoriesPage() {
 							/>
 						</FieldWrap>
 
+						<FieldWrap label='Parent category'>
+							<Select
+								value={form.parentId}
+								onValueChange={value =>
+									setForm(prev => ({ ...prev, parentId: value }))
+								}
+							>
+								<SelectTrigger>
+									<SelectValue placeholder='Asosiy kategoriya' />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value='null'>Asosiy kategoriya</SelectItem>
+									{rootCategories
+										.filter(category => category.id !== editingCategory?.id)
+										.map(category => (
+											<SelectItem
+												key={category.id}
+												value={String(category.id)}
+											>
+												{category.name}
+											</SelectItem>
+										))}
+								</SelectContent>
+							</Select>
+						</FieldWrap>
+
+						<FieldWrap label='Images'>
+							<Textarea
+								value={form.imagesText}
+								onChange={e =>
+									setForm(prev => ({
+										...prev,
+										imagesText: e.target.value,
+									}))
+								}
+								placeholder={"https://example.com/image-1.jpg\nhttps://example.com/image-2.jpg"}
+								rows={4}
+							/>
+						</FieldWrap>
+
 						<div className='flex gap-3'>
 							<Button
 								onClick={handleSubmit}
@@ -272,6 +342,7 @@ export default function AdminCategoriesPage() {
 											<TableHead>ID</TableHead>
 											<TableHead>Name</TableHead>
 											<TableHead>Slug</TableHead>
+											<TableHead>Parent</TableHead>
 											<TableHead className='text-right'>Action</TableHead>
 										</TableRow>
 									</TableHeader>
@@ -279,7 +350,7 @@ export default function AdminCategoriesPage() {
 										{filteredCategories.length === 0 ? (
 											<TableRow>
 												<TableCell
-													colSpan={4}
+													colSpan={5}
 													className='h-28 text-center text-muted-foreground'
 												>
 													No categories found.
@@ -293,6 +364,13 @@ export default function AdminCategoriesPage() {
 														{category.name}
 													</TableCell>
 													<TableCell>{category.slug}</TableCell>
+													<TableCell>
+														{category.parent_id == null
+															? "Root"
+															: categories.find(
+																	item => item.id === category.parent_id,
+																)?.name ?? category.parent_id}
+													</TableCell>
 													<TableCell>
 														<div className='flex justify-end gap-2'>
 															<Button

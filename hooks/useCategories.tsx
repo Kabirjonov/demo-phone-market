@@ -14,6 +14,8 @@ import { ICategory } from "@/type";
 export interface CategoryMutationInput {
 	name: string;
 	slug: string;
+	images?: string[];
+	parent_id?: number | null;
 }
 
 interface UpdateCategoryMutationInput extends CategoryMutationInput {

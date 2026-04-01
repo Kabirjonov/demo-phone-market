@@ -18,6 +18,8 @@ export const CREATE_CATEGORY = gql`
 			id
 			name
 			slug
+			images
+			parent_id
 		}
 	}
 `;
@@ -28,6 +30,8 @@ export const UPDATE_CATEGORY = gql`
 			id
 			name
 			slug
+			images
+			parent_id
 		}
 	}
 `;
@@ -38,6 +42,8 @@ export const REMOVE_CATEGORY = gql`
 			id
 			name
 			slug
+			images
+			parent_id
 		}
 	}
 `;
