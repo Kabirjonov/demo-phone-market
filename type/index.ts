@@ -16,6 +16,8 @@ export type ICategory = {
 	id: number;
 	name: string;
 	slug: string;
+	images?: string[];
+	parent_id?: number | null;
 	products: IProduct[];
 };
 

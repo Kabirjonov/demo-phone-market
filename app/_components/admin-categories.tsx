@@ -32,7 +32,7 @@ import {
 	useRemoveCategory,
 	useUpdateCategory,
 } from "@/hooks/useCategories";
-import { slugifyProduct } from "@/mockInfo/data";
+import { slugifyProduct } from "@/lib/slugify";
 import { ICategory } from "@/type";
 
 type CategoryFormState = {

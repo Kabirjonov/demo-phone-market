@@ -21,7 +21,7 @@ export const formatUzPhone = (value: string) => {
 };
 
 export const normalizePhone = (phone: string) => {
-	let value = phone.replace(/\D/g, ""); // faqat raqamlar
+	const value = phone.replace(/\D/g, ""); // faqat raqamlar
 
 	if (value.startsWith("998")) {
 		return `+${value}`;

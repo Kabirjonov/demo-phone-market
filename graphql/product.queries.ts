@@ -70,9 +70,11 @@ export const CREATE_Products = gql`
 export const GET_CATEGORIES = gql`
 	query GetProducts {
 		categories {
+			id
 			name
 			slug
-			id
+			images
+			parent_id
 		}
 	}
 `;

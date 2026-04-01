@@ -14,43 +14,6 @@ export interface IUser {
 	isVerified: boolean;
 }
 
-export type ICategory = {
-	id: number;
-	name: string;
-	slug: string;
-	products: IProduct[];
-};
-
-export interface IProduct {
-	id: number;
-	title: string;
-	price: number;
-	images: string[];
-	slug?: string;
-	brand: string;
-	category?: ICategory;
-	stock: number;
-	code: string;
-	description: string;
-	shortDescription?: string;
-	specifications?: IProductSpecification[];
-
-	monthlyPrice: number;
-	monthlyDuration: number;
-	rating?: number;
-	reviewsText?: string;
-	badge?: string;
-	discount?: string;
-	discountSecondary?: string;
-	capacity?: string;
-	storeCount?: number;
-	warranty?: string;
-	installmentNote?: string;
-	providers?: string[];
-	availability: boolean;
-	user: IUser;
-}
-
 export interface IProductFormState {
 	title: string;
 	price: string;
@@ -62,43 +25,6 @@ export interface IProductFormState {
 	description: string;
 	imagesText: string;
 	specifications: IProductSpecification[];
-}
-
-const mockUser: IUser = {
-	id: "user-1",
-	name: "Texno Admin",
-	phone: "+998901234567",
-	role: "seller",
-	isVerified: true,
-};
-
-const smartphoneCategory: ICategory = {
-	id: 1,
-	name: "Smartfonlar",
-	slug: "smartfonlar",
-	products: [],
-};
-
-export function slugifyProduct(title: string) {
-	return title
-		.toLowerCase()
-		.normalize("NFKD")
-		.replace(/[\u0300-\u036f]/g, "")
-		.replace(/[^a-z0-9]+/g, "-")
-		.replace(/^-+|-+$/g, "");
-}
-
-export type MockCatalogItem = {
-	name: string;
-	slug?: string;
-};
-
-export function getMockCatalogItemSlug(item?: MockCatalogItem | null) {
-	if (!item) {
-		return "";
-	}
-
-	return item.slug || slugifyProduct(item.name);
 }
 
 export const slides = [
@@ -250,111 +176,6 @@ export const promotions: PromotionItem[] = [
 				title: "Mijozlar uchun tavsiya",
 				text: "Bayramoldi xaridlarini kechiktirmaslik tavsiya etiladi. Ombordagi mashhur modellarda tez tugash holati kuzatilmoqda.",
 			},
-		],
-	},
-];
-
-export const mockData = [
-	{
-		id: 1,
-		title: "Smartfonlar va gadjetlar",
-		titleKey: "catalogSection.categories.smartphones",
-		image: "/catalog/1.webp",
-		items: [
-			{ name: "Smartfonlar", slug: "phone" },
-			{ name: "Smartfonlar", slug: "phone" },
-			{ name: "Telefonlar", slug: "phone" },
-			{ name: "Planshetlar", slug: "tablet" },
-			{ name: "Gadjetlar", slug: "gadget" },
-			{ name: "Telefon aksessuarlari", slug: "phone-accessories" },
-		],
-	},
-	{
-		id: 2,
-		title: "Kompyuter texnikasi",
-		titleKey: "catalogSection.categories.computers",
-		image: "/catalog/2.webp",
-		items: [
-			{ name: "Noutbuklar", slug: "laptop" },
-			{ name: "Monitorlar", slug: "monitor" },
-			{ name: "Monobloklar", slug: "monoblock" },
-			{ name: "Kompyuter aksessuarlari", slug: "computer-accessories" },
-			{ name: "Tashqi qattiq disklar", slug: "external-drives" },
-			{ name: "Flash xotiralar", slug: "flash-storage" },
-			{ name: "Kolonkalar", slug: "speakers" },
-			{ name: "Stabilizatorlar", slug: "stabilizers" },
-		],
-	},
-	{
-		id: 3,
-		title: " Televizorlar va audiotexnikalar ",
-		titleKey: "catalogSection.categories.tvAudio",
-		image: "/catalog/3.webp",
-		items: [
-			{ name: "Noutbuklar", slug: "laptop" },
-			{ name: "Monitorlar", slug: "monitor" },
-			{ name: "Monobloklar", slug: "monoblock" },
-			{ name: "Kompyuter aksessuarlari", slug: "computer-accessories" },
-			{ name: "Tashqi qattiq disklar", slug: "external-drives" },
-			{ name: "Flash xotiralar", slug: "flash-storage" },
-			{ name: "Kolonkalar", slug: "speakers" },
-			{ name: "Stabilizatorlar", slug: "stabilizers" },
-		],
-	},
-	{
-		id: 4,
-		title: "Iqlim texnikasi ",
-		titleKey: "catalogSection.categories.climate",
-		image: "/catalog/4.webp",
-		items: [
-			{ name: "Noutbuklar", slug: "laptop" },
-			{ name: "Monitorlar", slug: "monitor" },
-			{ name: "Monobloklar", slug: "monoblock" },
-			{ name: "Kompyuter aksessuarlari", slug: "computer-accessories" },
-			{ name: "Tashqi qattiq disklar", slug: "external-drives" },
-			{ name: "Flash xotiralar", slug: "flash-storage" },
-			{ name: "Kolonkalar", slug: "speakers" },
-			{ name: "Stabilizatorlar", slug: "stabilizers" },
-		],
-	},
-	{
-		id: 5,
-		title: "Maishiy texnika ",
-		titleKey: "catalogSection.categories.homeAppliances",
-		image: "/catalog/5.webp",
-		items: [
-			{ name: "Televizorlar", slug: "tv" },
-			{ name: "TV aksessuarlari", slug: "tv-accessories" },
-			{ name: "Musiqiy markazlar", slug: "music-centers" },
-			{ name: "Simsiz kolonkalar", slug: "wireless-speakers" },
-			{ name: "Soundbarlar", slug: "soundbars" },
-			{ name: "TV obuna", slug: "tv-subscription" },
-		],
-	},
-
-	{
-		id: 6,
-		title: "Maishiy texnika ",
-		titleKey: "catalogSection.categories.household",
-		image: "/catalog/6.webp",
-		items: [
-			{ name: "Konditsionerlar", slug: "air-conditioners" },
-			{ name: "Ventilyatorlar", slug: "fans" },
-			{ name: "Isitgichlar", slug: "heaters" },
-			{ name: "Suv isitgichlar", slug: "water-heaters" },
-			{ name: "Namlagichlar", slug: "humidifiers" },
-			{ name: "Havo tozalagichlar", slug: "air-purifiers" },
-		],
-	},
-	{
-		id: 7,
-		title: "Oshxona uchun texnika ",
-		titleKey: "catalogSection.categories.kitchen",
-		image: "/catalog/7.webp",
-		items: [
-			{ name: "Uy parvarishi tovarlari", slug: "home-care" },
-			{ name: "Kiyim parvarishi mahsulotlari", slug: "clothing-care" },
-			{ name: "Dispenserlar", slug: "dispensers" },
 		],
 	},
 ];

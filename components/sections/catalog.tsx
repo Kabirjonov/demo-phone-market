@@ -9,17 +9,14 @@ import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { getMockCatalogItemSlug, mockData } from "@/mockInfo/data";
+import { useCategories } from "@/hooks/useCategories";
+import { buildCategoryTree } from "@/lib/category-tree";
+import { resolveProductImage } from "@/lib/resolveProductImage";
 
 export default function CatalogSection() {
 	const { t } = useTranslation();
-
-	const promotionCard = {
-		id: 1,
-		title: t("catalogSection.promotionTitle"),
-		href: "/promotions/ustamasiz-muddatli-tolov-0012",
-		image: "/products/product-1.webp",
-	};
+	const { categories } = useCategories();
+	const catalogSections = buildCategoryTree(categories);
 
 	return (
 		<section className='py-8'>
@@ -86,21 +83,21 @@ export default function CatalogSection() {
 
 							<div className='absolute -bottom-8 right-6 h-20 w-20 rounded-full bg-white/35 blur-2xl' />
 						</Link> */}
-						{mockData.map(item => (
+						{catalogSections.map(item => (
 							<SwiperSlide key={item.id}>
 								<Link
-									href={`/catalog/${getMockCatalogItemSlug(item.items[0])}`}
+									href={`/catalog/${item.slug}`}
 									className={`group relative block overflow-hidden rounded-xl p-4 bg-card shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(15,23,42,0.10)]`}
 								>
 									<div className='relative z-10 flex h-full min-h-[126px] flex-col justify-between'>
 										<h2 className='max-w-[150px] text-xl font-semibold leading-7 text-foreground'>
-											{t(item.titleKey)}
+											{item.name}
 										</h2>
 
 										<div className='ml-auto mt-4 flex w-full justify-end'>
 											<Image
-												src={item.image}
-												alt={t(item.titleKey)}
+												src={resolveProductImage(item.images[0] || "/logo.png")}
+												alt={item.name}
 												width={120}
 												height={120}
 												className='h-[92px] w-auto object-contain transition duration-300 group-hover:scale-105'

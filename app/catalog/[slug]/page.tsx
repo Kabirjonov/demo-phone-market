@@ -9,9 +9,14 @@ import ProductCard from "@/components/cards/product-card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
+import {
+	findCategoryBySlug,
+	getCategoryBranchIds,
+} from "@/lib/category-tree";
 import { formatPrice } from "@/lib/formatPrice";
-import { slugifyProduct } from "@/mockInfo/data";
+import { slugifyProduct } from "@/lib/slugify";
 import { IProduct } from "@/type";
 
 const sortOptions = [
@@ -53,6 +58,11 @@ export default function CatalogSlugPage() {
 	const slug = Array.isArray(params?.slug)
 		? params.slug[0]
 		: (params?.slug ?? "");
+	const {
+		categories,
+		loading: categoriesLoading,
+		error: categoriesError,
+	} = useCategories();
 	const { products, loading, error } = useProducts({ limit: 100 });
 
 	const [search, setSearch] = useState("");
@@ -60,9 +70,32 @@ export default function CatalogSlugPage() {
 	const [sortBy, setSortBy] =
 		useState<(typeof sortOptions)[number]["value"]>("recommended");
 
+	const selectedCategory = useMemo(
+		() => findCategoryBySlug(categories, slug),
+		[categories, slug],
+	);
+
+	const relevantCategoryIds = useMemo(() => {
+		if (!selectedCategory) {
+			return [];
+		}
+
+		if (selectedCategory.parent_id != null) {
+			return [selectedCategory.id];
+		}
+
+		return getCategoryBranchIds(categories, selectedCategory.id);
+	}, [categories, selectedCategory]);
+
 	const matchedProducts = useMemo(() => {
+		if (relevantCategoryIds.length > 0) {
+			return products.filter(product =>
+				relevantCategoryIds.includes(product.category?.id ?? -1),
+			);
+		}
+
 		return products.filter(product => matchesCatalogSlug(product, slug));
-	}, [products, slug]);
+	}, [products, relevantCategoryIds, slug]);
 
 	const availableBrands = useMemo(() => {
 		return [
@@ -131,6 +164,7 @@ export default function CatalogSlugPage() {
 	}, [matchedProducts, search, selectedBrand, priceRange, sortBy]);
 
 	const pageTitle =
+		selectedCategory?.name ??
 		matchedProducts[0]?.category?.name ??
 		humanizeSlug(slug) ??
 		"Katalog mahsulotlari";
@@ -142,7 +176,7 @@ export default function CatalogSlugPage() {
 		setSortBy("recommended");
 	}
 
-	if (loading) {
+	if (loading || categoriesLoading) {
 		return (
 			<section className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
 				<div className='flex min-h-[50vh] items-center justify-center text-muted-foreground'>
@@ -153,7 +187,7 @@ export default function CatalogSlugPage() {
 		);
 	}
 
-	if (error) {
+	if (error || categoriesError) {
 		return (
 			<section className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
 				<div className='rounded-[28px] border border-destructive/20 bg-destructive/5 p-8 text-center text-destructive'>
