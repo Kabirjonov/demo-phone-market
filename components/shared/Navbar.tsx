@@ -18,13 +18,15 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useOrders } from "@/hooks/useOrders";
+import { canManageUsers, isAdminRole } from "@/lib/roles";
 import { useSessionStore } from "@/store/useSession.store";
 
 const Navbar = () => {
 	const { theme } = useTheme();
 	const { t } = useTranslation();
 	const { isAuth, logout, user } = useSessionStore();
-	const isAdmin = user?.role === "admin";
+	const isAdmin = isAdminRole(user?.role);
+	const isSuperAdmin = canManageUsers(user);
 	const { orders } = useOrders(isAdmin);
 	const newOrdersCount = orders.filter(
 		order => order.deliveryStatus === "NEW",
@@ -67,17 +69,17 @@ const Navbar = () => {
 									<DropdownMenuGroup>
 										{isAdmin ? (
 											<>
-											<DropdownMenuItem>
-												<Link href={"/admin"}>{t("nav.adminPanel")}</Link>
-											</DropdownMenuItem>
-											<DropdownMenuItem>
-												<Link href={"/admin/categories"}>
-													{t("nav.categories")}
-												</Link>
-											</DropdownMenuItem>
-											<DropdownMenuItem>
-												<Link
-													href={"/admin/orders"}
+												<DropdownMenuItem>
+													<Link href={"/admin"}>{t("nav.adminPanel")}</Link>
+												</DropdownMenuItem>
+												<DropdownMenuItem>
+													<Link href={"/admin/categories"}>
+														{t("nav.categories")}
+													</Link>
+												</DropdownMenuItem>
+												<DropdownMenuItem>
+													<Link
+														href={"/admin/orders"}
 														className='flex w-full items-center justify-between gap-3'
 													>
 														<span>{t("nav.orders")}</span>
@@ -88,6 +90,11 @@ const Navbar = () => {
 														) : null}
 													</Link>
 												</DropdownMenuItem>
+												{isSuperAdmin ? (
+													<DropdownMenuItem>
+														<Link href={"/admin/users"}>Users</Link>
+													</DropdownMenuItem>
+												) : null}
 											</>
 										) : (
 											<>

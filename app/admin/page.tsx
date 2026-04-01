@@ -1,6 +1,7 @@
 "use client";
 
 import { useSessionStore } from "@/store/useSession.store";
+import { isAdminRole } from "@/lib/roles";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,12 +19,12 @@ export default function AdminPage() {
 			return;
 		}
 
-		if (user?.role !== "admin") {
+		if (!isAdminRole(user?.role)) {
 			router.replace("/");
 		}
 	}, [isAuth, user, router]);
 
-	if (!isAuth || user?.role !== "admin") {
+	if (!isAuth || !isAdminRole(user?.role)) {
 		return <div>{t("admin.page.checking")}</div>;
 	}
 

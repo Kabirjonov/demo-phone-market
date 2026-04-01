@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import AdminOrdersPage from "@/app/_components/admin-orders";
+import { isAdminRole } from "@/lib/roles";
 import { useSessionStore } from "@/store/useSession.store";
 
 export default function OrdersPage() {
@@ -17,12 +18,12 @@ export default function OrdersPage() {
 			return;
 		}
 
-		if (user?.role !== "admin") {
+		if (!isAdminRole(user?.role)) {
 			router.replace("/");
 		}
 	}, [isAuth, user, router]);
 
-	if (!isAuth || user?.role !== "admin") {
+	if (!isAuth || !isAdminRole(user?.role)) {
 		return <div>Tekshirilmoqda...</div>;
 	}
 
