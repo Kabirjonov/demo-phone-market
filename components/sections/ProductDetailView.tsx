@@ -70,7 +70,7 @@ export default function ProductDetailView({
 	);
 
 	return (
-		<div className='mx-auto max-w-[1440px] px-4 pb-16 pt-28 sm:px-6 lg:px-10'>
+		<div className='mx-auto max-w-[1440px] px-4 md:pb-16 py-40 md:pt-28 sm:px-6 lg:px-10'>
 			<div className='mb-8 flex flex-col gap-4 border-b border-border/70 pb-5 lg:flex-row lg:items-center lg:justify-between'>
 				<div className='space-y-3'>
 					{/* <h1 className='max-w-4xl text-2xl font-semibold tracking-tight text-foreground md:text-4xl'>
@@ -80,7 +80,7 @@ export default function ProductDetailView({
 						{product.shortDescription || product.description}
 					</p> */}
 				</div>
-				{/* {productCategories.length > 0 ? (
+				{productCategories.length > 0 ? (
 					<div className='mt-2 flex flex-wrap gap-2'>
 						{productCategories.map(item => (
 							<Link
@@ -92,7 +92,7 @@ export default function ProductDetailView({
 							</Link>
 						))}
 					</div>
-				) : null} */}
+				) : null}
 
 				<CopyButton
 					className='flex flex-wrap items-center gap-3 text-sm text-muted-foreground'

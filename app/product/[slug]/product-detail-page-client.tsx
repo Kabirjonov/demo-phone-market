@@ -24,7 +24,7 @@ export default function ProductDetailPageClient({
 
 	if (error || !product) {
 		return (
-			<div className='mx-auto max-w-[960px] px-4 pb-16 pt-28 text-center sm:px-6 lg:px-10'>
+			<div className='mx-auto max-w-[960px] px-4 pb-16 py-40 text-center sm:px-6 lg:px-10'>
 				<h1 className='text-3xl font-semibold text-foreground'>
 					{t("productDetail.page.notFoundTitle")}
 				</h1>
