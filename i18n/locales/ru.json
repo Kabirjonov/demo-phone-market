@@ -16,6 +16,27 @@
 			"registerLink": "Зарегистрироваться",
 			"forgotPassword": "Забыли пароль?"
 		},
+		"forgotPassword": {
+			"title": "Сброс пароля",
+			"description": "Введите номер телефона, и мы отправим вам код для восстановления.",
+			"phoneLabel": "Номер телефона",
+			"sendCode": "Отправить код",
+			"backToLogin": "Вернуться ко входу"
+		},
+		"resetPassword": {
+			"title": "Установить новый пароль",
+			"description": "Код восстановления был отправлен на номер:",
+			"codeLabel": "Код подтверждения",
+			"passwordLabel": "Новый пароль",
+			"passwordPlaceholder": "Введите новый пароль",
+			"confirmPasswordLabel": "Подтвердите пароль",
+			"confirmPasswordPlaceholder": "Введите пароль еще раз",
+			"submit": "Обновить пароль",
+			"codeNotReceived": "Код не пришел?",
+			"resend": "Отправить повторно",
+			"resendIn": "Повторить через {{seconds}}с",
+			"changePhone": "Изменить номер телефона"
+		},
 		"register": {
 			"title": "Регистрация",
 			"description": "Введите имя, номер телефона и пароль.",

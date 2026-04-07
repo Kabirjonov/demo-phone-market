@@ -141,7 +141,7 @@ export default function LoginForm() {
 				</div>
 				<button
 					type='button'
-					onClick={() => setStep("register")}
+					onClick={() => setStep("forgotPassword")}
 					className='font-medium text-primary transition hover:underline'
 				>
 					{t("auth.login.forgotPassword")}

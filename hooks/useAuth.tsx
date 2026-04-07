@@ -118,3 +118,56 @@ export function useAuthVerify() {
 	});
 	return { mutate, isPending };
 }
+
+export function useAuthForgotPassword() {
+	const { setStep, setPhone } = useAuthFlowStore();
+
+	const { mutate, isPending } = useMutation({
+		mutationKey: ["auth-forgot-password"],
+		mutationFn: async (phoneNumber: string) => {
+			const phone = normalizePhone(phoneNumber);
+			const res = await api.post("/api/auth/forgot-password", {
+				phone,
+			});
+
+			return res.data;
+		},
+		onSuccess: (data, phoneNumber) => {
+			setPhone(phoneNumber);
+			setStep("resetPassword");
+			toast.success(data.message ?? "Tasdiqlash kodi yuborildi");
+		},
+		onError: error => {
+			toast.error(getErrorMessage(error));
+		},
+	});
+
+	return { mutate, isPending };
+}
+
+export function useAuthResetPassword() {
+	const { setStep, phone, resetFlow } = useAuthFlowStore();
+
+	const { mutate, isPending } = useMutation({
+		mutationKey: ["auth-reset-password"],
+		mutationFn: async (values: { code: string; password: string }) => {
+			const res = await api.post("/api/auth/reset-password", {
+				phone: normalizePhone(phone),
+				code: values.code,
+				password: values.password,
+			});
+
+			return res.data;
+		},
+		onSuccess: data => {
+			toast.success(data.message ?? "Parol muvaffaqiyatli yangilandi");
+			resetFlow();
+			setStep("login");
+		},
+		onError: error => {
+			toast.error(getErrorMessage(error));
+		},
+	});
+
+	return { mutate, isPending };
+}

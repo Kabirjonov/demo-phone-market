@@ -1,7 +1,12 @@
 // store/useAuthFlow.store.ts
 import { create } from "zustand";
 
-type AuthStep = "login" | "register" | "verify";
+type AuthStep =
+	| "login"
+	| "register"
+	| "verify"
+	| "forgotPassword"
+	| "resetPassword";
 
 type AuthFlowStore = {
 	step: AuthStep;

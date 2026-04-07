@@ -16,6 +16,27 @@
 			"registerLink": "Ro'yxatdan o'tish",
 			"forgotPassword": "Parolni unutdingizmi?"
 		},
+		"forgotPassword": {
+			"title": "Parolni tiklash",
+			"description": "Telefon raqamingizni kiriting, biz sizga tiklash kodini yuboramiz.",
+			"phoneLabel": "Telefon raqam",
+			"sendCode": "Kod yuborish",
+			"backToLogin": "Kirishga qaytish"
+		},
+		"resetPassword": {
+			"title": "Yangi parol o'rnatish",
+			"description": "Tiklash kodi quyidagi raqamga yuborildi:",
+			"codeLabel": "Tasdiqlash kodi",
+			"passwordLabel": "Yangi parol",
+			"passwordPlaceholder": "Yangi parol kiriting",
+			"confirmPasswordLabel": "Parolni tasdiqlang",
+			"confirmPasswordPlaceholder": "Parolni qayta kiriting",
+			"submit": "Parolni yangilash",
+			"codeNotReceived": "Kod kelmadimi?",
+			"resend": "Qayta yuborish",
+			"resendIn": "Qayta yuborish {{seconds}}s",
+			"changePhone": "Telefon raqamni o'zgartirish"
+		},
 		"register": {
 			"title": "Ro'yxatdan o'tish",
 			"description": "Ismingiz, telefon raqamingiz va parolingizni kiriting.",

@@ -16,6 +16,27 @@
 			"registerLink": "Create one",
 			"forgotPassword": "Forgot password?"
 		},
+		"forgotPassword": {
+			"title": "Reset password",
+			"description": "Enter your phone number and we will send you a reset code.",
+			"phoneLabel": "Phone number",
+			"sendCode": "Send code",
+			"backToLogin": "Back to sign in"
+		},
+		"resetPassword": {
+			"title": "Set a new password",
+			"description": "A reset code was sent to:",
+			"codeLabel": "Verification code",
+			"passwordLabel": "New password",
+			"passwordPlaceholder": "Enter a new password",
+			"confirmPasswordLabel": "Confirm password",
+			"confirmPasswordPlaceholder": "Enter the password again",
+			"submit": "Update password",
+			"codeNotReceived": "Didn't receive the code?",
+			"resend": "Resend",
+			"resendIn": "Resend in {{seconds}}s",
+			"changePhone": "Change phone number"
+		},
 		"register": {
 			"title": "Create account",
 			"description": "Enter your name, phone number, and password.",
