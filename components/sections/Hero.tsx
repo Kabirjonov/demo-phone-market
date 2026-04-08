@@ -9,10 +9,6 @@ import { useTranslation } from "react-i18next";
 
 import { promotions } from "@/mockInfo/data";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
 export default function Hero() {
 	const { t } = useTranslation();
 
@@ -64,11 +60,17 @@ export default function Hero() {
 											{t(`hero.promotions.${slide.slug}.title`, slide.title)}
 										</h2>
 										<p className='mt-3 max-w-2xl text-sm opacity-90 md:text-lg truncate'>
-											{t(`hero.promotions.${slide.slug}.summary`, slide.summary)}
+											{t(
+												`hero.promotions.${slide.slug}.summary`,
+												slide.summary,
+											)}
 										</p>
 										<div className='mt-5 flex flex-wrap items-center gap-3 text-sm text-white/85'>
 											<span>
-												{t(`hero.promotions.${slide.slug}.period`, slide.period)}
+												{t(
+													`hero.promotions.${slide.slug}.period`,
+													slide.period,
+												)}
 											</span>
 											<span className='h-1.5 w-1.5 rounded-full bg-white/70' />
 											<span>

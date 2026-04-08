@@ -154,6 +154,39 @@
 			"kitchen": "Техника для кухни"
 		}
 	},
+	"catalogSlugPage": {
+		"defaultTitle": "Товары каталога",
+		"loading": "Товары загружаются...",
+		"error": "Не удалось загрузить данные каталога.",
+		"catalog": "Каталог",
+		"resultsBadge": "Реальные результаты каталога",
+		"description": "Показываются реальные товары, загруженные с backend по slug. Сейчас найдено {{count}} подходящих товар(ов).",
+		"total": "Всего: {{count}}",
+		"brands": "Бренды: {{count}}",
+		"price": "Цена: {{min}} - {{max}}",
+		"searchLabel": "Поиск",
+		"searchPlaceholder": "По названию или бренду",
+		"brandLabel": "Бренд",
+		"allBrands": "Все бренды",
+		"priceRangeLabel": "Диапазон цен",
+		"priceFrom": "от",
+		"priceTo": "до",
+		"currency": "сум",
+		"priceRangeAriaLabel": "Диапазон цен",
+		"sortLabel": "Сортировка",
+		"clearFilters": "Очистить фильтры",
+		"foundPrefix": "Найдено",
+		"foundSuffix": "товар(ов).",
+		"selectedSection": "Выбранный раздел:",
+		"empty": "Для этого slug не найдено подходящих реальных товаров.",
+		"sort": {
+			"recommended": "Рекомендуемые",
+			"priceLow": "Цена: сначала дешевые",
+			"priceHigh": "Цена: сначала дорогие",
+			"title": "По названию"
+		}
+	},
+
 	"productDetail": {
 		"seo": {
 			"title": "Детали товара",
@@ -204,13 +237,7 @@
 		"summary": {
 			"paymentDescription": "Вы можете оплатить товар наличными или банковской картой в магазине или при доставке.",
 			"finishPurchase": "Завершите покупку удобным способом: оплатите наличными или картой.",
-			"providers": [
-				"Наличные",
-				"Visa",
-				"Mastercard",
-				"Humo",
-				"Uzcard"
-			]
+			"providers": ["Наличные", "Visa", "Mastercard", "Humo", "Uzcard"]
 		},
 		"pickup": {
 			"title": "Бесплатный самовывоз из магазина",

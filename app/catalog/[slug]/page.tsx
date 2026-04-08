@@ -398,12 +398,13 @@ import { findCategoryBySlug, getCategoryBranchIds } from "@/lib/category-tree";
 import { formatPrice } from "@/lib/formatPrice";
 import { slugifyProduct } from "@/lib/slugify";
 import { IProduct } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const sortOptions = [
-	{ label: "Tavsiya etilgan", value: "recommended" },
-	{ label: "Narx: arzonidan", value: "price-low" },
-	{ label: "Narx: qimmatidan", value: "price-high" },
-	{ label: "Nomi bo'yicha", value: "title" },
+	{ labelKey: "catalogSlugPage.sort.recommended", value: "recommended" },
+	{ labelKey: "catalogSlugPage.sort.priceLow", value: "price-low" },
+	{ labelKey: "catalogSlugPage.sort.priceHigh", value: "price-high" },
+	{ labelKey: "catalogSlugPage.sort.title", value: "title" },
 ] as const;
 
 function normalizeSlug(value?: string | null) {
@@ -434,6 +435,8 @@ function humanizeSlug(slug: string) {
 }
 
 export default function CatalogSlugPage() {
+	const { t } = useTranslation();
+
 	const params = useParams<{ slug: string }>();
 	const slug = Array.isArray(params?.slug)
 		? params.slug[0]
@@ -546,7 +549,7 @@ export default function CatalogSlugPage() {
 		selectedCategory?.name ??
 		matchedProducts[0]?.category?.name ??
 		humanizeSlug(slug) ??
-		"Katalog mahsulotlari";
+		t("catalogSlugPage.defaultTitle");
 
 	function clearFilters() {
 		setSearch("");
@@ -560,7 +563,7 @@ export default function CatalogSlugPage() {
 			<section className='mx-auto max-w-[1440px] px-4 pb-12 pt-24 sm:px-6 sm:pt-28 lg:px-8 xl:px-10'>
 				<div className='flex min-h-[50vh] items-center justify-center text-muted-foreground'>
 					<Loader2 className='mr-2 h-5 w-5 animate-spin' />
-					Mahsulotlar yuklanmoqda...
+					{t("catalogSlugPage.loading")}
 				</div>
 			</section>
 		);
@@ -570,7 +573,7 @@ export default function CatalogSlugPage() {
 		return (
 			<section className='mx-auto max-w-[1440px] px-4 pb-12 pt-24 sm:px-6 sm:pt-28 lg:px-8 xl:px-10'>
 				<div className='rounded-[24px] border border-destructive/20 bg-destructive/5 p-6 text-center text-destructive sm:rounded-[28px] sm:p-8'>
-					Katalog ma&apos;lumotlarini yuklab bo&apos;lmadi.
+					{t("catalogSlugPage.error")}
 				</div>
 			</section>
 		);
@@ -583,7 +586,7 @@ export default function CatalogSlugPage() {
 					href='/catalog'
 					className='rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/5'
 				>
-					Katalog
+					{t("catalogSlugPage.catalog")}
 				</Link>
 
 				<Badge className='max-w-full rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground'>
@@ -596,7 +599,9 @@ export default function CatalogSlugPage() {
 					<div className='space-y-3 min-w-0'>
 						<div className='inline-flex max-w-full items-center gap-2 rounded-full border border-primary/20 bg-white/80 px-4 py-2 text-sm text-muted-foreground backdrop-blur'>
 							<SlidersHorizontal className='h-4 w-4 shrink-0 text-primary' />
-							<span className='truncate'>Real katalog natijalari</span>
+							<span className='truncate'>
+								{t("catalogSlugPage.resultsBadge")}
+							</span>
 						</div>
 
 						<h1 className='text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl'>
@@ -604,9 +609,9 @@ export default function CatalogSlugPage() {
 						</h1>
 
 						<p className='max-w-3xl text-sm leading-6 text-muted-foreground md:text-base'>
-							Slug bo&apos;yicha backenddan kelgan haqiqiy mahsulotlar
-							ko&apos;rsatilmoqda. Hozir {filteredProducts.length} ta mos
-							mahsulot topildi.
+							{t("catalogSlugPage.description", {
+								count: filteredProducts.length,
+							})}
 						</p>
 					</div>
 
@@ -615,7 +620,11 @@ export default function CatalogSlugPage() {
 							variant='outline'
 							className='max-w-full rounded-full border-primary/20 bg-white/75 px-4 py-2'
 						>
-							<span className='truncate'>Jami: {matchedProducts.length}</span>
+							<span className='truncate'>
+								{t("catalogSlugPage.total", {
+									count: matchedProducts.length,
+								})}
+							</span>
 						</Badge>
 
 						<Badge
@@ -623,7 +632,9 @@ export default function CatalogSlugPage() {
 							className='max-w-full rounded-full border-primary/20 bg-white/75 px-4 py-2'
 						>
 							<span className='truncate'>
-								Brendlar: {availableBrands.length}
+								{t("catalogSlugPage.brands", {
+									count: availableBrands.length,
+								})}
 							</span>
 						</Badge>
 
@@ -632,8 +643,10 @@ export default function CatalogSlugPage() {
 							className='max-w-full rounded-full border-primary/20 bg-white/75 px-4 py-2'
 						>
 							<span className='break-all sm:break-normal'>
-								Narx: {formatPrice(totalMinPrice)} -{" "}
-								{formatPrice(totalMaxPrice)}
+								{t("catalogSlugPage.price", {
+									min: formatPrice(totalMinPrice),
+									max: formatPrice(totalMaxPrice),
+								})}
 							</span>
 						</Badge>
 					</div>
@@ -645,14 +658,14 @@ export default function CatalogSlugPage() {
 					<div className='space-y-5'>
 						<div className='space-y-2'>
 							<label className='text-sm font-medium text-foreground'>
-								Qidiruv
+								{t("catalogSlugPage.searchLabel")}
 							</label>
 							<div className='relative'>
 								<Search className='pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
 								<Input
 									value={search}
 									onChange={event => setSearch(event.target.value)}
-									placeholder='Nomi yoki brend bo‘yicha'
+									placeholder={t("catalogSlugPage.searchPlaceholder")}
 									className='pl-9'
 								/>
 							</div>
@@ -660,14 +673,14 @@ export default function CatalogSlugPage() {
 
 						<div className='space-y-2'>
 							<label className='text-sm font-medium text-foreground'>
-								Brend
+								{t("catalogSlugPage.brandLabel")}
 							</label>
 							<select
 								value={selectedBrand}
 								onChange={event => setSelectedBrand(event.target.value)}
 								className='h-11 w-full rounded-2xl border border-border bg-background px-4 text-sm outline-none transition focus:border-primary'
 							>
-								<option value='all'>Barcha brendlar</option>
+								<option value='all'>{t("catalogSlugPage.allBrands")}</option>
 								{availableBrands.map(brand => (
 									<option key={brand} value={brand}>
 										{brand}
@@ -678,22 +691,28 @@ export default function CatalogSlugPage() {
 
 						<div className='space-y-2'>
 							<label className='text-sm font-medium text-foreground'>
-								Narx oralig‘i
+								{t("catalogSlugPage.priceRangeLabel")}
 							</label>
 
 							<div className='min-w-0 overflow-hidden rounded-[24px] border border-primary/10 bg-primary/5 p-4'>
 								<div className='mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2'>
 									<div className='min-w-0 rounded-2xl bg-background px-3 py-2'>
-										<p className='text-xs text-muted-foreground'>dan</p>
+										<p className='text-xs text-muted-foreground'>
+											{t("catalogSlugPage.priceFrom")}
+										</p>
 										<p className='mt-1 break-words text-sm font-semibold leading-5 text-foreground'>
-											{formatPrice(priceRange[0])} so&apos;m
+											{formatPrice(priceRange[0])}{" "}
+											{t("catalogSlugPage.currency")}
 										</p>
 									</div>
 
 									<div className='min-w-0 rounded-2xl bg-background px-3 py-2'>
-										<p className='text-xs text-muted-foreground'>gacha</p>
+										<p className='text-xs text-muted-foreground'>
+											{t("catalogSlugPage.priceTo")}
+										</p>
 										<p className='mt-1 break-words text-sm font-semibold leading-5 text-foreground'>
-											{formatPrice(priceRange[1])} so&apos;m
+											{formatPrice(priceRange[1])}{" "}
+											{t("catalogSlugPage.currency")}
 										</p>
 									</div>
 								</div>
@@ -708,7 +727,7 @@ export default function CatalogSlugPage() {
 										max={Math.max(totalMaxPrice, totalMinPrice + 1)}
 										step={50000}
 										className='w-full'
-										aria-label='Price range'
+										aria-label={t("catalogSlugPage.priceRangeAriaLabel")}
 									/>
 								</div>
 							</div>
@@ -716,7 +735,7 @@ export default function CatalogSlugPage() {
 
 						<div className='space-y-2'>
 							<label className='text-sm font-medium text-foreground'>
-								Saralash
+								{t("catalogSlugPage.sortLabel")}
 							</label>
 							<select
 								value={sortBy}
@@ -729,7 +748,7 @@ export default function CatalogSlugPage() {
 							>
 								{sortOptions.map(option => (
 									<option key={option.value} value={option.value}>
-										{option.label}
+										{t(option.labelKey)}
 									</option>
 								))}
 							</select>
@@ -741,7 +760,7 @@ export default function CatalogSlugPage() {
 							className='inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 sm:w-auto'
 						>
 							<X className='h-4 w-4' />
-							Filterlarni tozalash
+							{t("catalogSlugPage.clearFilters")}
 						</button>
 					</div>
 				</aside>
@@ -749,11 +768,12 @@ export default function CatalogSlugPage() {
 				<div className='min-w-0 space-y-5 sm:space-y-6'>
 					<div className='rounded-[24px] border border-border/70 bg-[linear-gradient(135deg,rgba(255,247,237,0.9),rgba(255,255,255,1))] p-4 shadow-[0_14px_40px_rgba(15,23,42,0.05)] sm:rounded-[28px] sm:p-5'>
 						<p className='text-sm leading-6 text-muted-foreground'>
-							Topildi{" "}
+							{t("catalogSlugPage.foundPrefix")}{" "}
 							<span className='font-semibold text-foreground'>
 								{filteredProducts.length}
 							</span>{" "}
-							ta mahsulot. Tanlangan bo‘lim:{" "}
+							{t("catalogSlugPage.foundSuffix")}{" "}
+							{t("catalogSlugPage.selectedSection")}{" "}
 							<span className='font-semibold text-foreground break-words'>
 								{pageTitle}
 							</span>
@@ -762,7 +782,7 @@ export default function CatalogSlugPage() {
 
 					{filteredProducts.length === 0 ? (
 						<div className='rounded-[24px] border border-dashed border-primary/20 bg-primary/5 p-8 text-center text-muted-foreground sm:rounded-[28px] sm:p-10'>
-							Bu slug uchun mos real mahsulot topilmadi.
+							{t("catalogSlugPage.empty")}
 						</div>
 					) : (
 						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>

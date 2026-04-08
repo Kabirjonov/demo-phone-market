@@ -29,7 +29,7 @@ export default function HomePage() {
 				products={products}
 				loading={loading}
 				error={!!error}
-				viewAllHref='/products'
+				// viewAllHref='/products'
 			/>
 		</div>
 	);

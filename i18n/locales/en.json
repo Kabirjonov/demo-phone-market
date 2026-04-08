@@ -154,6 +154,39 @@
 			"kitchen": "Kitchen appliances"
 		}
 	},
+	"catalogSlugPage": {
+		"defaultTitle": "Catalog products",
+		"loading": "Loading products...",
+		"error": "Could not load catalog data.",
+		"catalog": "Catalog",
+		"resultsBadge": "Real catalog results",
+		"description": "Showing real products loaded from the backend by slug. {{count}} matching product(s) found right now.",
+		"total": "Total: {{count}}",
+		"brands": "Brands: {{count}}",
+		"price": "Price: {{min}} - {{max}}",
+		"searchLabel": "Search",
+		"searchPlaceholder": "By name or brand",
+		"brandLabel": "Brand",
+		"allBrands": "All brands",
+		"priceRangeLabel": "Price range",
+		"priceFrom": "from",
+		"priceTo": "to",
+		"currency": "UZS",
+		"priceRangeAriaLabel": "Price range",
+		"sortLabel": "Sort",
+		"clearFilters": "Clear filters",
+		"foundPrefix": "Found",
+		"foundSuffix": "product(s).",
+		"selectedSection": "Selected section:",
+		"empty": "No real products were found for this slug.",
+		"sort": {
+			"recommended": "Recommended",
+			"priceLow": "Price: low to high",
+			"priceHigh": "Price: high to low",
+			"title": "By name"
+		}
+	},
+
 	"productDetail": {
 		"seo": {
 			"title": "Product details",
@@ -204,13 +237,7 @@
 		"summary": {
 			"paymentDescription": "You can pay for the product in cash or by bank card in the store or on delivery.",
 			"finishPurchase": "Complete your purchase in the most convenient way: pay in cash or by card.",
-			"providers": [
-				"Cash",
-				"Visa",
-				"Mastercard",
-				"Humo",
-				"Uzcard"
-			]
+			"providers": ["Cash", "Visa", "Mastercard", "Humo", "Uzcard"]
 		},
 		"pickup": {
 			"title": "Free store pickup",

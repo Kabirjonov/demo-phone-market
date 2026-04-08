@@ -154,6 +154,38 @@
 			"kitchen": "Oshxona uchun texnika"
 		}
 	},
+	"catalogSlugPage": {
+		"defaultTitle": "Katalog mahsulotlari",
+		"loading": "Mahsulotlar yuklanmoqda...",
+		"error": "Katalog ma'lumotlarini yuklab bo'lmadi.",
+		"catalog": "Katalog",
+		"resultsBadge": "Real katalog natijalari",
+		"description": "Slug bo'yicha backenddan kelgan haqiqiy mahsulotlar ko'rsatilmoqda. Hozir {{count}} ta mos mahsulot topildi.",
+		"total": "Jami: {{count}}",
+		"brands": "Brendlar: {{count}}",
+		"price": "Narx: {{min}} - {{max}}",
+		"searchLabel": "Qidiruv",
+		"searchPlaceholder": "Nomi yoki brend bo'yicha",
+		"brandLabel": "Brend",
+		"allBrands": "Barcha brendlar",
+		"priceRangeLabel": "Narx oralig'i",
+		"priceFrom": "dan",
+		"priceTo": "gacha",
+		"currency": "so'm",
+		"priceRangeAriaLabel": "Narx oralig'i",
+		"sortLabel": "Saralash",
+		"clearFilters": "Filterlarni tozalash",
+		"foundPrefix": "Topildi",
+		"foundSuffix": "ta mahsulot.",
+		"selectedSection": "Tanlangan bo'lim:",
+		"empty": "Bu slug uchun mos real mahsulot topilmadi.",
+		"sort": {
+			"recommended": "Tavsiya etilgan",
+			"priceLow": "Narx: arzonidan",
+			"priceHigh": "Narx: qimmatidan",
+			"title": "Nomi bo'yicha"
+		}
+	},
 	"productDetail": {
 		"seo": {
 			"title": "Mahsulot tafsiloti",
@@ -204,13 +236,7 @@
 		"summary": {
 			"paymentDescription": "Mahsulotni do'konda yoki yetkazib berishda naqd pul va bank kartasi orqali to'lashingiz mumkin.",
 			"finishPurchase": "Xaridni o'zingizga qulay usulda yakunlang: naqd pul yoki kartalar orqali to'lov qiling.",
-			"providers": [
-				"Naqd to'lov",
-				"Visa",
-				"Mastercard",
-				"Humo",
-				"Uzcard"
-			]
+			"providers": ["Naqd to'lov", "Visa", "Mastercard", "Humo", "Uzcard"]
 		},
 		"pickup": {
 			"title": "Do'kondan olib ketish bepul",
