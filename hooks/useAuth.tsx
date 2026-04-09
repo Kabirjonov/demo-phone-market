@@ -151,7 +151,7 @@ export function useAuthResetPassword() {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ["auth-reset-password"],
 		mutationFn: async (values: { code: string; password: string }) => {
-			const res = await api.post("/api/auth/reset-password", {
+			const res = await api.put("/api/auth/reset-password", {
 				phone: normalizePhone(phone),
 				code: values.code,
 				password: values.password,

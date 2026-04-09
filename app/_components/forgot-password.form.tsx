@@ -44,7 +44,7 @@ function formatPhoneForView(phone: string) {
 
 export default function ForgotPasswordForm() {
 	const { t } = useTranslation();
-	const { phone, setPhone, setStep } = useAuthFlowStore();
+	const { phone, setPhone, setStep, step } = useAuthFlowStore();
 	const { mutate: sendCode, isPending: isSending } = useAuthForgotPassword();
 	const { mutate: resetPassword, isPending: isResetting } =
 		useAuthResetPassword();
@@ -93,7 +93,7 @@ export default function ForgotPasswordForm() {
 		});
 	};
 
-	if (!phone) {
+	if (step === "forgotPassword") {
 		return (
 			<>
 				<div className='mb-6 space-y-2'>
@@ -185,14 +185,14 @@ export default function ForgotPasswordForm() {
 						name='code'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>{t("auth.resetPassword.codeLabel")}</FormLabel>
+								<FormLabel>Tasdiqlash kodi</FormLabel>
 								<FormControl>
 									<Input
 										placeholder='123456'
 										autoComplete='one-time-code'
 										inputMode='numeric'
 										maxLength={6}
-										disabled={isResetting}
+										// disabled={isPending}
 										className='h-12 text-center text-lg tracking-[0.35em]'
 										{...field}
 										onChange={event =>
@@ -206,7 +206,6 @@ export default function ForgotPasswordForm() {
 							</FormItem>
 						)}
 					/>
-
 					<FormField
 						control={resetForm.control}
 						name='password'

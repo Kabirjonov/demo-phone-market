@@ -34,7 +34,10 @@ export const verifySchema = z.object({
 		.string()
 		.trim()
 		.length(6, "Tasdiqlash kodi 6 ta raqam bo'lishi kerak")
-		.regex(/^\d{6}$/, "Tasdiqlash kodi faqat raqamlardan iborat bo'lishi kerak"),
+		.regex(
+			/^\d{6}$/,
+			"Tasdiqlash kodi faqat raqamlardan iborat bo'lishi kerak",
+		),
 });
 
 export const forgotPasswordSchema = z.object({
