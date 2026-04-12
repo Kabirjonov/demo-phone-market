@@ -27,7 +27,7 @@ export default async function RootLayout({
 	const locale = await getRequestLocale();
 	const dictionary = getDictionary(locale);
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang='en' className='light'>
 			<body
 				className={`${fontSans.variable}  ${fontMono.variable} antialiased`}
 			>
