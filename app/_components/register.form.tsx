@@ -40,7 +40,6 @@ export default function RegisterForm() {
 		setPhone(values.phoneNumber);
 		void values;
 		mutate(values);
-		setStep("verify");
 	};
 
 	return (

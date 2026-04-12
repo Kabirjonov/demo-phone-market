@@ -60,8 +60,9 @@ export function useAuthLogin() {
 }
 
 export function useAuthRegister() {
-	const { setStep } = useAuthFlowStore();
-
+	const { setStep, resetFlow } = useAuthFlowStore();
+	const router = useRouter();
+	const { setUser } = useSessionStore();
 	const { mutate, isPending } = useMutation({
 		mutationKey: ["auth-register"],
 		mutationFn: async (values: z.infer<typeof registerSchema>) => {
@@ -74,7 +75,16 @@ export function useAuthRegister() {
 			return res.data;
 		},
 		onSuccess: data => {
-			setStep("verify");
+			if (data?.accessToken) {
+				setAccessToken(data.accessToken);
+			}
+
+			if (data?.user) {
+				setUser(data.user);
+			}
+			router.replace("/");
+
+			resetFlow();
 			toast.success(data.message);
 		},
 		onError: error => {

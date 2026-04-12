@@ -143,39 +143,39 @@ export const promotions: PromotionItem[] = [
 			{ name: "25W USB-C adapter", price: "249 000 so'm", tag: "Aksessuar" },
 		],
 	},
-	{
-		kind: "announcement",
-		label: "E'lon",
-		image:
-			"https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1600&auto=format&fit=crop",
-		slug: "ramazon-ish-jadvali-yetkazib-berish",
-		title: "Ramazon oyidagi ish jadvali va yetkazib berish tartibi",
-		summary:
-			"Filiallar ish vaqti, call-markaz grafigi hamda buyurtmalarni yetkazish bo'yicha yangilangan jadval e'lon qilindi.",
-		publishedAt: "2026-03-26",
-		period: "26 Martdan 10 Aprelgacha",
-		daysLeft: 13,
-		kicker:
-			"Bayramoldi kunlari ayrim filiallar qisqartirilgan rejimda ishlaydi, kuryer xizmati esa oldindan tasdiq bilan yetkazadi.",
-		description: [
-			"Shahar markazidagi filiallar 10:00 dan 21:00 gacha, savdo markazlaridagi nuqtalar esa 22:00 gacha xizmat ko'rsatadi.",
-			"Yetkazib berish buyurtma yuklamasiga qarab 1 kundan 3 kungacha davom etishi mumkin. Operator buyurtma vaqtini alohida tasdiqlaydi.",
-			"To'lov, muddatli to'lov va kafolat bo'yicha barcha xizmatlar avvalgi tartibda saqlanib qoladi.",
-		],
-		highlights: [
-			"Filiallar bo'yicha yangilangan ish vaqti",
-			"Kuryer xizmati oldindan qo'ng'iroq qiladi",
-			"Call-markaz har kuni 09:00 dan 22:00 gacha ishlaydi",
-		],
-		sections: [
-			{
-				title: "Filiallar bo'yicha eslatma",
-				text: "Ayrim hududiy filiallarda inventarizatsiya sababli buyurtmani yig'ish vaqti 24 soatgacha uzayishi mumkin.",
-			},
-			{
-				title: "Mijozlar uchun tavsiya",
-				text: "Bayramoldi xaridlarini kechiktirmaslik tavsiya etiladi. Ombordagi mashhur modellarda tez tugash holati kuzatilmoqda.",
-			},
-		],
-	},
+	// {
+	// 	kind: "announcement",
+	// 	label: "E'lon",
+	// 	image:
+	// 		"https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=1600&auto=format&fit=crop",
+	// 	slug: "ramazon-ish-jadvali-yetkazib-berish",
+	// 	title: "Ramazon oyidagi ish jadvali va yetkazib berish tartibi",
+	// 	summary:
+	// 		"Filiallar ish vaqti, call-markaz grafigi hamda buyurtmalarni yetkazish bo'yicha yangilangan jadval e'lon qilindi.",
+	// 	publishedAt: "2026-03-26",
+	// 	period: "26 Martdan 10 Aprelgacha",
+	// 	daysLeft: 13,
+	// 	kicker:
+	// 		"Bayramoldi kunlari ayrim filiallar qisqartirilgan rejimda ishlaydi, kuryer xizmati esa oldindan tasdiq bilan yetkazadi.",
+	// 	description: [
+	// 		"Shahar markazidagi filiallar 10:00 dan 21:00 gacha, savdo markazlaridagi nuqtalar esa 22:00 gacha xizmat ko'rsatadi.",
+	// 		"Yetkazib berish buyurtma yuklamasiga qarab 1 kundan 3 kungacha davom etishi mumkin. Operator buyurtma vaqtini alohida tasdiqlaydi.",
+	// 		"To'lov, muddatli to'lov va kafolat bo'yicha barcha xizmatlar avvalgi tartibda saqlanib qoladi.",
+	// 	],
+	// 	highlights: [
+	// 		"Filiallar bo'yicha yangilangan ish vaqti",
+	// 		"Kuryer xizmati oldindan qo'ng'iroq qiladi",
+	// 		"Call-markaz har kuni 09:00 dan 22:00 gacha ishlaydi",
+	// 	],
+	// 	sections: [
+	// 		{
+	// 			title: "Filiallar bo'yicha eslatma",
+	// 			text: "Ayrim hududiy filiallarda inventarizatsiya sababli buyurtmani yig'ish vaqti 24 soatgacha uzayishi mumkin.",
+	// 		},
+	// 		{
+	// 			title: "Mijozlar uchun tavsiya",
+	// 			text: "Bayramoldi xaridlarini kechiktirmaslik tavsiya etiladi. Ombordagi mashhur modellarda tez tugash holati kuzatilmoqda.",
+	// 		},
+	// 	],
+	// },
 ];
