@@ -139,13 +139,13 @@ export default function LoginForm() {
 						{t("auth.login.registerLink")}
 					</button>
 				</div>
-				<button
+				{/* <button
 					type='button'
 					onClick={() => setStep("forgotPassword")}
 					className='font-medium text-primary transition hover:underline'
 				>
 					{t("auth.login.forgotPassword")}
-				</button>
+				</button> */}
 			</div>
 		</>
 	);

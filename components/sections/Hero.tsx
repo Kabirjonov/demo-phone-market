@@ -3,18 +3,32 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "react-i18next";
-
+import * as React from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { promotions } from "@/mockInfo/data";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "../ui/carousel";
+import { useRef } from "react";
 
 export default function Hero() {
 	const { t } = useTranslation();
-
+	const plugin = useRef(
+		Autoplay({
+			delay: 2500,
+			stopOnInteraction: false, // 🔥 important
+			stopOnMouseEnter: true, // pause on hover (optional)
+		}),
+	);
 	return (
 		<div className='h-[500px] pt-24'>
-			<div className='relative h-full'>
+			{/* <div className='relative h-full'>
 				<Swiper
 					slidesPerView={1.2}
 					centeredSlides={true}
@@ -93,8 +107,72 @@ export default function Hero() {
 
 				<button className='next absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 backdrop-blur'>
 					<ChevronRight />
-				</button>
-			</div>
+				</button> 
+			</div> */}
+			<Carousel
+				opts={{
+					align: "start",
+					loop: true,
+					duration: 30,
+				}}
+				plugins={[plugin.current]}
+				className='w-full h-full'
+				onMouseEnter={plugin.current.stop}
+				onMouseLeave={plugin.current.reset}
+			>
+				<CarouselContent>
+					{promotions.map((slide, index) => (
+						<CarouselItem key={index} className='relative w-full h-[500px]'>
+							<Link href='/' className='block h-full overflow-hidden'>
+								{/* Image */}
+								<Image
+									src={slide.image}
+									alt={t(`hero.promotions.${slide.slug}.title`, slide.title)}
+									fill
+									className='object-cover '
+								/>
+
+								{/* Gradient overlay */}
+								<div className='absolute inset-0 bg-[linear-gradient(90deg,rgba(8,15,28,0.9)_0%,rgba(8,15,28,0.56)_45%,rgba(8,15,28,0.18)_100%)]' />
+
+								{/* Content */}
+								<div className='absolute inset-0 flex flex-col justify-center px-6 text-white md:px-8'>
+									{/* Label */}
+									<span className='mb-4 inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur'>
+										{t(`hero.promotions.${slide.slug}.label`, slide.label)}
+									</span>
+
+									{/* Title */}
+									<h2 className='max-w-2xl text-2xl font-bold md:text-4xl'>
+										{t(`hero.promotions.${slide.slug}.title`, slide.title)}
+									</h2>
+
+									{/* Description */}
+									<p className='mt-3 max-w-2xl text-sm opacity-90 md:text-lg line-clamp-2'>
+										{t(`hero.promotions.${slide.slug}.summary`, slide.summary)}
+									</p>
+
+									{/* Meta */}
+									<div className='mt-5 flex flex-wrap items-center gap-3 text-sm text-white/80'>
+										<span>
+											{t(`hero.promotions.${slide.slug}.period`, slide.period)}
+										</span>
+										<span className='h-1.5 w-1.5 rounded-full bg-white/70' />
+										<span>
+											{t(
+												`hero.promotions.${slide.slug}.publishedAt`,
+												slide.publishedAt,
+											)}
+										</span>
+									</div>
+								</div>
+							</Link>
+						</CarouselItem>
+					))}
+				</CarouselContent>
+				<CarouselPrevious />
+				<CarouselNext />
+			</Carousel>
 		</div>
 	);
 }

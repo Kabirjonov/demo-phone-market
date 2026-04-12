@@ -5,6 +5,7 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRouter } from "next/navigation";
 import LikedProductButton from "@/components/shared/Liked-product-button";
+import { motion } from "framer-motion";
 
 import "swiper/css";
 import { formatPrice } from "@/lib/formatPrice";
@@ -24,9 +25,16 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 	return (
 		<div className=''>
-			<div
-				// className=' shadow-[0_16px_42px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(15,23,42,0.09)]'
+			<motion.div
 				className='group cursor-pointer  p-4 group-hover:shadow rounded-2xl border border-border/70 dark:bg-secondary/30'
+				initial={{ opacity: 0, y: 18, scale: 0.98 }}
+				whileInView={{ opacity: 1, y: 0, scale: 1 }}
+				viewport={{ once: true, amount: 0.2 }}
+				whileHover={{ y: -6, scale: 1.01 }}
+				transition={{
+					duration: 0.35,
+					ease: [0.22, 1, 0.36, 1],
+				}}
 				role='link'
 				tabIndex={0}
 				onClick={() => router.push(productHref)}
@@ -37,8 +45,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 					}
 				}}
 			>
-				<div className='rounded-3xl bg-muted/40 p-3 '>
-					<div className='relative h-[220px] overflow-hidden'>
+				<motion.div
+					className='rounded-3xl bg-muted/40 p-3 '
+					transition={{ duration: 0.35, ease: "easeOut" }}
+				>
+					<div className='relative h-[220px] overflow-hidden rounded-[1.4rem]'>
 						{productImages.length > 1 ? (
 							<Swiper
 								modules={[Autoplay]}
@@ -59,7 +70,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 											<img
 												src={imageSrc}
 												alt={`${product.title} ${index + 1}`}
-												className='h-auto rounded-xl max-h-[210px] w-auto object-contain transition-transform duration-300 group-hover:scale-105'
+												className='h-auto rounded-xl max-h-[210px] w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-[1.08]'
 											/>
 											{/* 
 											{product.badge && (
@@ -78,7 +89,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 								<img
 									src={productImages[0]}
 									alt={product.title}
-									className='h-auto rounded-xl max-h-[210px] w-auto object-contain transition-transform duration-300 group-hover:scale-105'
+									className='h-auto rounded-xl max-h-[210px] w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-[1.08]'
 								/>
 
 								{product.brand && (
@@ -92,7 +103,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 						)}
 					</div>
 					{/*  */}
-				</div>
+				</motion.div>
 
 				<div className='mt-4 space-y-3'>
 					<div className='flex justify-between items-start gap-2'>
@@ -136,7 +147,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 						</div>
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		</div>
 	);
 }

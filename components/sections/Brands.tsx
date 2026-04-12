@@ -101,10 +101,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/navigation";
 import Link from "next/link";
 
+import "swiper/css";
+import "swiper/css/navigation";
 const brands = [
 	{ id: "honor", logo: "/brands/honor.svg", alt: "HONOR" },
 	{ id: "asus", logo: "/brands/asus.svg", alt: "asus" },
@@ -117,7 +117,7 @@ const brands = [
 	{ id: "hp", logo: "/brands/hp.svg", alt: "hp" },
 	{ id: "samsung", logo: "/brands/samsung.svg", alt: "Samsung" },
 	{ id: "xiaomi", logo: "/brands/xiaomi.svg", alt: "xiaomi" },
-	{ id: "hisense", logo: "/brands/hisense.svg", alt: "Hisense" },
+	// { id: "hisense", logo: "/brands/hisense.svg", alt: "Hisense" },
 ];
 
 export default function BrandsSection() {
